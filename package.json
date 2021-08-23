@@ -5,7 +5,7 @@
   "main": "pressf.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
