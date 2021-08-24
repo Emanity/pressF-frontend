@@ -3,10 +3,24 @@ const app = express()
 const nunjucks = require('nunjucks');
 const fetch = require('node-fetch');
 
-nunjucks.configure('views', { 
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Port
+let port = 7999;
+
+//Configuring Express to use Nunjucks
+nunjucks.configure('views', {
+         autoescape: true,
          express: app 
 }); 
- 
+
+// Provide Public files such as Images & Styling
+app.use(express.static('public'))
+
+// Nunjucks view engine
+//app.set('view engine', 'njk');
 app.set('view engine', 'html');
 
 
@@ -14,6 +28,17 @@ app.get('/', function (req, res) {
    res.render('index')
    console.log('Request processed'); 
 }); 
+
+
+app.get('/index', function (req, res) {
+   res.render('index')
+   console.log('Request processed'); 
+}); 
+
+// Start Server
+app.listen(port, function() {
+   console.log('Express started')
+});
 
 
 // POC - API Call (simple JSON response from API Call - with DB Connection)
@@ -52,9 +77,3 @@ app.get('/api_getTest/:testvalue', async (req, res) => {
    res.render(text);
 
 })
-
- 
-app.listen(7999, function() { 
-   console.log('Express started') 
-});
-
