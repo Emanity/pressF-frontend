@@ -2,13 +2,13 @@ const express = require('express')
 const app = express() 
 const nunjucks = require('nunjucks');
 const fetch = require('node-fetch');
+var path = require('path')
 
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// // Port
-let port = 7999;
+
 
 //Configuring Express to use Nunjucks
 nunjucks.configure('views', {
@@ -18,6 +18,7 @@ nunjucks.configure('views', {
 
 // Provide Public files such as Images & Styling
 app.use(express.static('public'))
+// app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // Nunjucks view engine
 //app.set('view engine', 'njk');
@@ -35,10 +36,7 @@ app.get('/index', function (req, res) {
    console.log('Request processed'); 
 }); 
 
-// Start Server
-app.listen(port, function() {
-   console.log('Express started')
-});
+
 
 
 // POC - API Call (simple JSON response from API Call - with DB Connection)

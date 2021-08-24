@@ -1,62 +1,38 @@
-// const request = require('supertest');
-// const app = require('./app')
+var proxyquire = require('proxyquire')
+var supertest = require('supertest');
 
-const mockApp = {
-    use: jest.fn(),
-    set: jest.fn(),
-    get: jest.fn(),
-    listen: jest.fn(),
-    address: jest.fn()
-}
-
-jest.mock('express', () => {
-    const mockApp = () => {
-        // return jest.fn(() => {
-        //     return mockApp
-        // })
-        return {
-            use: jest.fn(),
-            set: jest.fn(),
-            get: jest.fn(),
-            listen: jest.fn(),
-            address: jest.fn()
-        }
-    }
-    Object.defineProperty(mockApp, "static", { value: jest.fn() });
-    return mockApp;
-})
-
-// jest.mock('express', () => {
-//     return jest.fn(() => {
-//         return mockApp
-//     })
-// })
-
+var express = require('express')
+var path = require('path')
+var nunjucks = require('nunjucks')
+var expect = require('chai').expect;
 require('./app')
 
-
-
-
-// test('status code should be 200 on root', async() => {
-//     const response = await request(app).get('/');
-//     expect(response.statusCode).toBe(200);
+describe('index', function() {
+    var request
+    beforeEach(function () {
+        var app = express()
     
-//     //expect(mockApp.listen).toHaveBeenCalledWith(7999, expect.any(Function))
-// })
+        app.set('view engine', 'html')
+        
+        nunjucks.configure('views')
 
+        request = supertest(app)
+    })
 
-test('should register root route to respond with first message', () => {
-    // pre-check
-    expect(mockApp.get).toHaveBeenCalledWith('/', expect.any(Function))
+    describe('GET /', function() {
+        it('should respond with 200 and render index', function(done){
+            const mockRes = { render: jest.fn() }
 
-    // arrange
-    const behaviour = mockApp.get.mock.calls[0][1] // grab the second [1] param of the first [0] call
-    const mockRes = { render: jest.fn() }
-
-    // act
-    behaviour(null, mockRes)
-
-    // assert
-    expect(mockRes.render).toHaveBeenCalledWith('index')
-    
+            request
+                .get('/')
+                .expect(200)
+                .expect(mockRes.render('index'))
+                done()
+        })
+    })
 })
+
+afterAll(done => {
+
+    done();
+});
