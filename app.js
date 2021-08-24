@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Port
+// // Port
 let port = 7999;
 
 //Configuring Express to use Nunjucks
@@ -77,3 +77,5 @@ app.get('/api_getTest/:testvalue', async (req, res) => {
    res.render(text);
 
 })
+
+module.exports = app;

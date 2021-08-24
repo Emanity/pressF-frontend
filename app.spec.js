@@ -1,12 +1,16 @@
+// const request = require('supertest');
+// const app = require('./app')
+
 const mockApp = {
     use: jest.fn(),
     set: jest.fn(),
     get: jest.fn(),
-    listen: jest.fn()
+    listen: jest.fn(),
+    address: jest.fn()
 }
 
 jest.mock('express', () => {
-    const mockedExpress = () => {
+    const mockApp = () => {
         // return jest.fn(() => {
         //     return mockApp
         // })
@@ -14,25 +18,31 @@ jest.mock('express', () => {
             use: jest.fn(),
             set: jest.fn(),
             get: jest.fn(),
-            listen: jest.fn()
+            listen: jest.fn(),
+            address: jest.fn()
         }
     }
-    Object.defineProperty(mockedExpress, "static", { value: jest.fn() });
-    return mockedExpress;
+    Object.defineProperty(mockApp, "static", { value: jest.fn() });
+    return mockApp;
 })
-
-
 
 // jest.mock('express', () => {
 //     return jest.fn(() => {
-//         Object.defineProperty(mockApp, "static", { value: jest.fn() });
 //         return mockApp
-        
 //     })
 // })
 
 require('./app')
 
+
+
+
+// test('status code should be 200 on root', async() => {
+//     const response = await request(app).get('/');
+//     expect(response.statusCode).toBe(200);
+    
+//     //expect(mockApp.listen).toHaveBeenCalledWith(7999, expect.any(Function))
+// })
 
 
 test('should register root route to respond with first message', () => {
@@ -48,8 +58,5 @@ test('should register root route to respond with first message', () => {
 
     // assert
     expect(mockRes.render).toHaveBeenCalledWith('index')
-})
-
-test('should listen on port 7999', () => {
-    expect(mockApp.listen).toHaveBeenCalledWith(7999, expect.any(Function))
+    
 })

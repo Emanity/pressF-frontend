@@ -2,7 +2,7 @@
   "name": "pressF-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "pressf.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
     "test": "jest --passWithNoTests"
@@ -25,7 +25,8 @@
     "nunjucks": "^3.2.3"
   },
   "devDependencies": {
+    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
-    "jest": "^27.0.6"
+    "supertest": "^6.1.6"
   }
 }
