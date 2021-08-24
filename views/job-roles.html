@@ -11,15 +11,23 @@
             <table class="table">
 
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Test Message</th>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Job Spec</th>
+                    <th scope="col">Job Band</th>
+                    <th scope="col">Job Capability</th>
+                    <th scope="col">Job Competencies</th>
+
+
 
                 </tr>
 
                 {% for JobRole in JobRoles %}
                     <tr>    
-                        <td scope="row">{{JobRole.id}}</td>
-                        <td>{{JobRole.testMessage}}</td>
+                        <td scope="row">{{JobRole.jobTitle}}</td>
+                        <td>{{JobRole.jobSpec}}</td>
+                        <td>{{JobRole.jobBand}}</td>
+                        <td>{{JobRole.jobCapability}}</td>
+                        <td>{{JobRole.jobCompetencies}}</td>
                     </tr>
                 {% endfor %}
 

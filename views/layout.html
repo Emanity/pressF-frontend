@@ -22,34 +22,45 @@
 </head>
 <body>
 
-    <!-- Header with login button -->
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="/index" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <img src="/Images/KainosLogo.png" alt="Logo" id="Logo">
-            </a>
-            <div class="col-md-3 text-end">
-                <button id="login-btn" type="button" class="btn btn-outline-primary me-2">Login</button>
-            </div>
-        </header>
+        <div id="page_container">
+            <div id="content_wrap">
+
+        <!-- Header with login button -->
+            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="/index" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="/Images/KainosLogo.png" alt="Logo" id="Logo">
+                </a>
+                <div class="col-md-3 text-end">
+                    <button id="login-btn" type="button" class="btn btn-outline-primary me-2">Login</button>
+                </div>
+            </header>
+
+        <!-- Nunjuck Template content call -->
+        {% block content %}
+
+
+
+
+        {% endblock %}
+
+        </div>
     </div>
 
-    <!-- Nunjuck Template content call -->
-    {% block content %}
+        <!-- Footer -->
+        
+        <footer class="page-footer py-3 mb-4 border-top">
+            <div class="container">
 
-
-
-
-    {% endblock %}
-
-    <!-- Footer -->
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <span class="text-muted">Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> Kainos</span>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                
+                    <p><span class="text-muted">Copyright &copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> Kainos</span></p>
+                
+                </div>
+            
             </div>
         </footer>
-    </div>
+
+    
 
 </body>
 </html>
