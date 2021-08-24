@@ -9,6 +9,7 @@ require('./app')
 
 describe('index', function() {
     var request
+
     beforeEach(function () {
         var app = express()
     
@@ -21,18 +22,15 @@ describe('index', function() {
 
     describe('GET /', function() {
         it('should respond with 200 and render index', function(done){
-            const mockRes = { render: jest.fn() }
-
-            request
-                .get('/')
-                .expect(200)
-                .expect(mockRes.render('index'))
+        const mockRes = { render: jest.fn() }
+        
+        request
+            .get('/')
+            .expect(mockRes.render('index'))
+            .expect(200, function () {
                 done()
+            })
         })
     })
+
 })
-
-afterAll(done => {
-
-    done();
-});
