@@ -8,6 +8,9 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12"> 
 
+
+            {% if JobRoles and JobRoles.length > 0 %}
+
             <table class="table">
 
                 <tr>
@@ -22,6 +25,7 @@
                 </tr>
 
                 {% for JobRole in JobRoles %}
+
                     <tr>    
                         <td scope="row">{{JobRole.jobTitle}}</td>
                         <td>{{JobRole.jobSpec}}</td>
@@ -29,14 +33,20 @@
                         <td>{{JobRole.jobCapability}}</td>
                         <td>{{JobRole.jobCompetencies}}</td>
                     </tr>
+
                 {% endfor %}
 
             </table>
+
+            {% else %}
+
+                <h4> No results can be returned! </h4>
+
+            {% endif %}
 
         </div>
     </div>
 
 </div>
-
 
 {% endblock %}
