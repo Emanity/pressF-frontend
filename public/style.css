@@ -1,0 +1,12 @@
+#Logo{
+    height: 40px;
+}
+
+body {
+    background-color:#ffffff;
+}
+
+#login-btn{
+    color: #283583
+    border-color: #283583
+}

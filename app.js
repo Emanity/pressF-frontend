@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let port = 7999;
 
 //Configuring Express to use Nunjucks
-nunjucks.configure('views', { 
+nunjucks.configure('views', {
+         autoescape: true,
          express: app 
 }); 
 
@@ -27,11 +28,11 @@ app.get('/', function (req, res) {
    console.log('Request processed'); 
 }); 
 
-app.get('/index', function (req, res) { 
+app.get('/index', function (req, res) {
    res.render('index')
    console.log('Request processed'); 
 }); 
- 
+
 // Start Server
 app.listen(port, function() {
    console.log('Express started')

@@ -4,7 +4,7 @@
   "description": "",
   "main": "pressf.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "jest --passWithNoTests"
   },
   "repository": {
@@ -23,5 +23,8 @@
     "express": "^4.17.1",
     "jest": "^27.0.6",
     "nunjucks": "^3.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
