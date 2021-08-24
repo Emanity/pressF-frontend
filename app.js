@@ -35,6 +35,11 @@ app.get('/index', function (req, res) {
    console.log('Request processed'); 
 }); 
 
+app.get('/job-spec', function (req, res) {
+   res.render('job-spec')
+   console.log('Request processed'); 
+}); 
+
 // Start Server
 app.listen(port, function() {
    console.log('Express started')
