@@ -1,10 +1,13 @@
 const fetch = require('node-fetch');
 
+
+
 exports.getJobRoles = async () => {
 
-    api_url = 'http://localhost:8080/api/getjobroles' 
+    api_url = 'http://localhost:8080/api/getjobroles'
 
     const fetch_response = await fetch(api_url)
+
         if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 
             console.log("Job Roles Fetched");
@@ -16,5 +19,6 @@ exports.getJobRoles = async () => {
             return null;
         
         }
+
 
 }
