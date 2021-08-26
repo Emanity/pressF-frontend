@@ -70,7 +70,7 @@ app.get('/api_getTest/:testvalue', async (req, res) => {
    testvalue = req.params.testvalue;
 
    // API URL Var
-   const api_url = `http://localhost:8080/api/print/${testvalue}`
+   api_url = `http://localhost:8080/api/print/${testvalue}`
 
    // Fetch from API URL
    const fetch_response = await fetch(api_url);
@@ -80,5 +80,12 @@ app.get('/api_getTest/:testvalue', async (req, res) => {
 
    // Render Response in Text - (NOTE- Any DB Response will be JSON won't need this again. Error is expected, due to looking for Nunjucks)
    res.render(text);
+
+})
+
+app.get('/job-spec/:jobRoleID', async (req, res) => {
+   jobRoleID = req.params.jobRoleID;
+
+   let result = await JobSpec.getJobSpec(jobRoleID);
 
 })
