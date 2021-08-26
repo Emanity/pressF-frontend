@@ -14,27 +14,24 @@
             <table class="table">
 
                 <tr>
-                    <th scope="col">Job Title</th>
-                    <th scope="col">Job Spec</th>
+
                     <th scope="col">Job Band</th>
                     <th scope="col">Job Capability</th>
-                    <th scope="col">Job Competencies</th>
-
-
+                    <th scope="col">Job Title</th>
 
                 </tr>
 
                 {% for JobRole in JobRoles %}
 
                     <tr>    
-                        <td scope="row">{{JobRole.jobTitle}}</td>
-                        <td>{{JobRole.jobSpec}}</td>
-                        <td>{{JobRole.jobBand}}</td>
+
+                        <td scope="row">{{JobRole.jobBand}}</td>
                         <td>{{JobRole.jobCapability}}</td>
-                        <td>{{JobRole.jobCompetencies}}</td>
+                        <td><a href="/job-spec/{{JobRole.jobid}}}">{{JobRole.jobTitle}}</a></td>
+
                     </tr>
 
-                {% endfor %}
+                {% endfor %} 
 
             </table>
 
