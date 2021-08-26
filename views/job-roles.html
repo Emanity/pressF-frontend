@@ -8,6 +8,16 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12"> 
 
+            <h2>Job Roles</h2>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12"> 
+
             {% if JobRoles and JobRoles.length > 0 %}
 
 
@@ -35,9 +45,9 @@
                                 <div class="accordion-body">
                             
                                                             
-                                    <li>{{JobRole.jobBand}}</li>
-                                    <li>{{JobRole.jobCapability}}</li>
-                                    <li>{{JobRole.jobDiscipline}}</li>
+                                    <li>Job Band: {{JobRole.jobBand}}</li>
+                                    <li>Job Capability: {{JobRole.jobCapability}}</li>
+                                    <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
                                     <li><a href="/job-spec/{{JobRole.jobRoleID}}">View Job Role Details</a></li>
                                         
                                 </div>
