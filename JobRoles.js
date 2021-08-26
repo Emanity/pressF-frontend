@@ -1,4 +1,3 @@
-const { json } = require('body-parser');
 const fetch = require('node-fetch');
 
 exports.getJobRoles = async () => {
