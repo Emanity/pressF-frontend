@@ -11,29 +11,31 @@
 
             {% if JobRoles and JobRoles.length > 0 %}
 
-            <table class="table">
+                <table class="table">
 
-                <tr>
+                    <tr>
 
-                    <th scope="col">Job Band</th>
-                    <th scope="col">Job Capability</th>
-                    <th scope="col">Job Title</th>
-
-                </tr>
-
-                {% for JobRole in JobRoles %}
-
-                    <tr>    
-
-                        <td scope="row">{{JobRole.jobBand}}</td>
-                        <td>{{JobRole.jobCapability}}</td>
-                        <td><a href="/job-spec/{{JobRole.jobRoleID}}">{{JobRole.jobTitle}}</a></td>
+                        <th scope="col">Job Band</th>
+                        <th scope="col">Job Capability</th>
+                        <th scope="col">Job Discipline</th>
+                        <th scope="col">Job Title</th>
 
                     </tr>
 
-                {% endfor %} 
+                    {% for JobRole in JobRoles %}
 
-            </table>
+                        <tr>    
+
+                            <td scope="row">{{JobRole.jobBand}}</td>
+                            <td>{{JobRole.jobCapability}}</td>
+                            <td>{{JobRole.jobDiscipline}}</td>
+                            <td><a href="/job-spec/{{JobRole.jobRoleID}}">{{JobRole.jobTitle}}</a></td>
+
+                        </tr>
+
+                    {% endfor %} 
+
+                </table>
 
             {% else %}
 

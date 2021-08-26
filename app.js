@@ -82,10 +82,7 @@ app.listen(port, function() {
 app.get('/job-roles', async (req, res) => {
 
    let result = await JobRoles.getJobRoles()
-
    res.render('job-roles', {JobRoles : result});
-
-
-
+   
 })
 
