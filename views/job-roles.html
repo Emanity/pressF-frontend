@@ -8,40 +8,53 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12"> 
 
-
             {% if JobRoles and JobRoles.length > 0 %}
 
-                <table class="table">
 
-                    <tr>
+                 <!--   <div class="input-group w-25 mb-3">
+                            <input type="text" class="form-control" placeholder="Search for available job roles"aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+                    </div> -->
 
-                        <th scope="col">Job Band</th>
-                        <th scope="col">Job Capability</th>
-                        <th scope="col">Job Discipline</th>
-                        <th scope="col">Job Title</th>
+                {% for JobRole in JobRoles %}
+                    
+                    <div class="accordion" id="accordion{{JobRole.jobRoleID}}">
 
-                    </tr>
+                        <div class="accordion-item">
+                        
+                            <h2 class="accordion-header" id="heading{{JobRole.jobRoleID}}">
+                                
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{JobRole.jobRoleID}}" aria-expanded="true" aria-controls="collapse{{JobRole.jobRoleID}}">
+                                    {{JobRole.jobTitle}}
+                                </button>
 
-                    {% for JobRole in JobRoles %}
+                            </h2>
+                            
+                            <div id="collapse{{JobRole.jobRoleID}}" class="accordion-collapse collapse show" aria-labelledby="heading{{JobRole.jobRoleID}}" data-bs-parent="#accordion{{JobRole.jobRoleID}}">
+                                
+                                <div class="accordion-body">
+                            
+                                                            
+                                    <li>{{JobRole.jobBand}}</li>
+                                    <li>{{JobRole.jobCapability}}</li>
+                                    <li>{{JobRole.jobDiscipline}}</li>
+                                    <li><a href="/job-spec/{{JobRole.jobRoleID}}">View Job Role Details</a></li>
+                                        
+                                </div>
 
-                        <tr>    
+                            </div>
+                    </div>
 
-                            <td scope="row">{{JobRole.jobBand}}</td>
-                            <td>{{JobRole.jobCapability}}</td>
-                            <td>{{JobRole.jobDiscipline}}</td>
-                            <td><a href="/job-spec/{{JobRole.jobRoleID}}">{{JobRole.jobTitle}}</a></td>
+                {% endfor %} 
 
-                        </tr>
-
-                    {% endfor %} 
-
-                </table>
 
             {% else %}
 
                 <h4> No results can be returned! </h4>
 
             {% endif %}
+
+            <br>
 
         </div>
         
