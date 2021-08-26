@@ -4,9 +4,10 @@ exports.getJobSpec = async ( jobRoleID ) => {
 
     jobRoleID = jobRoleID;
 
-    api_url = 'http://localhost:8080/api/getjobspec';
+    api_url = `http://localhost:8080/api/getjobspec/${jobRoleID}`;
 
     const fetch_response = await fetch(api_url)
+        
         if (fetch_response.status >= 200 && fetch_response.status <= 299) {
             
             console.log("Job Spec Fetched");
@@ -14,6 +15,8 @@ exports.getJobSpec = async ( jobRoleID ) => {
 
         }
         else {
-            
+            console.log(fetch_response.status, ' | ', fetch_response.statusText, " | Unable to fetch Job Spec ");
+            return null
         }
+
 }
