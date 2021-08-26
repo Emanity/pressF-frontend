@@ -2,14 +2,15 @@ const express = require('express')
 const app = express() 
 const nunjucks = require('nunjucks');
 const fetch = require('node-fetch');
+var path = require('path')
 
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
+const { json } = require('express');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Port
-let port = 7999;
+
 
 //Configuring Express to use Nunjucks
 nunjucks.configure('views', {
@@ -21,7 +22,6 @@ nunjucks.configure('views', {
 app.use(express.static('public'))
 
 // Nunjucks view engine
-//app.set('view engine', 'njk');
 app.set('view engine', 'html');
 
 
@@ -41,49 +41,6 @@ app.get('/job-spec', function (req, res) {
    console.log('Request processed'); 
 }); 
 
-// Start Server
-app.listen(port, function() {
-   console.log('Express started')
-});
-
-
-// // POC - API Call (simple JSON response from API Call - with DB Connection)
-// app.get('/getAPIResponse', async (req, res) => {
-
-//    // API URL Var
-//    api_url = 'http://localhost:8080/api/testMybatis'
-
-//    // Fetch from API URL
-//    const fetch_response = await fetch(api_url);
-
-//    // API Response (Async - NEEDS await)
-//    const json = await fetch_response.json();
-
-//    // Send JSON Response to page
-//    res.json(json);
-
-// })
-
-// // POC - API Call (Passing a value to JAVA API)
-// app.get('/api_getTest/:testvalue', async (req, res) => {
-
-//    // Request parameters URL
-//    testvalue = req.params.testvalue;
-
-//    // API URL Var
-//    const api_url = `http://localhost:8080/api/print/${testvalue}`
-
-//    // Fetch from API URL
-//    const fetch_response = await fetch(api_url);
-
-//    // API Response in HTML/Text
-//    const text = await fetch_response.text();
-
-//    // Render Response in Text - (NOTE- Any DB Response will be JSON won't need this again. Error is expected, due to looking for Nunjucks)
-//    res.render(text);
-
-// })
-
 app.get('/job-roles', async (req, res) => {
 
    let result = await JobRoles.getJobRoles()
@@ -91,3 +48,4 @@ app.get('/job-roles', async (req, res) => {
    
 })
 
+module.exports = app;
