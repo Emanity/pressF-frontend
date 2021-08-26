@@ -37,6 +37,10 @@ app.get('/index', function (req, res) {
 }); 
 
 
+app.get('/job-spec', function (req, res) {
+   res.render('job-spec')
+   console.log('Request processed'); 
+}); 
 
 
 // POC - API Call (simple JSON response from API Call - with DB Connection)
