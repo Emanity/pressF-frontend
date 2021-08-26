@@ -36,7 +36,6 @@ app.get('/index', function (req, res) {
    console.log('Request processed'); 
 }); 
 
-
 app.get('/job-spec', function (req, res) {
    res.render('job-spec')
    console.log('Request processed'); 
@@ -44,9 +43,9 @@ app.get('/job-spec', function (req, res) {
 
 app.get('/job-roles', async (req, res) => {
 
-   let result = await JobRoles.getJobRoles();
+   let result = await JobRoles.getJobRoles()
    res.render('job-roles', {JobRoles : result});
-
+   
 })
 
 module.exports = app;
