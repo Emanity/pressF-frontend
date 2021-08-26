@@ -4,7 +4,8 @@ const nunjucks = require('nunjucks');
 const fetch = require('node-fetch');
 var path = require('path')
 
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const JobRoles = require('./JobRoles');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -43,40 +44,47 @@ app.get('/job-spec', function (req, res) {
 }); 
 
 
-// POC - API Call (simple JSON response from API Call - with DB Connection)
-app.get('/getAPIResponse', async (req, res) => {
+// // POC - API Call (simple JSON response from API Call - with DB Connection)
+// app.get('/getAPIResponse', async (req, res) => {
 
-   // API URL Var
-   api_url = 'http://localhost:8080/api/testMybatis'
+//    // API URL Var
+//    api_url = 'http://localhost:8080/api/testMybatis'
 
-   // Fetch from API URL
-   const fetch_response = await fetch(api_url);
+//    // Fetch from API URL
+//    const fetch_response = await fetch(api_url);
 
-   // API Response (Async - NEEDS await)
-   const json = await fetch_response.json();
+//    // API Response (Async - NEEDS await)
+//    const json = await fetch_response.json();
 
-   // Send JSON Response to page
-   res.json(json);
+//    // Send JSON Response to page
+//    res.json(json);
 
-})
+// })
 
-// POC - API Call (Passing a value to JAVA API)
-app.get('/api_getTest/:testvalue', async (req, res) => {
+// // POC - API Call (Passing a value to JAVA API)
+// app.get('/api_getTest/:testvalue', async (req, res) => {
 
-   // Request parameters URL
-   testvalue = req.params.testvalue;
+//    // Request parameters URL
+//    testvalue = req.params.testvalue;
 
-   // API URL Var
-   const api_url = `http://localhost:8080/api/print/${testvalue}`
+//    // API URL Var
+//    const api_url = `http://localhost:8080/api/print/${testvalue}`
 
-   // Fetch from API URL
-   const fetch_response = await fetch(api_url);
+//    // Fetch from API URL
+//    const fetch_response = await fetch(api_url);
 
-   // API Response in HTML/Text
-   const text = await fetch_response.text();
+//    // API Response in HTML/Text
+//    const text = await fetch_response.text();
 
-   // Render Response in Text - (NOTE- Any DB Response will be JSON won't need this again. Error is expected, due to looking for Nunjucks)
-   res.render(text);
+//    // Render Response in Text - (NOTE- Any DB Response will be JSON won't need this again. Error is expected, due to looking for Nunjucks)
+//    res.render(text);
+
+// })
+
+app.get('/job-roles', async (req, res) => {
+
+   let result = await JobRoles.getJobRoles();
+   res.render('job-roles', {JobRoles : result});
 
 })
 
