@@ -4,7 +4,6 @@ const app = require('../app');
 const fetch = require('node-fetch')
 const JobRoles = require('../JobRoles')
 
-jest.mock('axios');
 jest.mock('node-fetch', ()=> jest.fn())
 
 describe('index', function() {
@@ -54,24 +53,45 @@ describe('index', function() {
 })
 
 
+// const unmockedFetch = global.fetch
+
+// beforeAll(() => {
+//   global.fetch = () =>
+//     Promise.resolve({
+//       json: () => Promise.resolve([]),
+//     })
+// })
+
+// afterAll(() => {
+//   global.fetch = unmockedFetch
+// })
+
+// // This is actual testing suite
+// describe('getJobRoles', () => {
+//   it('works', async () => {
+//     const json = await JobRoles.getJobRoles()
+//     expect(Array.isArray(json)).toEqual(true)
+//     expect(json.length).toEqual(0)
+//   })
+// })
+
+
 const unmockedFetch = global.fetch
 
 beforeAll(() => {
-  global.fetch = () =>
+    global.fetch = () => 
     Promise.resolve({
-      json: () => Promise.resolve([]),
+        json: () => Promise.resolve([]),
     })
 })
 
 afterAll(() => {
-  global.fetch = unmockedFetch
+    global.fetch = unmockedFetch
 })
 
-// This is actual testing suite
-describe('getJobRoles', () => {
-  it('works', async () => {
-    const json = await JobRoles.getJobRoles()
-    expect(Array.isArray(json)).toEqual(true)
-    expect(json.length).toEqual(0)
-  })
+describe('withFetch', () => {
+    test('works', async () => {
+        const json = await JobRoles.getJobRoles()
+        expect (Array.isArray(json)).toEqual(true)
+    })
 })

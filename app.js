@@ -6,6 +6,7 @@ var path = require('path')
 
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
+const { json } = require('express');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
