@@ -83,9 +83,12 @@ app.get('/api_getTest/:testvalue', async (req, res) => {
 
 })
 
-app.get('/job-spec/:jobRoleID', async (req, res) => {
+app.get('/job-role-details/:jobRoleID', async (req, res) => {
+   
    jobRoleID = req.params.jobRoleID;
 
-   let result = await JobSpec.getJobSpec(jobRoleID);
+   let result = await JobRoleDetails.getJobRoleDetails(jobRoleID);
+
+   res.render('job-role-details', {JobRoles : result})
 
 })

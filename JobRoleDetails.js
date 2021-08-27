@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-exports.getJobSpec = async ( jobRoleID ) => {
+exports.getJobRoleDetails = async ( jobRoleID ) => {
 
     jobRoleID = jobRoleID;
 
@@ -15,8 +15,10 @@ exports.getJobSpec = async ( jobRoleID ) => {
 
         }
         else {
+
             console.log(fetch_response.status, ' | ', fetch_response.statusText, " | Unable to fetch Job Spec ");
             return null
+
         }
 
 }
