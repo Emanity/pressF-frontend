@@ -9,7 +9,6 @@ const assert = require('assert');
 const app = require('../app');
 const fetch = require('node-fetch')
 
-
 // Index Test
 describe('index', function() {
     
@@ -36,7 +35,6 @@ describe('index', function() {
     })
 
 })
-
 
 describe('Job Roles With Fetch', () => {
     beforeEach(() => {
