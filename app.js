@@ -6,7 +6,6 @@ var path = require('path')
 
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
-const { json } = require('express');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,16 +21,19 @@ app.use(express.static('public'))
 // Nunjucks view engine
 app.set('view engine', 'html');
 
+// Index (Home Page) Route
 app.get('/', function (req, res) { 
    res.render('index')
    console.log('Request processed'); 
 }); 
 
+// Index (Home Page) Route
 app.get('/index', function (req, res) {
    res.render('index')
    console.log('Request processed'); 
 }); 
 
+// Job Roles Route
 app.get('/job-roles', async (req, res) => {
 
    let result = await JobRoles.getJobRoles()
@@ -39,6 +41,7 @@ app.get('/job-roles', async (req, res) => {
    
 })
 
+// Index (Home Page) Route
 app.get('/job-role-details/:jobRoleID', async (req, res) => {
    
    jobRoleID = req.params.jobRoleID;
@@ -50,23 +53,3 @@ app.get('/job-role-details/:jobRoleID', async (req, res) => {
 })
 
 module.exports = app;
-
-// // POC - API Call (Passing a value to JAVA API)
-// app.get('/api_getTest/:testvalue', async (req, res) => {
-
-//    // Request parameters URL
-//    testvalue = req.params.testvalue;
-
-//    // API URL Var
-//    api_url = `http://localhost:8080/api/print/${testvalue}`
-
-//    // Fetch from API URL
-//    const fetch_response = await fetch(api_url);
-
-//    // API Response in HTML/Text
-//    const text = await fetch_response.text();
-
-//    // Render Response in Text - (NOTE- Any DB Response will be JSON won't need this again. Error is expected, due to looking for Nunjucks)
-//    res.render(text);
-
-// })

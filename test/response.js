@@ -1,3 +1,4 @@
+// Example expected response
 module.exports = {
     jobRoleID: 1,
     jobTitle: "(CTO) Chief Technology Officer",

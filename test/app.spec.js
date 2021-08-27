@@ -7,9 +7,8 @@ const expect = require('chai').expect;
 var supertest = require('supertest');
 const assert = require('assert');
 const app = require('../app');
-const fetch = require('node-fetch')
 
-// Index Test
+// Index (Home Page) Test
 describe('index', function() {
     
     var request
@@ -20,7 +19,7 @@ describe('index', function() {
 
     })
 
-    describe('GET /', function() {
+    describe('Checks that gets / returns 200 response', function() {
         
         it('should return OK status', function(){
         return request
