@@ -1,3 +1,9 @@
+const nock = require('nock');
+const response = require('./response');
+const getJobRoles = require('../JobRoles').getJobRoles;
+const getJobRoleDetails = require('../JobRoles').getJobRoleDetails;
+const expect = require('chai').expect;
+
 var supertest = require('supertest');
 const assert = require('assert');
 const app = require('../app');
@@ -31,126 +37,45 @@ describe('index', function() {
 
 })
 
-// Job Roles Test
-    describe('job-roles', function() {
 
-        var request
-        
-        beforeEach(function () {
+describe('Job Roles With Fetch', () => {
+    beforeEach(() => {
+        nock('http://localhost:8080/')
+          .get('/api/getjobroles')
+          .reply(200, response);
+      })
 
-            request = supertest(app)
+      it('Get a db response', () => {
+          console.log(response)
+        return getJobRoles()
+          .then(response => {
+            //expect an object back
+            expect(typeof response).to.equal('object');
+            //Test result of name, company and location for the response
+            expect(response.jobRoleID).to.equal(1)
+
+          })
+      })
+    
+})
+
+describe('Job Roles Details with Fetch', () => {
+  beforeEach(() => {
+      nock('http://localhost:8080/')
+        .get('/api/getjobroledetails/1')
+        .reply(200, response);
+    })
+
+    it('Get a db response', () => {
+        console.log(response)
+      return getJobRoleDetails(1)
+        .then(response => {
+          //expect an object back
+          expect(typeof response).to.equal('object');
+          //Test result of name, company and location for the response
+          expect(response.jobRoleID).to.equal(1)
 
         })
-
-
-    describe('GET /job-roles', function() {
-        
-        it('should return OK status', async () => {
-        return await request
-
-            .get('/job-roles')
-            
-            .then(function(response) {
-
-                assert.equal(response.statusCode, 200)
-                
-            })
-
-        })
-
     })
-
-})
-
-//Job Roles Details Test Job Role Exists
-describe('job-role-details', function() {
-
-    var request
-    
-    beforeEach(function () {
-
-        request = supertest(app)
-
-    })
-
-describe('GET /job-role-details Role Exists', function() {
-    
-    it('should return OK status', async () => {
-
-    return await request
-
-        .get('/job-role-details/1')
-
-        .then(function(response){
-
-            assert.equal(response.statusCode, 200)
-            
-        })
-        
-    })
-
-})
-
-})
-
-//Job Role Details Do Not Exist
-describe('job-role-details', function() {
-
-    var request
-    
-    beforeEach(function () {
-
-        request = supertest(app)
-
-    })
-
-describe('GET /job-role-details Role Does Not Exist', function() {
-    
-    it('should return OK status', async () => {
-
-    return await request
-
-        .get('/job-role-details/2000')
-
-        .then(function(response){
-
-            assert.equal(response.statusCode, 200)
-            
-        })
-        
-    })
-
-})
-
-})
-
-//Job Role Details Do Not Exist (Text passed in instead of number)
-describe('job-role-details', function() {
-
-    var request
-    
-    beforeEach(function () {
-
-        request = supertest(app)
-
-    })
-
-describe('GET /job-role-details Role Does Not Exist (text)', function() {
-    
-    it('should return OK status', async () => {
-
-    return await request
-
-        .get('/job-role-details/hi')
-
-        .then(function(response){
-
-            assert.equal(response.statusCode, 200)
-            
-        })
-        
-    })
-
-})
-
+  
 })
