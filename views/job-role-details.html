@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% set title = 'Job Role Details' %}
+
+{% block content %}
+
+<div class="container">
+
+{% if JobRoles and JobRoles.length > 0 %}
+
+    {% for JobRole in JobRoles %}
+
+            <div class="card text-center">
+                
+                <div class="card-header">
+
+                    <strong>{{JobRole.jobTitle}}</strong>
+
+                </div>
+                
+                <div class="card-body">
+                    
+                    <div class="accordion" id="accordionBU">
+                        
+                        <div class="accordion-item">
+                            
+                            <h2 class="accordion-header" id="headingOne">
+                                
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Job Role Details
+                                </button>
+
+                            </h2>
+
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                                <div class="accordion-body">
+
+                                    <ul id="jobDetailsList">
+
+                                        <li>Job Band: {{JobRole.jobBand}}</li>
+                                        <li>Job Capability: {{JobRole.jobCapability}}</li>
+                                        <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="accordion-item">
+                            
+                            <h2 class="accordion-header" id="headingTwo">
+                                
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Job Competencies
+                                </button>
+
+                            </h2>
+
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                
+                                <div class="accordion-body">
+                                    
+                                    <p>{{JobRole.jobCompetencies}}</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="accordion-item">
+
+                            <h2 class="accordion-header" id="headingThree">
+
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Job Specification
+                                </button>
+
+                            </h2>
+
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+
+                                <div class="accordion-body">
+                                    
+                                    <p>{{JobRole.jobSpecification}}</p>
+
+                                    {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
+                                        <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer text-muted">
+                    Job listing created: {{JobRole.recordCreated}}
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    {% else %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <h4> No result can be returned! </h4>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    {% endif %}
+
+{% endblock %}
