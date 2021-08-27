@@ -88,8 +88,9 @@
                                     
                                     <p>{{JobRole.jobSpecification}}</p>
 
-                                    <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
-
+                                    {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
+                                        <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
+                                    {% endif %}
                                 </div>
 
                             </div>
