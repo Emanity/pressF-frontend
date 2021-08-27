@@ -43,7 +43,7 @@ app.get('/job-role-details/:jobRoleID', async (req, res) => {
    
    jobRoleID = req.params.jobRoleID;
 
-   let result = await JobRoleDetails.getJobRoleDetails(jobRoleID);
+   let result = await JobRoles.getJobRoleDetails(jobRoleID);
 
    res.render('job-role-details', {JobRoles : result})
 
