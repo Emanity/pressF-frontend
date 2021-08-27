@@ -24,7 +24,7 @@ exports.getJobRoleDetails = async ( jobRoleID ) => {
 
     jobRoleID = jobRoleID;
 
-    api_url = `http://localhost:8080/api/getjobspec/${jobRoleID}`;
+    api_url = `http://localhost:8080/api/getjobroledetails/${jobRoleID}`;
 
     const fetch_response = await fetch(api_url)
         
