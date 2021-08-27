@@ -36,7 +36,7 @@ exports.getJobRoleDetails = async ( jobRoleID ) => {
         }
         else {
 
-            console.log(fetch_response.status, ' | ', fetch_response.statusText, " | Unable to fetch Job Spec ");
+            console.log(fetch_response.status, ' | ', fetch_response.statusText, " | Unable to fetch Job Role Details ");
             return null
 
         }
