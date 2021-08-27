@@ -41,3 +41,6 @@ footer p {
     height: 2.5rem;    
   }
 
+  #jobDetailsList li {
+      text-align: left;
+  }
