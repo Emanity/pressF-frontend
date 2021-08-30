@@ -3,12 +3,42 @@
     padding-left: 15px;
 }
 
+a {
+    color:#283583;
+}
+
+a:hover {
+    color:#283583;
+}
+
 body {
     background-color:#ffffff;
     overflow-x: hidden;
 }
 
+#card-text{
+    text-align: center;
+}
+
 #login-btn{
+    color: #283583;
+    border-color: #283583;
+}
+
+#login-btn:hover {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+#jobRoles-Button {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #283583;
+}
+
+#jobRoles-Button:hover {
+    background-color: #ffff;
     color: #283583;
     border-color: #283583;
 }
@@ -57,3 +87,16 @@ footer p {
   #list {
       padding: 10px;
   }
+
+.card p {
+      display: block;
+      padding-left: 10px;
+  }
+
+.card a {
+    display: block;
+    padding-left: 10px;
+}
+
+
+

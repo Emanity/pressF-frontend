@@ -10,9 +10,9 @@
 
     {% for JobRole in JobRoles %}
 
-            <div class="card text-center">
+            <div class="card">
                 
-                <div class="card-header">
+                <div class="card-header" id="card-text">
 
                     <strong>{{JobRole.jobTitle}}</strong>
 
@@ -62,7 +62,7 @@
                                         <p>{{JobRole.jobSpecification}}</p>
 
                                         {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
-                                            <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
+                                            <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a><br>
 
                                         {% else%}
 
@@ -74,9 +74,11 @@
 
                         </div>
 
-                    <br>
+                </div>
 
-                <div class="card-footer text-muted">
+            </div>
+
+                <div class="card-footer text-muted" id="card-text">
 
                     Job listing created: {{JobRole.recordCreated}}
 
@@ -86,8 +88,6 @@
 
         </div>
 
-
-
     {% endfor %}
 
     {% else %}
@@ -96,13 +96,15 @@
 
         <div class="row">
 
-            <h4> No result can be returned! </h4>
+            <div class="card card-header">
+
+                <h4> No result can be returned! </h4>
+
+            </div>
 
         </div>
 
     </div>
-
-    <br>
 
     {% endif %}
 
