@@ -19,6 +19,7 @@ describe('index', function() {
 
     })
 
+    //Test checks Homepage
     describe('Checks that gets / returns 200 response', function() {
         
         it('should return OK status', function(){
@@ -35,6 +36,7 @@ describe('index', function() {
 
 })
 
+// Test getJobRoles method to ensure all records returned
 describe('Job Roles With Fetch - All Records', () => {
     beforeEach(() => {
         nock('http://localhost:8080/')
@@ -56,6 +58,7 @@ describe('Job Roles With Fetch - All Records', () => {
     
 })
 
+// Test getJobRolesDetails to ensure record is returned when exists
 describe('Job Roles Details with Fetch - Record Exists', () => {
   beforeEach(() => {
       nock('http://localhost:8080/')
@@ -77,6 +80,7 @@ describe('Job Roles Details with Fetch - Record Exists', () => {
   
 })
 
+// Test getJobRolesDetails to ensure null is returned when does not exist
 describe('Job Roles Details with Fetch - Does Not Exist', () => {
   beforeEach(() => {
       nock('http://localhost:8080/')
@@ -96,6 +100,7 @@ describe('Job Roles Details with Fetch - Does Not Exist', () => {
   
 })
 
+// Test getJobRolesDetails to ensure null is returned when does not exist (String)
 describe('Job Roles Details with Fetch - Does Not Exist (String)', () => {
   beforeEach(() => {
       nock('http://localhost:8080/')
