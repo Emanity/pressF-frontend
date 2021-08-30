@@ -3,12 +3,42 @@
     padding-left: 15px;
 }
 
+a {
+    color:#283583;
+}
+
+a:hover {
+    color:#283583;
+}
+
 body {
     background-color:#ffffff;
     overflow-x: hidden;
 }
 
+#card-text{
+    text-align: center;
+}
+
 #login-btn{
+    color: #283583;
+    border-color: #283583;
+}
+
+#login-btn:hover {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+#jobRoles-Button {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #283583;
+}
+
+#jobRoles-Button:hover {
+    background-color: #ffff;
     color: #283583;
     border-color: #283583;
 }
@@ -19,7 +49,7 @@ body {
 
 #page_container {
     position: relative;
-    min-height: 91vh;
+    min-height: 92vh;
 }
 
 #content_wrap {
@@ -27,9 +57,10 @@ body {
   }
 
 footer p {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 30px;
     text-align: center;
+    color: #ffffff;
 }
 
 .page_footer {
@@ -38,9 +69,30 @@ footer p {
     margin: none;
     padding: none;
     width: 100%;
-    height: 2.5rem;    
+  }
+
+  footer {
+    background: linear-gradient( 180deg, #252d4f 0%, rgba(37,45,79,0) 100%),linear-gradient(90deg, #004631 .02%, #61a83f 27.47%, #61a83f 40.06%, #41679f 69.71%, #283583 100%);
+    height: 98px;
   }
 
   #jobDetailsList li {
       text-align: left;
   }
+
+  #list {
+    padding: 10px;
+  }
+
+.card p {
+    display: block;
+    padding-left: 10px;
+  }
+
+.card a {
+    display: block;
+    padding-left: 10px;
+}
+
+
+
