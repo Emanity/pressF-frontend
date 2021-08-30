@@ -20,94 +20,73 @@
                 
                 <div class="card-body">
                     
-                    <div class="accordion" id="accordionBU">
+                    <div id="list{{JobRole.jobRoleID}}">
                         
-                        <div class="accordion-item">
+                        <div class="card">
+
+                            <details>
+                        
+                                <summary id="list"> Job Role Details </summary>
                             
-                            <h2 class="accordion-header" id="headingOne">
-                                
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Job Role Details
-                                </button>
+                                        <ul id="jobDetailsList">
 
-                            </h2>
+                                            <li>Job Band: {{JobRole.jobBand}}</li>
+                                            <li>Job Capability: {{JobRole.jobCapability}}</li>
+                                            <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
 
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        </ul>
 
-                                <div class="accordion-body">
+                            </details>
 
-                                    <ul id="jobDetailsList">
+                        </div>    
 
-                                        <li>Job Band: {{JobRole.jobBand}}</li>
-                                        <li>Job Capability: {{JobRole.jobCapability}}</li>
-                                        <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
 
-                                    </ul>
+                        <div class="card">
 
-                                </div>
+                            <details>
 
-                            </div>
+                                <summary id="list"> Job Competencies </summary>
+                                        
+                                        <p>{{JobRole.jobCompetencies}}</p>
+
+                            </details>
 
                         </div>
+                        
+                        <div class="card">
 
-                        <div class="accordion-item">
+                            <details>
+
+                                <summary id="list"> Job Specification </summary>
+                                        
+                                        <p>{{JobRole.jobSpecification}}</p>
+
+                                        {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
+                                            <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
+
+                                        {% else%}
+
+                                            <p>SharePoint Link Does Not Exist</p>
+
+                                        {% endif %}
                             
-                            <h2 class="accordion-header" id="headingTwo">
-                                
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Job Competencies
-                                </button>
-
-                            </h2>
-
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                
-                                <div class="accordion-body">
-                                    
-                                    <p>{{JobRole.jobCompetencies}}</p>
-
-                                </div>
-
-                            </div>
+                            </details>
 
                         </div>
 
-                        <div class="accordion-item">
-
-                            <h2 class="accordion-header" id="headingThree">
-
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Job Specification
-                                </button>
-
-                            </h2>
-
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-
-                                <div class="accordion-body">
-                                    
-                                    <p>{{JobRole.jobSpecification}}</p>
-
-                                    {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
-                                        <a href="{{JobRole.jobProfileLink}}">SharePoint Link</a>
-                                    {% endif %}
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                    <br>
 
                 <div class="card-footer text-muted">
+
                     Job listing created: {{JobRole.recordCreated}}
+
                 </div>
 
             </div>
 
         </div>
+
+
 
     {% endfor %}
 
@@ -126,5 +105,6 @@
     <br>
 
     {% endif %}
+
 
 {% endblock %}

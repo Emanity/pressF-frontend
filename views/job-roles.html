@@ -28,31 +28,23 @@
 
                 {% for JobRole in JobRoles %}
                     
-                    <div class="accordion" id="accordion{{JobRole.jobRoleID}}">
+                    <div class="card" id="list{{JobRole.jobRoleID}}">
 
-                        <div class="accordion-item">
-                        
-                            <h2 class="accordion-header" id="heading{{JobRole.jobRoleID}}">
-                                
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{JobRole.jobRoleID}}" aria-expanded="true" aria-controls="collapse{{JobRole.jobRoleID}}">
-                                    {{JobRole.jobTitle}}
-                                </button>
+                        <details>
 
-                            </h2>
-                            
-                            <div id="collapse{{JobRole.jobRoleID}}" class="accordion-collapse collapse" aria-labelledby="heading{{JobRole.jobRoleID}}" data-bs-parent="#accordion{{JobRole.jobRoleID}}">
-                                
-                                <div class="accordion-body">
-                            
-                                                            
+                                <summary id="list">{{JobRole.jobTitle}}</summary>
+
+                            <ul>
+                          
                                     <li>Job Band: {{JobRole.jobBand}}</li>
                                     <li>Job Capability: {{JobRole.jobCapability}}</li>
                                     <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
                                     <li><a href="/job-role-details/{{JobRole.jobRoleID}}">View Job Role Details</a></li>
-                                        
-                                </div>
 
-                            </div>
+                            </ul>
+
+                        </details>
+
                     </div>
 
                 {% endfor %} 
