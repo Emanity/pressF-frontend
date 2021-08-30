@@ -7,9 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12"> 
-
             <h2>Job Roles</h2>
-
         </div>
     </div>
 </div>
@@ -29,22 +27,15 @@
                 {% for JobRole in JobRoles %}
                     
                     <div class="card" id="list{{JobRole.jobRoleID}}">
-
                         <details>
-
                                 <summary id="list">{{JobRole.jobTitle}}</summary>
-
                             <ul>
-                          
                                     <li>Job Band: {{JobRole.jobBand}}</li>
                                     <li>Job Capability: {{JobRole.jobCapability}}</li>
                                     <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
                                     <li><a href="/job-role-details/{{JobRole.jobRoleID}}">View Job Role Details</a></li>
-
                             </ul>
-
                         </details>
-
                     </div>
 
                 {% endfor %} 
@@ -57,11 +48,8 @@
             {% endif %}
 
             <br>
-
         </div>
-        
     </div>
-
 </div>
 
 {% endblock %}
