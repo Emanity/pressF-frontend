@@ -64,4 +64,24 @@ describe('app.js route testing', () => {
 			await expect(res.render).toHaveBeenCalledWith('job-roles', {JobRoles: {result: 'Test Data'}});
 		});
 	});
+	// GET /job-role-details/:JobRoleID 
+	describe('GET /job-role-details/:jobRoleID testing', () => {
+		test('GET /job-role-details/:jobRoleID', () => {
+			expect(mockApp.get).toHaveBeenCalledWith('/job-role-details/:jobRoleID', expect.any(Function));
+		});
+		test('GET /job-role-details/1 renders job-role-details.html page', async() => {
+			// mocking example result from api call
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve(
+				{ status: 200, json: () => Promise.resolve(
+					{ result: 'Test Data' }
+				)}));
+			// grabs the fourth call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
+			const behaviour = mockApp.get.mock.calls[3][1];
+			const res = { render: jest.fn() };
+			const req = { params: jest.fn(1) };
+			// call function used by get handler
+			await behaviour(req, res);
+			await expect(res.render).toHaveBeenCalledWith('job-role-details', {JobRole: {result: 'Test Data'}});
+		});
+	});
 });
