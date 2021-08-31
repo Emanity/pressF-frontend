@@ -1,74 +1,75 @@
 /* eslint-disable jest/valid-expect */
+/* imports */
 const nock = require('nock');
 const getJobRoles = require('../app/JobRoles').getJobRoles;
 const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
 const expect = require('chai').expect;
 
-/* Test Unit: testing JobRoles.js 
+/* Test Suite: testing JobRoles.js 
 - does each method fetch when api can be found
 - does it return null if it can't reach api */
 describe('JobRoles.js method testing', () => {
+	// getJobRoles() testing 
 	describe('getJobRoles()', () => {
-		describe('getJobRoles() return null when api is not available', () => {
+		// unhappy path
+		describe('getJobRoles() returns null when api endpoint is not available', () => {
 			// pass in status code 404
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroles')
 					.reply(404, null);
 			});
-			it('Get a response', () => {
+			it('should return a null response', () => {
 				return getJobRoles()
 					.then(response => {
-						// should return null
 						expect(response).to.equal(null);
 					});
 			});
 		});
-		describe('getJobRoles() return json when api is available(status 200)', () => {
+		// happy path
+		describe('getJobRoles() returns json when api endpoint is available (status 200)', () => {
 			// pass in status code 200
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroles')
 					.reply(200, { results: [{id:1},{id:2}] });
 			});
-			it('Get a response', () => {
+			it('should return a json object', () => {
 				return getJobRoles()
 					.then(response => {
-						// should return json object
 						expect(typeof response).to.equal('object');
 					});
 			});
 		});
 	});
-
+	// getJobRoleDetails() testing
 	describe('getJobRoleDetails()', () => {
-		describe('getJobRoleDetails() return null when api is not available', () => {
+		// unhappy path
+		describe('getJobRoleDetails() returns null when api endpoint is not available', () => {
 			// pass in status code 404
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroledetails/1000')
 					.reply(404, null);
 			});
-			it('Get a response', () => {
+			it('should return a null response', () => {
 				return getJobRoleDetails(1000)
 					.then(response => {
-						// should return null
 						expect(response).to.equal(null);
 					});
 			});
 		});
-
-		describe('getJobRoleDetails() return json when api is available(status 200)', () => {
-			// pass in status code 404
+		// happy path
+		describe('getJobRoleDetails() returns json when api endpoint is available (status 200)', () => {
+			// pass in status code 200
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroledetails/1')
 					.reply(200, {id:1});
 			});
-			it('Get a response', () => {
+			it('should return a json object', () => {
 				return getJobRoleDetails(1)
 					.then(response => {
-						// should return json object
 						expect(typeof response).to.equal('object');
 					});
 			});

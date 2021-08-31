@@ -18,7 +18,7 @@ jest.mock('node-fetch', () => mockNodeFetch);
 /* importing app.js file to test */
 require('../app/app.js');
 
-/* First test unit: route testing app.js 
+/* Test Suite: route testing app.js 
 - does each route get called
 - does it then render the appropriate view (with data if required */
 describe('app.js route testing', () => {
