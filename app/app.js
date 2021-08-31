@@ -36,7 +36,7 @@ app.get('/job-roles', async (req, res) => {
 	res.render('job-roles', {JobRoles : result});
 });
 
-/* Index (Home Page) Route */
+/* Job Role Details Route */
 app.get('/job-role-details/:jobRoleID', async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
