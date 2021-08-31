@@ -14,6 +14,7 @@ a:hover {
 body {
     background-color:#ffffff;
     overflow-x: hidden;
+    font-family: "century-gothic" !important;
 }
 
 #card-text{
