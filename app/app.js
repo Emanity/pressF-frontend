@@ -40,6 +40,6 @@ app.get('/job-roles', async (req, res) => {
 app.get('/job-role-details/:jobRoleID', async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
-	res.render('job-role-details', {JobRoles : result});
+	res.render('job-role-details', {JobRole : result});
 });
 module.exports = app;

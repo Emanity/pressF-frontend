@@ -3,12 +3,10 @@
 {% set title = 'Job Role Details' %}
 
 {% block content %}
-
 <div class="container">
 
-{% if JobRoles and JobRoles.length > 0 %}
+{% if JobRole %}
 
-    {% for JobRole in JobRoles %}
 
             <div class="card">
                 <div class="card-header" id="card-text">
@@ -32,6 +30,7 @@
                             <details>
                                 <summary id="list"> Job Competencies </summary>       
                                         <p>{{JobRole.jobCompetencies}}</p>
+                                        <p><a href="https://kainossoftwareltd.sharepoint.com/people/Shared%20Documents/Forms/AllItems.aspx?id=%2Fpeople%2FShared%20Documents%2FLeadership%20Competency%20Framework%20Documents%2FKainos%20Leadership%20Competency%20Framework%20%28Apprentice%20to%20Consultant%29%20v5%2E3%2Epdf&parent=%2Fpeople%2FShared%20Documents%2FLeadership%20Competency%20Framework%20Documents">SharePoint Link (For Details)</a></p>
                             </details>
                         </div>
                         
@@ -60,7 +59,7 @@
             </div>
         </div>
 
-    {% endfor %}
+   
 
     {% else %}
 
