@@ -1,100 +1,50 @@
 /* eslint-disable jest/valid-expect */
-const nock = require('nock');
-const response = require('./response');
-const getJobRoles = require('../app/JobRoles').getJobRoles;
-const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
-const expect = require('chai').expect;
-var supertest = require('supertest');
-const assert = require('assert');
-const app = require('../app/app');
+// mocking and setup
 
-/* Index (Home Page) Test */
-describe('index', function() {
-	var request;
-	beforeEach(function () {
-		request = supertest(app);
-	});
+const mockApp = {
+	get: jest.fn(),
+	listen: jest.fn(),
+	set: jest.fn(),
+	use: jest.fn(),
+};
+const mockExpress = jest.fn(() => mockApp);
+mockExpress.static = jest.fn();
 
-	/* Test checks Homepage */
-	describe('Checks that gets / returns 200 response', function() {
-		it('should return OK status', function(){
-			return request
-				.get('/')
-				.then(function(response){
-					assert.equal(response.statusCode, 200);
-				});
+jest.mock('express', () => mockExpress);
+
+const mockNodeFetch = jest.fn();
+jest.mock('node-fetch', () => mockNodeFetch);
+    
+require('../app/app.js');
+
+describe('app.js route testing', () => {
+	describe('GET /index testing', () => {
+		test('root route serves index html page', () => {
+			// call get function here?
+			expect(mockApp.get).toHaveBeenCalledWith('/', expect.any(Function));
+
+			const behaviour = mockApp.get.mock.calls[0][1]; // grab the second [1] param of the first [0] call
+			const res = { render: jest.fn() };
+			// call function used by get handler
+			behaviour(null, res);
+			expect(res.render).toHaveBeenCalledWith('index');
 		});
 	});
-});
 
-/* Test getJobRoles method to ensure all records returned */
-describe('Job Roles With Fetch - All Records', () => {
-	beforeEach(() => {
-		nock('http://localhost:8080/')
-			.get('/api/getjobroles')
-			.reply(200, response);
-	});
-	it('Get a db response', () => {
-		console.log(response);
-		return getJobRoles()
-			.then(response => {
-				// expect an object back
-				expect(typeof response).to.equal('object');
-				// Test result of name, company and location for the response
-				expect(response.jobRoleID).to.equal(1);
-			});
-	});
-});
+	describe('GET /job-roles testing', () => {
 
-/* Test getJobRolesDetails to ensure record is returned when exists */
-describe('Job Roles Details with Fetch - Record Exists', () => {
-	beforeEach(() => {
-		nock('http://localhost:8080/')
-			.get('/api/getjobroledetails/1')
-			.reply(200, response);
-	});
-	it('Get a db response', () => {
-		console.log(response);
-		return getJobRoleDetails(1)
-			.then(response => {
-				// expect an object back
-				expect(typeof response).to.equal('object');
-				// Test result of name, company and location for the response
-				expect(response.jobRoleID).to.equal(1);
-			});
-	});
-});
+        test("job-roles route get method set up in express", () => {
+            expect(mockApp.get).toHaveBeenCalledWith('/job-roles', expect.any(Function))
+        });
+		test('/job-roles renders job-roles.html page', async() => {
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ data: "Test Data" })}))
 
-/* Test getJobRolesDetails to ensure null is returned when does not exist */
-describe('Job Roles Details with Fetch - Does Not Exist', () => {
-	beforeEach(() => {
-		nock('http://localhost:8080/')
-			.get('/api/getjobroledetails/1000')
-			.reply(404, null);
-	});
-	it('Get a db response', () => {
-		console.log(response);
-		return getJobRoleDetails(1000)
-			.then(response => {
-				// expect an object back
-				expect(response).to.equal(null);
-			});
-	});
-});
+			const behaviour = mockApp.get.mock.calls[2][1]; // grab the second [1] param of the first [0] call
+			const res = { render: jest.fn() };
+			// call function used by get handler
+			behaviour(null, res);
+			await expect(res.render).toHaveBeenCalledWith('job-roles');
+		});
 
-/* Test getJobRolesDetails to ensure null is returned when does not exist (String) */
-describe('Job Roles Details with Fetch - Does Not Exist (String)', () => {
-	beforeEach(() => {
-		nock('http://localhost:8080/')
-			.get('/api/getjobroledetails/hi')
-			.reply(404, null);
-	});
-	it('Get a db response', () => {
-		console.log(response);
-		return getJobRoleDetails('hi')
-			.then(response => {
-				// expect an object back
-				expect(response).to.equal(null);
-			});
-	});
+	})
 });
