@@ -22,8 +22,8 @@ require('../app/app.js');
 - does each route get called
 - does it then render the appropriate view (with data if required */
 describe('app.js route testing', () => {
-	// / testing 
-	describe('/index testing', () => {
+	// GET / testing 
+	describe('GET /index testing', () => {
 		test('GET / renders index html page', () => {
 			// call get function
 			expect(mockApp.get).toHaveBeenCalledWith('/', expect.any(Function));
@@ -34,7 +34,7 @@ describe('app.js route testing', () => {
 			behaviour(null, res);
 			expect(res.render).toHaveBeenCalledWith('index');
 		});
-		test('/index renders index html page', () => {
+		test('GET /index renders index html page', () => {
 			// call get function
 			expect(mockApp.get).toHaveBeenCalledWith('/index', expect.any(Function));
 			// grabs the second call in the app file, i.e. app.get('/index')
@@ -45,12 +45,12 @@ describe('app.js route testing', () => {
 			expect(res.render).toHaveBeenCalledWith('index');
 		});
 	});
-	// /job-roles 
-	describe('/job-roles testing', () => {
+	// GET /job-roles 
+	describe('GET /job-roles testing', () => {
 		test('GET /job-roles', () => {
 			expect(mockApp.get).toHaveBeenCalledWith('/job-roles', expect.any(Function));
 		});
-		test('/job-roles renders job-roles.html page', async() => {
+		test('GET /job-roles renders job-roles.html page', async() => {
 			// mocking example result from api call
 			mockNodeFetch.mockImplementationOnce(() => Promise.resolve(
 				{ status: 200, json: () => Promise.resolve(
