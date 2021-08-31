@@ -4,19 +4,6 @@ const getJobRoles = require('../app/JobRoles').getJobRoles;
 const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
 const expect = require('chai').expect;
 
-// mocking app
-const mockApp = {
-	get: jest.fn(),
-	listen: jest.fn(),
-	set: jest.fn(),
-	use: jest.fn(),
-};
-
-/* mocking express and express.static method */
-const mockExpress = jest.fn(() => mockApp);
-mockExpress.static = jest.fn();
-jest.mock('express', () => mockExpress);
-
 /* Test Unit: testing JobRoles.js 
 - does each method fetch when api can be found
 - does it return null if it can't reach api */
