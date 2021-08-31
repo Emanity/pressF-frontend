@@ -7,12 +7,6 @@ describe("Loading home page", function(){
     });
 });
 
-describe("Getting Job Roles view", function(){
-    it("connects to display Job Roles", function(){
-        cy.visit("http://localhost:7999");
-        cy.get('.btn').contains('View Job Roles').click();
-        cy.url().should('include', '/job-roles');
-    });
-});
+
 
 
