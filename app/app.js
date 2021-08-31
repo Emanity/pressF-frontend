@@ -1,6 +1,6 @@
-const express = require('express')
-const app = express()
-const nunjucks = require('nunjucks')
+const express = require('express');
+const app = express();
+const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
 
@@ -11,10 +11,13 @@ nunjucks.configure('views', {
 	autoescape: true,
 	express: app 
 }); 
+
 /* Provide Public files such as Images & Styling */
 app.use(express.static('public'));
+
 /* Nunjucks view engine */
 app.set('view engine', 'html');
+
 /* Index (Home Page) Route */
 app.get('/', function (req, res) { 
 	res.render('index');

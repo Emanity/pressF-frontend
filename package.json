@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon app/server.js",
     "test": "jest --passWithNoTests --detectOpenHandles",
-    "lint": "./node_modules/.bin/eslint app/*.js test/*.js --fix"
+    "lint": "./node_modules/.bin/eslint app/*.js test/*.js"
   },
   "repository": {
     "type": "git",
