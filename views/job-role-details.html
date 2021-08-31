@@ -3,12 +3,10 @@
 {% set title = 'Job Role Details' %}
 
 {% block content %}
-
 <div class="container">
 
-{% if JobRoles and JobRoles.length > 0 %}
+{% if JobRole %}
 
-    {% for JobRole in JobRoles %}
 
             <div class="card">
                 <div class="card-header" id="card-text">
@@ -60,7 +58,7 @@
             </div>
         </div>
 
-    {% endfor %}
+   
 
     {% else %}
 
