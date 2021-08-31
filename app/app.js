@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 /* Configuring Express to use Nunjucks */
 nunjucks.configure('views', {
 	autoescape: true,
