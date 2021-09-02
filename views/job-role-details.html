@@ -52,13 +52,9 @@
                             <details>
                                 <summary id="list"> Job Role Responsibilties </summary>       
                                         <ul>
-                                        {% if jobRole.jobRoleResponsibilities > 0 %}
-                                            {% for Responsibility in JobRole.jobRoleResponsibilities %}
+                                            {% for jobRoleResponsibility in JobRole.jobRoleResponsibilities %}
                                                 <li>{{jobRole.jobRoleResponsibility}}</li>
                                             {% endfor %}
-                                        {% else %}
-                                            <p>Job Role Responsibilties cannot be found</p>
-                                        {% endif %}
                                         </ul>
                             </details>
                         </div>
