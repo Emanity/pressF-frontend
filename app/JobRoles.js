@@ -18,6 +18,7 @@ exports.getJobRoles = async () => {
 			return null;
 		}
 	} catch(err) {
+		console.log('API connection failed: ' + err);
 		return 'Error: There was a problem retrieving job roles.'; 
 	}
 };
