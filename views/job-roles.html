@@ -15,8 +15,10 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12"> 
-
-            {% if JobRoles and JobRoles.length > 0 %}
+            {% if JobRoles == "Error: There was a problem retrieving job roles." %}
+                <h4> {{JobRoles}} </h4>
+                <p> The service is not available right now. Please try again later. </p>
+            {% elif JobRoles and JobRoles.length > 0 %}
 
 
                  <!--   <div class="input-group w-25 mb-3">
