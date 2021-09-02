@@ -95,5 +95,43 @@ footer p {
     padding-left: 10px;
 }
 
+.breadcrumb-svg-icon {
+    height: 0.65rem;
+    margin: 0 0.2rem;
+    vertical-align: middle;
+    width: 0.65rem;
+}
 
+.breadcrumbs {
+    align-items: center;
+    display: flex;
+    padding: 1rem 0;
+}
 
+.breadcrumb-list {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-item {
+    display: inline-block;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.breadcrumb {
+    align-items: center;
+    display: flex;
+    padding: 1rem 0;
+}
+
+.breadcrumb-items {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb__item {
+    display: inline-block;
+    margin: 0;
+    white-space: nowrap;
+}
