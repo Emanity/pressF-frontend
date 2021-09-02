@@ -55,7 +55,15 @@
                 <div class="card">
                             <details>
                                 <summary id="list"> Job Role Responsibilties </summary>       
-                                        <p>To be created</p>
+                                        <ul>
+                                        {% if jobRoleResponsibilities < 0 %}
+                                            {% for item in JobRole.jobRoleResponsibilities%}
+                                                <li>{{item}}</li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>Job Role Responsibilties cannot be found</p>
+                                        {% endif %}
+                                        </ul>
                             </details>
                         </div>
                 </div>
