@@ -50,12 +50,16 @@
 
                 <div class="card">
                             <details>
-                                <summary id="list"> Job Role Responsibilties </summary>       
+                                <summary id="list"> Job Role Responsibilties </summary>
+                                {% if JobRole.jobRoleResponsibilities and JobRole.jobRoleResponsibilities.length > 0 %}
                                         <ul>
-                                            {% for jobRoleResponsibility in JobRole.jobRoleResponsibilities %}
-                                                <li>{{jobRole.jobRoleResponsibility}}</li>
+                                            {% for responsibility in JobRole.jobRoleResponsibilities %}
+                                                <li>{{responsibility.jobRoleResponsibility}}</li>
                                             {% endfor %}
                                         </ul>
+                                {% else %}
+                                    <p> No responsibilities can be returned </p>
+                                {% endif %}
                             </details>
                         </div>
                 </div>
