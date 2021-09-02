@@ -5,7 +5,11 @@
 {% block content %}
 <div class="container">
 
-    {% if JobRole %}
+{% if JobRole %}
+
+    {% if JobRole == "Error: There was a problem retrieving job role details." %}
+        <h4> {{JobRole}} </h4>
+    {% else %}
 
     <div class="card">
         <div class="card-header" data-cy="jobTitleCard" id="card-text">
@@ -44,7 +48,7 @@
 
                         <a data-cy="jobSpecLink" href="{{JobRole.jobProfileLink}}">SharePoint Link</a><br>
 
-                        {% else%}
+                        {% else %}
 
                         <p>SharePoint Link Does Not Exist</p>
 
@@ -52,15 +56,18 @@
                     </details>
                 </div>
             </div>
-
         </div>
+
         <div class="card-footer text-muted" id="card-text">
             Job listing created: {{JobRole.recordCreated}}
         </div>
+        </div>
     </div>
-</div>
 
+    {% endif %}
+    
 {% else %}
+    
 
 <div class="container">
     <div class="row">
