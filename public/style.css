@@ -130,7 +130,7 @@ footer p {
     padding: 0;
 }
 
-.breadcrumb__item {
+.breadcrumb-item {
     display: inline-block;
     margin: 0;
     white-space: nowrap;
