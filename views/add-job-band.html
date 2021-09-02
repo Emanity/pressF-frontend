@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% set title = 'Add Job Band' %}
+
+{% block content %} 
+
+<div class="container"> 
+    <div class="col-lg-4 col-md-4 col-sm-12">
+    </div>
+    
+    <div class="col-lg-4 col-md-4 col-sm-12" id="accent-color">
+        <div class="row">
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="jobBandName">Job Band Name:</label>
+                    <input type="text" name="jobBandName" class="form-control" id="jobBandName">
+                </div>
+
+                <br>
+
+                <input type="submit" value="Submit" class="btn btn-primary" id="jobRoles-Button">
+            </form>
+        </div>
+        
+        <div class="col-lg-4 col-md-4 col-sm-12">
+        </div>
+    </div>
+</div>
+{% endblock %}

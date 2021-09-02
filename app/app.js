@@ -42,4 +42,21 @@ app.get('/job-role-details/:jobRoleID', async (req, res) => {
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {JobRole : result});
 });
+
+app.get('/login', function (req, res) {
+	res.render('login');
+});
+
+app.get('/add-job-band', function (req, res) {
+	res.render('add-job-band');
+});
+
+app.get('/add-job-capability', function (req, res) {
+	res.render('add-job-capability');
+});
+
+app.get('/add-job-role', function (req, res) {
+	res.render('add-job-role');
+});
+
 module.exports = app;

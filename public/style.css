@@ -118,3 +118,10 @@ footer p {
     margin: 0;
     white-space: nowrap;
 }
+
+#accent-color {
+    background-color: #252d4f;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+}
