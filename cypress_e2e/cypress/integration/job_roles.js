@@ -24,7 +24,7 @@ describe("Viewing job role's details", () => {
         cy.get('[data-cy=jobCompetencies]').should('contain', 'Job Competencies').click();
         cy.get('[data-cy=jobCompLink]').should('be.visible');
         cy.get('[data-cy=jobSpecification]').should('contain', 'Job Specification').click();
-        cy.get('[data-cy=jobRoleResponsibilities]').should('contain', 'Job Role Responsibilities').click();
         cy.get('[data-cy=jobSpecLink]').should('be.visible');
+        cy.get('[data-cy=jobRoleResponsibilities]').should('contain', 'Job Role Responsibilities').click();
     });
 });
