@@ -6,7 +6,3 @@ describe("Loading home page", function(){
         cy.url().should('include', '/');
     });
 });
-
-
-
-

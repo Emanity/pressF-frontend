@@ -27,6 +27,3 @@ describe("Viewing job role's details", () => {
         cy.get('[data-cy=jobSpecLink]').should('be.visible');
     });
 });
-
-
-
