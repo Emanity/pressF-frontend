@@ -120,8 +120,8 @@ footer p {
 }
 
 #accent-color {
-    background-color: #61a83f;
-    color: #ffffff;
+    border: solid #283583;
+    color: #00000;
     padding: 10px;
     border-radius: 15px;
 }
