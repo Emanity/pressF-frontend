@@ -124,6 +124,7 @@ footer p {
     color: #000000;
     padding: 20px;
     border-radius: 15px;
+    box-shadow:  2px 2px 4px #000000;
 }
 
 .formsPage {
