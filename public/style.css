@@ -200,3 +200,9 @@ footer p {
     color: #283583;
     border-color: #283583;
 }
+
+@media (max-width: 991px){
+    .formsPage{
+        width: 100%;
+    }
+}
