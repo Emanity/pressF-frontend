@@ -38,12 +38,6 @@
                 <p> The service is not available right now. Please try again later. </p>
             {% elif JobRoles and JobRoles.length > 0 %}
 
-
-                 <!--   <div class="input-group w-25 mb-3">
-                            <input type="text" class="form-control" placeholder="Search for available job roles"aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
-                    </div> -->
-
                 {% for JobRole in JobRoles %}
                     
                     <div class="card" id="list{{JobRole.jobRoleID}}" data-cy="jobSummary{{JobRole.jobRoleID}}">
