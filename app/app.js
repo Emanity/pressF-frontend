@@ -3,6 +3,7 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
+const user = require('./user');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -45,6 +46,12 @@ app.get('/job-role-details/:jobRoleID', async (req, res) => {
 
 app.get('/login', function (req, res) {
 	res.render('login');
+});
+
+app.post('/submit-login', async (req, res) => {
+	let result = await user.getLoginResponse(req);
+	res.render('login-result', {test : result});
+	
 });
 
 app.get('/add-job-band', function (req, res) {
