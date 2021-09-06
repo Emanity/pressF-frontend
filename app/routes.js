@@ -2,15 +2,16 @@ const express = require('express');
 const router = express.Router();
 const JobRoles = require('./JobRoles');
 const user = require('./user');
-const x = 0;
 
-router.all('/', (req, res, next) => {
-	if (req.session.user != null){
+router.all('*', (req, res, next) => {
+    console.log("Email on request: "+req.session.email);
+	if (req.session.email != null || req.url.startsWith('/login') || req.url.startsWith('/submit-login')){
 		next();
 	} else {
-        res.redirect('login');
+        res.redirect('/login');
 	}
 });
+
 
 /* Index (Home Page) Route */
 router.get('/', function (req, res) { 
@@ -44,13 +45,34 @@ router.get('/login', function (req, res) {
 router.post('/submit-login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
     if (result == '401'){
+        // TODO error
         res.redirect('login');
     } else {
         x = 1;
-	    res.render('login-result', {test : result});
+
+        req.session.email = JSON.parse(result).email;
+        req.session.role = JSON.parse(result).role;
+        req.session.save((err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        console.log(JSON.parse(result).email);
+
+	    res.render('login-result', {userDetails : result});
+
     }
 	
 });
+
+router.get('/logout',(req,res) => {
+    req.session.destroy((err) => {
+        if(err) {
+            return console.log(err);
+        }
+        res.redirect('/');
+    });
+})
 
 router.get('/add-job-band', function (req, res) {
 	res.render('add-job-band');
