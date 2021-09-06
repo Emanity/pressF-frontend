@@ -5,13 +5,11 @@ const crypto = require('crypto');
 
 this.exampleUser = {
 		email: null,
-		password: null,
 		role: null
 	};
 
 exports.updateUser = (req, role) => {
 	this.exampleUser.email = req.body.email
-	this.exampleUser.password = req.body.password
 	this.exampleUser.role = role
 }
 

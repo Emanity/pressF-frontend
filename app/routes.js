@@ -44,13 +44,12 @@ router.get('/login', function (req, res) {
 
 router.post('/submit-login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
-	user.updateUser(req, JSON.parse(result).role)
     if (result == '401'){
         // TODO error
         res.redirect('login');
     } else {
         x = 1;
-
+		user.updateUser(req, JSON.parse(result).role)
         req.session.email = JSON.parse(result).email;
         req.session.role = JSON.parse(result).role;
         req.session.save((err) => {
