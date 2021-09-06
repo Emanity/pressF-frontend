@@ -3,15 +3,14 @@ const router = express.Router();
 const JobRoles = require('./JobRoles');
 const user = require('./user');
 const x = 0;
-// function redirect (req, res, next){
-// 	if (req.session.user == null){
-// 		res.redirect('login');
-// 	} else {
-// 		next();
-// 	}
-// };
 
-
+router.all('/', (req, res, next) => {
+	if (req.session.user != null){
+		next();
+	} else {
+        res.redirect('login');
+	}
+});
 
 /* Index (Home Page) Route */
 router.get('/', function (req, res) { 

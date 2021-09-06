@@ -32,14 +32,6 @@ app.set('view engine', 'html');
 
 /* Routes */
 const routes = require('./routes.js');
-// const redirect = require('./routes.js').redirect();
-app.all('*', (req, res, next) => {
-	if (req.session.user == null){
-		res.redirect('login');
-	} else {
-		next();
-	}
-});
 app.use(routes);
-// app.use(redirect);
+
 module.exports = app;
