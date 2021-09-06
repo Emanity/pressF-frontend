@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% set title = 'User Profile' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12" id="JobRolesMenu">
+            <h2>{{ exuser.email }}</h2>
+            <h3>is Admin?: {{ exuser.role}}</h3>
+        </div>
+        {% block admin %}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

@@ -2,6 +2,21 @@
 const fetch = require('node-fetch');
 const crypto = require('crypto');
 
+
+this.exampleUser = {
+		email: null,
+		password: null,
+		role: null
+	};
+
+exports.updateUser = (req, role) => {
+	this.exampleUser.email = req.body.email
+	this.exampleUser.password = req.body.password
+	this.exampleUser.role = role
+}
+
+exports.getUser = () => { return this.exampleUser}
+
 // Gets response to attempted login from API
 exports.getLoginResponse = async (req) => {
 	try {

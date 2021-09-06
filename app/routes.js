@@ -4,8 +4,8 @@ const JobRoles = require('./JobRoles');
 const user = require('./user');
 
 router.all('*', (req, res, next) => {
-    console.log("Email on request: "+req.session.email);
-	if (req.session.email != null || req.url.startsWith('/login') || req.url.startsWith('/submit-login')){
+    console.log("Email on request: "+ user.getUser().email );
+	if (user.getUser().email != null || req.url.startsWith('/login') || req.url.startsWith('/submit-login')){
 		next();
 	} else {
         res.redirect('/login');
@@ -44,6 +44,7 @@ router.get('/login', function (req, res) {
 
 router.post('/submit-login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
+	user.updateUser(req, JSON.parse(result).role)
     if (result == '401'){
         // TODO error
         res.redirect('login');
@@ -58,12 +59,20 @@ router.post('/submit-login', async (req, res) => {
             }
         });
         console.log(JSON.parse(result).email);
-
 	    res.render('login-result', {userDetails : result});
 
     }
 	
 });
+
+router.get('/user-profile', (req,res) => {
+	if(user.getUser().role == 1){
+		res.render('admin-profile', {exuser : user.getUser()})
+	} else {
+		res.render('user-profile', {exuser : user.getUser()})
+	}
+	
+})
 
 router.get('/logout',(req,res) => {
     req.session.destroy((err) => {
