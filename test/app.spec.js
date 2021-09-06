@@ -23,7 +23,7 @@ require('../app/app.js');
 - does each route get called
 - does it then render the appropriate view (with data if required */
 describe('app.js route testing', () => {
-	// GET / testing 
+	/*  GET / testing */
 	describe('GET /index testing', () => {
 		test('GET / renders index html page', () => {
 			// call get function
@@ -46,7 +46,8 @@ describe('app.js route testing', () => {
 			expect(res.render).toHaveBeenCalledWith('index');
 		});
 	});
-	// GET /job-roles 
+
+	/* GET /job-roles */
 	describe('GET /job-roles testing', () => {
 		test('GET /job-roles', () => {
 			expect(mockApp.get).toHaveBeenCalledWith('/job-roles', expect.any(Function));
@@ -65,7 +66,8 @@ describe('app.js route testing', () => {
 			await expect(res.render).toHaveBeenCalledWith('job-roles', {JobRoles: {result: 'Test Data'}});
 		});
 	});
-	// GET /job-role-details/:JobRoleID 
+
+	/* GET /job-role-details/:JobRoleID */
 	describe('GET /job-role-details/:jobRoleID testing', () => {
 		test('GET /job-role-details/:jobRoleID', () => {
 			expect(mockApp.get).toHaveBeenCalledWith('/job-role-details/:jobRoleID', expect.any(Function));
@@ -85,4 +87,51 @@ describe('app.js route testing', () => {
 			await expect(res.render).toHaveBeenCalledWith('job-role-details', {JobRole: {result: 'Test Data'}});
 		});
 	});
+
+	/* GET /add-job-role */
+	describe('GET /add-job-role testing', () => {
+		test('GET /add-job-role', () => {
+			expect(mockApp.get).toHaveBeenCalledWith('/add-job-role', expect.any(Function));
+		});
+		test('GET /add-job-role renders add-job-roles.html page', async() => {
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve(
+				{ status: 200, json: () => Promise.resolve(
+					{ bands: 'Test Data' }
+				)}));
+			
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve(
+				{ status: 200, json: () => Promise.resolve(
+					{ capabilities: 'Test Data' }
+				)}));
+
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve(
+				{ status: 200, json: () => Promise.resolve(
+					{ disciplines: 'Test Data' }
+				)}));
+			// grabs the seventh call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
+			const behaviour = mockApp.get.mock.calls[7][1];
+			const res = { render: jest.fn() };
+			// call function used by get handler
+			await behaviour(null, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-role', {bands: {bands: 'Test Data'}, capabilities: {capabilities: 'Test Data'}, disciplines : {disciplines: 'Test Data'}});
+			});
+		});
+
+	// /* POST /add-job-role */
+	// describe('POST /add-job-role testing', () => {
+	// 	// test('POST /add-job-role', () => {
+	// 	// 	expect(mockApp.post).toHaveBeenCalledWith('/add-job-role', expect.any(Function));
+	// 	// });
+		
+	// 	test('POST /add-job-role correct job role renders add-job-role complete', () => {
+	// 		// grabs the seventh call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
+	// 		const behaviour = mockApp.post.mock.calls[8];
+	// 		const res = { render: jest.fn() };
+	// 		const req = { body: jest.fn({jobTitle: 'test', jobBand: 'test', jobCapability: 'test', jobDiscipline: 'test', jobCompetencies: 'test'})};
+	// 		// call function used by get handler
+	// 		behaviour(req, res);
+	// 		expect(res.render).toHaveBeenCalledWith('add-job-role');
+	// 	});
+	// });
+
 });
