@@ -3,6 +3,7 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const JobRoles = require('./JobRoles');
+const FormValidation = require('./FormValidation');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -55,8 +56,28 @@ app.get('/add-job-capability', function (req, res) {
 	res.render('add-job-capability');
 });
 
+
+/* Add Job Role Routes */
 app.get('/add-job-role', function (req, res) {
 	res.render('add-job-role');
 });
+
+app.post('/add-job-role', async (req, res) => {
+	// variable to store error details
+	error = "";
+
+	// check to ensure there are no errors
+	if (error.length > 0)
+	{
+		// if there are errors return the details to the form and error
+		res.render('add-job-role', {JobRole : req.body, error: error});
+	} else {
+		// send the body to addJobRole function in JobRoles.js
+		await JobRoles.addJobRole(req.body);
+		res.redirect('index');
+	}
+
+})
+
 
 module.exports = app;

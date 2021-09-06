@@ -4,6 +4,7 @@ const mockApp = {
 	listen: jest.fn(),
 	set: jest.fn(),
 	use: jest.fn(),
+	post: jest.fn()
 };
 
 /* mocking express and express.static method */
