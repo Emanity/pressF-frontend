@@ -183,3 +183,20 @@ footer p {
     background-size: cover;
     height: 100vh;
 }
+
+#cardSpacing {
+    padding: 10px;
+}
+
+#AddForm-Button {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #283583;
+    display: block;
+}
+
+#AddForm-Button:hover {
+    background-color: #ffff;
+    color: #283583;
+    border-color: #283583;
+}
