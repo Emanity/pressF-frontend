@@ -2,9 +2,20 @@ const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
-const JobRoles = require('./JobRoles');
-const user = require('./user');
+const session = require('express-session');
 
+/* Storing to the session */
+app.use(session({
+    secret: 'ThisSecret',
+    resave: false,
+    saveUninitialized: true,
+    // store: sessionStore,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
+
+/* Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Configuring Express to use Nunjucks */
@@ -19,51 +30,16 @@ app.use(express.static('public'));
 /* Nunjucks view engine */
 app.set('view engine', 'html');
 
-/* Index (Home Page) Route */
-app.get('/', function (req, res) { 
-	res.render('index');
-	console.log('Request processed'); 
-}); 
-
-/* Index (Home Page) Route */
-app.get('/index', function (req, res) {
-	res.render('index');
-	console.log('Request processed'); 
-}); 
-
-/* Job Roles Route */
-app.get('/job-roles', async (req, res) => {
-	let result = await JobRoles.getJobRoles();
-	res.render('job-roles', {JobRoles : result});
+/* Routes */
+const routes = require('./routes.js');
+// const redirect = require('./routes.js').redirect();
+app.all('*', (req, res, next) => {
+	if (req.session.user == null){
+		res.redirect('login');
+	} else {
+		next();
+	}
 });
-
-/* Job Role Details Route */
-app.get('/job-role-details/:jobRoleID', async (req, res) => {
-	var jobRoleID = req.params.jobRoleID;
-	let result = await JobRoles.getJobRoleDetails(jobRoleID);
-	res.render('job-role-details', {JobRole : result});
-});
-
-app.get('/login', function (req, res) {
-	res.render('login');
-});
-
-app.post('/submit-login', async (req, res) => {
-	let result = await user.getLoginResponse(req);
-	res.render('login-result', {test : result});
-	
-});
-
-app.get('/add-job-band', function (req, res) {
-	res.render('add-job-band');
-});
-
-app.get('/add-job-capability', function (req, res) {
-	res.render('add-job-capability');
-});
-
-app.get('/add-job-role', function (req, res) {
-	res.render('add-job-role');
-});
-
+app.use(routes);
+// app.use(redirect);
 module.exports = app;

@@ -17,14 +17,14 @@
                 <form method="POST" action="/submit-login">
                     <div class="form-group">
                         <label for="email">Email: </label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control" id="email" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     </div>
                         
                     <br><br>
                         
                     <div class="form-group">
                         <label>Password: </label>
-                        <input type="password" name="password" class="form-control" id="password">
+                        <input type="password" name="password" class="form-control" id="password" required="true">
                     </div>
                         
                     <br><br>
