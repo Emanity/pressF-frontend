@@ -54,13 +54,41 @@ app.get('/add-job-band', function (req, res) {
 	res.render('add-job-band');
 });
 
+/* POST route to validate and send add-job-band form */
+app.post('/add-job-band', [
+	check('jobBand', 'Job Band: Must contain letters').exists().isAlpha(),
+	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1})
+], async (req, res) => {
+	// variable to store error details
+	errors = validationResult(req);
+
+	// check to ensure there are no errors
+	if (!errors.isEmpty()){
+		const alert = errors.array();
+		// if there are errors return details to the form and the details
+		res.render('add-job-band', {jobBand : req.body, alert});
+	} else {
+		// send the body to addJobBand function in JobRoles.js
+		await JobRoles.addJobCapbility(req.body);
+		res.render('add-job-band-complete');
+		console.log('add-job-band: POST Sent');
+	}
+});
+
+/* Add Job Capability Routes */
+// GET route for add-job-capability form
+app.get('/add-job-capability', function (req, res) {
+	res.render('add-job-capability');
+});
+
 /* POST route to validate and send add-job-capability form */
 app.post('/add-job-capability', [
 	check('jobCapability', 'Job Capability: Must contain letters').exists().isAlpha(),
 	check('jobCapability', 'Job Capability: Must be longer than 0').isLength({min: 1})
 ], async (req, res) => {
-	//variable to store error details
+	// variable to store error details
 	errors = validationResult(req);
+
 	// check to ensure there are no errors
 	if (!errors.isEmpty()){
 		const alert = errors.array();
@@ -72,10 +100,6 @@ app.post('/add-job-capability', [
 		res.render('add-job-capability-complete');
 		console.log('add-job-capability: POST Sent');
 	}
-})
-
-app.get('/add-job-capability', function (req, res) {
-	res.render('add-job-capability');
 });
 
 /* Add Job Role Routes */
@@ -104,6 +128,7 @@ app.post('/add-job-role', [
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);
+
 	// check to ensure there are no errors
 	if (!errors.isEmpty()){
 		const alert = errors.array();

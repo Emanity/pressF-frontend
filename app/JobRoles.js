@@ -111,14 +111,13 @@ exports.getJobDiscipline = async () => {
 	}
 };
 
-
 /* Method that adds a job role */
 exports.addJobRole = async (jobRole) => {
 	try {
 		// API url for adding a job role
-		var api_url = 'http://localhost:8080/api/addjobrole'
+		var api_url = 'http://localhost:8080/api/addjobrole';
 		// data from post request
-		var data = jobRole
+		var data = jobRole;
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
@@ -126,20 +125,20 @@ exports.addJobRole = async (jobRole) => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
-		}
+		};
 		// POSTing to API
 		const fetch_response = await fetch(api_url, options);
+
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 			// Return response
-				console.log('Added Job Role');
+			console.log('Added Job Role');
 		} else {
 			// Return NULL and log error
 			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Role');
 		}
-
 	} catch (err) {
-		return 'Error: There was a problem adding the job role.'
+		return 'Error: There was a problem adding the job role.';
 	}
 };
 
@@ -147,9 +146,9 @@ exports.addJobRole = async (jobRole) => {
 exports.addJobBand = async (jobBand) => {
 	try {
 		// API url for adding a job role
-		var api_url = 'http://localhost:8080/api/addjobrole'
+		var api_url = 'http://localhost:8080/api/addjobrole';
 		// data from post request
-		var data = jobBand
+		var data = jobBand;
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
@@ -157,31 +156,30 @@ exports.addJobBand = async (jobBand) => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
-		}
+		};
 		// POSTing to API
 		const fetch_response = await fetch(api_url, options);
+
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 			// Return response
-				console.log('Added Job Band');
+			console.log('Added Job Band');
 		} else {
 			// Return NULL and log error
 			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Band');
 		}
-
 	} catch (err) {
-		return 'Error: There was a problem adding the job band.'
+		return 'Error: There was a problem adding the job band.';
 	}
 };
-
 
 /* Method that adds a job role */
 exports.addJobCapbility = async (jobCapability) => {
 	try {
 		// API url for adding a job role
-		var api_url = 'http://localhost:8080/api/addjobrole'
+		var api_url = 'http://localhost:8080/api/addjobrole';
 		// data from post request
-		var data = jobCapability
+		var data = jobCapability;
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
@@ -189,19 +187,19 @@ exports.addJobCapbility = async (jobCapability) => {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
-		}
+		};
 		// POSTing to API
 		const fetch_response = await fetch(api_url, options);
+
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 			// Return response
-				console.log('Added Job Capability');
+			console.log('Added Job Capability');
 		} else {
 			// Return NULL and log error
 			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Capability');
 		}
-
 	} catch (err) {
-		return 'Error: There was a problem adding the job Capability.'
+		return 'Error: There was a problem adding the job Capability.';
 	}
 };
