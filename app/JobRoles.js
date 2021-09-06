@@ -132,7 +132,7 @@ exports.addJobRole = async (jobRole) => {
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 			// Return response
-				console.log('Job Spec Fetched');
+				console.log('Added Job Role');
 		} else {
 			// Return NULL and log error
 			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Role');
@@ -163,13 +163,45 @@ exports.addJobBand = async (jobBand) => {
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 			// Return response
-				console.log('Job Spec Fetched');
+				console.log('Added Job Band');
 		} else {
 			// Return NULL and log error
-			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Role');
+			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Band');
 		}
 
 	} catch (err) {
-		return 'Error: There was a problem adding the job role.'
+		return 'Error: There was a problem adding the job band.'
+	}
+};
+
+
+/* Method that adds a job role */
+exports.addJobCapbility = async (jobCapability) => {
+	try {
+		// API url for adding a job role
+		var api_url = 'http://localhost:8080/api/addjobrole'
+		// data from post request
+		var data = jobCapability
+		// creating POST request to POST to API
+		const options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		}
+		// POSTing to API
+		const fetch_response = await fetch(api_url, options);
+		// If statement to catch errors
+		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
+			// Return response
+				console.log('Added Job Capability');
+		} else {
+			// Return NULL and log error
+			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to add a Job Capability');
+		}
+
+	} catch (err) {
+		return 'Error: There was a problem adding the job Capability.'
 	}
 };

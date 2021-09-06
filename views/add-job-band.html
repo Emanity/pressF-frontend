@@ -8,10 +8,22 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="formsPage">
         <h4>Add a Job Band</h4>
-            <form method="POST" action="">
+            <form method="POST" action="/add-job-band">
                 <div class="form-group">
-                    <label for="jobBandName">Job Band Name:</label>
-                    <input type="text" name="jobBandName" class="form-control" id="jobBandName">
+
+                    {% if alert and alert.length > 0 %}
+                        {% for error in alert %}    
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{error.msg}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                        {% endfor %}
+                    {% endif %}
+
+
+                    <label for="jobBand">Job Band Name:</label>
+                    <input type="text" name="jobBand" class="form-control" id="jobBand">
                 </div>
 
                 <br>
