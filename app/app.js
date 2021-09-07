@@ -6,18 +6,19 @@ const session = require('express-session');
 const restsession = require('restsession');
 const HTTPStore = restsession(session);
 
+let sessionConfig = {
+	secret: 'key',
+	resave: false,
+	saveUninitialized: true,
+	secure: false,
+	// store: new HTTPStore('http://localhost:8080/api/sessions'), // causing problems...
+	cookie: {
+		maxAge: 1000 * 60 * 60 * 24,
+		httpOnly: false
+	}
+}
 /* Storing to the session */
-app.use(session({
-    secret: 'ThisSecret',
-    resave: false,
-    saveUninitialized: true,
-    store: new HTTPStore('http://localhost:8080/api/sessions'),
-    cookie: {
-		httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24
-    },
-	name: "secretname"
-}));
+app.use(session(sessionConfig));
 
 /* Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +37,7 @@ app.set('view engine', 'html');
 
 /* Routes */
 const routes = require('./routes.js');
+
 app.use(routes);
 
 module.exports = app;

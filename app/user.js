@@ -10,6 +10,7 @@ this.exampleUser = {
 exports.updateUser = (req, role) => {
 	this.exampleUser.email = req.body.email;
 	this.exampleUser.role = role;
+	req.session.role = role;
 	req.session.email = req.body.email;
 };
 
@@ -28,7 +29,7 @@ exports.getLoginResponse = async (req) => {
 		const api_url = 'http://localhost:8080/api/login';
 		const fetch_response = await fetch(api_url, {
 			method: 'POST',
-			headers: {'Authorization': 'Basic ' + data},
+        	headers: {'Authorization': 'Basic ' + data},
 			credentials: 'include'
 		});
 
