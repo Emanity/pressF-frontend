@@ -6,6 +6,9 @@ const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
 const getJobBand = require('../app/JobRoles').getJobBand;
 const getJobCapability = require('../app/JobRoles').getJobCapability;
 const getJobDiscipline = require('../app/JobRoles').getJobDiscipline;
+const addJobRole = require('../app/JobRoles').addJobRole;
+const addJobBand = require('../app/JobRoles').addJobBand;
+const addJobCapbility = require('../app/JobRoles').addJobCapbility;
 const expect = require('chai').expect;
 
 /* Test Suite: testing JobRoles.js 
@@ -115,7 +118,7 @@ describe('JobRoles.js method testing', () => {
 					});
 			});
 		});
-	})
+	});
 
 	/* getJobCapability() testing */
 	describe('getJobCapability()', () => {
@@ -149,7 +152,7 @@ describe('JobRoles.js method testing', () => {
 					});
 			});
 		});
-	})
+	});
 
 	/* getJobDiscipline() testing */
 	describe('getJobDiscipline()', () => {
@@ -162,7 +165,7 @@ describe('JobRoles.js method testing', () => {
 					.reply(200, {id:1});
 			});
 			it('should return a json object', () => {
-				return getJobCapability()
+				return getJobDiscipline()
 					.then(response => {
 						expect(typeof response).to.equal('object');
 					});
@@ -177,12 +180,127 @@ describe('JobRoles.js method testing', () => {
 					.reply(404, null);
 			});
 			it('should return a null response', () => {
-				return getJobCapability()
+				return getJobDiscipline()
 					.then(response => {
 						expect(response).to.equal(null);
 					});
 			});
 		});
-	})
+	});
 
+	/* addJobRoles() testing */
+	describe('addJobRole()', () => { 
+		// happy path
+		describe('addJobRole() returns 200 when adding a job role is successful', () => {
+			// send 200 status code when successful
+			beforeEach(() => {
+				mockData = {
+					jobTitle: 'test',
+					jobBand: 'test',
+					jobCapability: 'test',
+					jobDiscipline: 'test',
+					jobCompetencies: 'test'
+				}
+				nock('http://localhost:8080/')
+					.post('/api/addjobrole', mockData)
+					.reply(200);
+			});
+			it('should return a 200 status', () => {
+				return addJobRole()
+				.then(expect(200));
+			});
+		});
+		// unhappy path
+		describe('addJobRole() returns 404 when adding a job role is unsuccessful', () => {
+			// send 404 status code when unsuccessful
+			beforeEach(() => {
+				mockData = {
+					jobTitle: '',
+					jobBand: '',
+					jobCapability: '',
+					jobDiscipline: '',
+					jobCompetencies: ''
+				}
+				nock('http://localhost:8080/')
+					.post('/api/addjobrole', mockData)
+					.reply(404);
+			});
+			it('should return a 200 status', () => {
+				return addJobRole()
+				.then(expect(404));
+			});
+		});
+	});
+
+	/* addJobBand() testing */
+	describe('addJobBand()', () => { 
+		// happy path
+		describe('addJobBand() returns 200 when adding a job role is successful', () => {
+			// send 200 status code when successful
+			beforeEach(() => {
+				mockData = {
+					jobBand: 'test'
+				}
+				nock('http://localhost:8080/')
+					.post('/api/addjobband', mockData)
+					.reply(200);
+			});
+			it('should return a 200 status', () => {
+				return addJobBand()
+				.then(expect(200));
+			});
+		});
+		// unhappy path
+		describe('addJobBand() returns 404 when adding a job role is unsuccessful', () => {
+			// send 404 status code when unsuccessful
+			beforeEach(() => {
+				mockData = {
+					jobBand: '',
+				}
+				nock('http://localhost:8080/')
+					.post('/api/addjobband', mockData)
+					.reply(404);
+			});
+			it('should return a 200 status', () => {
+				return addJobBand()
+				.then(expect(404));
+			});
+		});
+	});
+
+		/* addJobBand() testing */
+		describe('addJobCapbility()', () => { 
+			// happy path
+			describe('addJobCapbility() returns 200 when adding a job role is successful', () => {
+				// send 200 status code when successful
+				beforeEach(() => {
+					mockData = {
+						jobCapability: 'test'
+					}
+					nock('http://localhost:8080/')
+						.post('/api/addjobcapbility', mockData)
+						.reply(200);
+				});
+				it('should return a 200 status', () => {
+					return addJobCapbility()
+					.then(expect(200));
+				});
+			});
+			// unhappy path
+			describe('addJobCapbility() returns 404 when adding a job role is unsuccessful', () => {
+				// send 404 status code when unsuccessful
+				beforeEach(() => {
+					mockData = {
+						jobCapability: '',
+					}
+					nock('http://localhost:8080/')
+						.post('/api/addjobcapbility', mockData)
+						.reply(404);
+				});
+				it('should return a 200 status', () => {
+					return addJobCapbility()
+					.then(expect(404));
+				});
+			});
+		});
 });
