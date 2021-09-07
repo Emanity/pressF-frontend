@@ -29,7 +29,7 @@
                 
                 <div class="form-group">
                     <label for="jobRoleName">Job Band:</label>
-                    <select name="jobBandId" id="jobBand_datalist" class="form-control"> 
+                    <select name="jobBandId" id="jobBand_datalist" class="form-control form-select"> 
                         {% for band in bands %} 
                             <option value="{{band.jobBandId}}">{{band.jobBand}}</option>
                         {% endfor %}
@@ -40,7 +40,7 @@
                 
                 <div class="form-group">
                     <label for="jobCapability">Job Capability:</label>
-                    <select name="jobCapabilityId" id="jobCapability_datalist" class="form-control">
+                    <select name="jobCapabilityId" id="jobCapability_datalist" class="form-control form-select">
                         {% for capability in capabilities %}
                             <option value="{{capability.jobCapabilityId}}">{{capability.jobCapability}}</option>
                         {% endfor %}
@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <label for="jobDiscipline">Job Discipline:</label>
-                    <select name="jobDisciplineId" id="jobDiscipline_datalist" class="form-control">
+                    <select name="jobDisciplineId" id="jobDiscipline_datalist" class="form-control form-select">
                         {% for discipline in disciplines %}
                             <option value="{{discipline.jobDisciplineId}}">{{discipline.jobDiscipline}}</option>
                         {% endfor %}

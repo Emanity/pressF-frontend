@@ -56,7 +56,8 @@ app.get('/add-job-band', function (req, res) {
 
 /* POST route to validate and send add-job-band form */
 app.post('/add-job-band', [
-	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1})
+	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1}),
+	check('jobBandTraining', 'Job Band Training: Must be a URL').matches('[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);

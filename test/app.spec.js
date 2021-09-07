@@ -160,13 +160,12 @@ describe('app.js route testing', () => {
 	 		await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
 	 	});
 		// // Unhappy path - bad Job Role
-		// test('POST /add-job-role correct job role renders add-job-role complete', async () => {
-		// 		// grabs the seventh call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
+		// test('POST /add-job-role correct job role renders add-job-role form as values not passed', async () => {
+		// 		// grabs the second call in the app file, i.e. app.post('/add-job-role')
 		// 		const behaviour = mockApp.post.mock.calls[2][2];
 		// 		const res = { render: jest.fn() };
-		// 		const req = { body: jest.fn({jobTitle: '', jobBand: '', jobCapability: '', jobDiscipline: '', jobCompetencies: ''})};
 		// 		// call function used by get handler
-		// 		await behaviour(req, res);
+		// 		await behaviour(null, res);
 		// 		await expect(res.render).toHaveBeenCalledWith('add-job-role');
 		// 	});
 		});
@@ -177,7 +176,7 @@ describe('app.js route testing', () => {
 				 // grabs the zero call in the app file, i.e. app.post('/add-job-band')
 				 const behaviour = mockApp.post.mock.calls[0][2];
 				 const res = { render: jest.fn() };
-				 const req = { body: jest.fn({jobBand: 'test'})};
+				 const req = { body: jest.fn({jobBand: 'test', jobBandTraining: 'test'})};
 				 // call function used by get handler
 				 await behaviour(req, res);
 				 await expect(res.render).toHaveBeenCalledWith('add-job-band-complete');
@@ -190,7 +189,7 @@ describe('app.js route testing', () => {
 				 // grabs the zero call in the app file, i.e. app.post('/add-job-capability')
 				 const behaviour = mockApp.post.mock.calls[1][2];
 				 const res = { render: jest.fn() };
-				 const req = { body: jest.fn({jobBand: 'test'})};
+				 const req = { body: jest.fn({jobCapability: 'test'})};
 				 // call function used by get handler
 				 await behaviour(req, res);
 				 await expect(res.render).toHaveBeenCalledWith('add-job-capability-complete');
