@@ -113,7 +113,7 @@ app.get('/add-job-role', async (req, res) => {
 
 /* POST route to validate and send add-job-role form */
 app.post('/add-job-role', [
-	check('jobTitle', 'Job Title: Must be contain letters').exists().isAlpha(),
+	check('jobTitle', 'Job Title: Must contain letters').exists().isAlpha(),
 	check('jobTitle', 'Job Title: Must be longer than 0').isLength({min: 1}),
 	check('jobBand', 'Job Band: Must contain letters').exists().isAlpha(),
 	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1}),
@@ -123,8 +123,8 @@ app.post('/add-job-role', [
 	check('jobSpecification', 'Job Specification: Must be longer than 0').isLength({min: 1}),
 	check('jobDiscipline', 'Job Discipline: Must contain letters').exists().isAlpha(),
 	check('jobDiscipline', 'Job Discipline: Must be longer than 0').isLength({min: 1}),
-	check('jobSpecification', 'Job Specificaion: Must contain letters').exists().isAlpha(),
-	check('jobSpecification', 'Job Specificaion: Must be longer than 0').isLength({min: 1})
+	check('jobSpecification', 'Job Specification: Must contain letters').exists().isAlpha(),
+	check('jobSpecification', 'Job Specification: Must be longer than 0').isLength({min: 1})
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);
