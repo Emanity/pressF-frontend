@@ -113,19 +113,15 @@ app.get('/add-job-role', async (req, res) => {
 
 /* POST route to validate and send add-job-role form */
 app.post('/add-job-role', [
-	check('jobTitle', 'Job Title: Must contain letters').exists().isAlpha(),
 	check('jobTitle', 'Job Title: Must be longer than 0').isLength({min: 1}),
-	check('jobBand', 'Job Band: Must contain letters').exists().isAlpha(),
-	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1}),
-	check('jobCapability', 'Job Capability: Must contain letters').exists().isAlpha(),
-	check('jobCapability', 'Job Capability: Must be longer than 0').isLength({min: 1}),
-	check('jobSpecification', 'Job Specification: Must contain letters').exists().isAlpha(),
 	check('jobSpecification', 'Job Specification: Must be longer than 0').isLength({min: 1}),
-	check('jobDiscipline', 'Job Discipline: Must contain letters').exists().isAlpha(),
-	check('jobDiscipline', 'Job Discipline: Must be longer than 0').isLength({min: 1}),
-	check('jobSpecification', 'Job Specification: Must contain letters').exists().isAlpha(),
-	check('jobSpecification', 'Job Specification: Must be longer than 0').isLength({min: 1})
+	check('jobCompetencies', 'Job Competencies: Must be longer than 0').isLength({min: 1})
 ], async (req, res) => {
+
+	let bandResult = await JobRoles.getJobBand();
+	let capabilityResult = await JobRoles.getJobCapability();
+	let disciplineResult = await JobRoles.getJobDiscipline();
+	
 	// variable to store error details
 	errors = validationResult(req);
 
@@ -133,7 +129,7 @@ app.post('/add-job-role', [
 	if (!errors.isEmpty()){
 		const alert = errors.array();
 		// if there are errors return the details to the form and error
-		res.render('add-job-role', {jobRole : req.body, alert});
+		res.render('add-job-role', {bands : bandResult, capabilities : capabilityResult, disciplines : disciplineResult, jobRole : req.body, alert});
 	} else {
 		// send the body to addJobRole function in JobRoles.js
 		await JobRoles.addJobRole(req.body);

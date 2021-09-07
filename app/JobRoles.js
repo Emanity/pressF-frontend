@@ -152,10 +152,11 @@ exports.addJobBand = async (jobBand) => {
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
+			body: JSON.stringify(data),
 			headers: {
+				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(data)
 		};
 		// POSTing to API
 		const fetch_response = await fetch(api_url, options);
@@ -183,6 +184,7 @@ exports.addJobCapbility = async (jobCapability) => {
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
+
 			headers: {
 				'Content-Type': 'application/json'
 			},

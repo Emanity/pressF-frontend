@@ -29,36 +29,33 @@
                 
                 <div class="form-group">
                     <label for="jobRoleName">Job Band:</label>
-                    <input list="jobBand_datalist" name="jobBand" id="jobBand" class="form-control">
-                    <datalist name="jobBand" id="jobBand_datalist"> 
+                    <select name="jobBandId" id="jobBand_datalist" class="form-control"> 
                         {% for band in bands %} 
-                            <option value="{{band.jobBand}}">{{band.jobBand}}</option>
+                            <option value="{{band.jobBandId}}">{{band.jobBand}}</option>
                         {% endfor %}
-                    </datalist>
+                    </select>
                 </div>
 
                 <br><br>
                 
                 <div class="form-group">
                     <label for="jobCapability">Job Capability:</label>
-                    <input list="jobCapability_datalist" name="jobCapability" id="jobCapability" class="form-control">
-                    <datalist name="jobCapability" id="jobCapability_datalist">
+                    <select name="jobCapabilityId" id="jobCapability_datalist" class="form-control">
                         {% for capability in capabilities %}
-                            <option value="{{capability.jobCapability}}">{{capability.jobCapability}}</option>
+                            <option value="{{capability.jobCapabilityId}}">{{capability.jobCapability}}</option>
                         {% endfor %}
-                    </datalist>
+                    </select>
                 </div>
 
                 <br><br>
 
                 <div class="form-group">
                     <label for="jobDiscipline">Job Discipline:</label>
-                    <input list="jobDiscipline_datalist" name="jobDiscipline" id="jobDiscipline" class="form-control">
-                    <datalist name="jobDiscipline" id="jobDiscipline_datalist">
+                    <select name="jobDisciplineId" id="jobDiscipline_datalist" class="form-control">
                         {% for discipline in disciplines %}
-                            <option value="{{discipline.jobDiscipline}}">{{discipline.jobDiscipline}}</option>
+                            <option value="{{discipline.jobDisciplineId}}">{{discipline.jobDiscipline}}</option>
                         {% endfor %}
-                    </datalist>
+                    </select>
                 </div> 
 
                 <br><br>
@@ -66,6 +63,13 @@
                 <div class="form-group">
                     <label for="jobSpecification">Job Specification:</label>
                     <textarea name="jobSpecification" class="form-control" id="jobSpecification" form="job-role-form" rows="3"></textarea>
+                </div>
+
+                <br><br>
+
+                <div class="form-group">
+                    <label for="jobCompetencies">Job Competencies:</label>
+                    <textarea name="jobCompetencies" class="form-control" id="jobCompetencies" form="job-role-form" rows="3"></textarea>
                 </div>
 
                 <br><br>
