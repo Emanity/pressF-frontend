@@ -3,20 +3,18 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const restsession = require('restsession');
-const HTTPStore = restsession(session);
 
 let sessionConfig = {
 	secret: 'key',
 	resave: false,
 	saveUninitialized: true,
 	secure: false,
-	// store: new HTTPStore('http://localhost:8080/api/sessions'), // causing problems...
 	cookie: {
 		maxAge: 1000 * 60 * 60 * 24,
 		httpOnly: false
 	}
-}
+};
+
 /* Storing to the session */
 app.use(session(sessionConfig));
 

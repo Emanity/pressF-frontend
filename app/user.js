@@ -1,6 +1,7 @@
 // Node fetch
 const fetch = require('node-fetch');
 const crypto = require('crypto');
+const buffer = require('buffer');
 
 this.exampleUser = {
 	email: null,
@@ -25,11 +26,11 @@ exports.getUser = () => { return this.exampleUser;};
 exports.getLoginResponse = async (req) => {
 	try {
 		let hash = crypto.createHash('sha256').update(req.body.password).digest('hex');
-		let data = Buffer.from(req.body.email + ':' + hash).toString('base64');
+		let data = buffer.from(req.body.email + ':' + hash).toString('base64');
 		const api_url = 'http://localhost:8080/api/login';
 		const fetch_response = await fetch(api_url, {
 			method: 'POST',
-        	headers: {'Authorization': 'Basic ' + data},
+			headers: {'Authorization': 'Basic ' + data},
 			credentials: 'include'
 		});
 
