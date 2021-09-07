@@ -14,7 +14,7 @@ app.use(session({
 	// store: new HTTPStore('http://localhost:8080/api/sessions'),
 	cookie: {
 		secure: false,
-		maxAge: 1000 * 60 * 60 * 24
+		maxAge: 1000 * 60 * 60
 	},
 	name: 'secretname'
 }));
