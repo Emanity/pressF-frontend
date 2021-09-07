@@ -50,8 +50,6 @@ router.post('/submit-login', async (req, res) => {
 		res.redirect('login');
 	} else {
 		user.updateUser(req, JSON.parse(result).role);
-		req.session.email = JSON.parse(result).email;
-		req.session.role = JSON.parse(result).role;
 		req.session.save((err) => {
 			if (err) {
 				console.log(err);
@@ -63,10 +61,10 @@ router.post('/submit-login', async (req, res) => {
 });
 
 router.get('/user-profile', middleware1, (req,res) => {
-	if(user.getUser().role == 1){
-		res.render('admin-profile', {exuser : user.getUser()});
+	if(req.session.role == 1){
+		res.render('admin-profile', {exuser : req.session});
 	} else {
-		res.render('user-profile', {exuser : user.getUser()});
+		res.render('user-profile', {exuser : req.session});
 	}
 });
 
@@ -77,7 +75,6 @@ router.get('/logout', middleware1, (req,res) => {
 		}
 		res.redirect('/');
 	});
-	user.resetUser();
 });
 
 router.get('/add-job-band', middleware1, function (req, res) {
