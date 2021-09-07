@@ -5,16 +5,17 @@ const user = require('./user');
 
 /* Requires user to login before accessing system */
 function loginMiddleware(req, res, next) {
-	console.log('Email on request: '+ req.session.email );
-	if (req.session.email != null ){
+	console.log('Email on request: ' + req.session.email);
+	
+	if (req.session.email != null) {
 		next();
 	} else {
 		res.redirect('/login');
 	}
 }
 
-function roleMiddleware(req,res,next) {
-	if(req.session.role == 1){
+function roleMiddleware(req, res, next) {
+	if (req.session.role == 1) {
 		// is admin - now do admin things
 		next();
 	} else {
@@ -26,8 +27,8 @@ function roleMiddleware(req,res,next) {
 /* Index (Home Page) Route */
 router.get('/', loginMiddleware, function (req, res) {
 	res.redirect('index');
-	console.log('Request processed'); 
-}); 
+	console.log('Request processed');
+});
 
 /* Index (Home Page) Route */
 router.get('/index', loginMiddleware, function (req, res) {
@@ -74,17 +75,21 @@ router.post('/submit-login', async (req, res) => {
 	}
 });
 
-router.get('/user-profile', loginMiddleware, (req,res) => {
-	if(req.session.role == 1){
-		res.render('admin-profile', {exuser : req.session});
+router.get('/user-profile', loginMiddleware, (req, res) => {
+	if (req.session.role == 1) {
+		res.render('admin-profile', {
+			exuser: req.session
+		});
 	} else {
-		res.render('user-profile', {exuser : req.session});
+		res.render('user-profile', {
+			exuser: req.session
+		});
 	}
 });
 
-router.get('/logout', loginMiddleware, (req,res) => {
+router.get('/logout', loginMiddleware, (req, res) => {
 	req.session.destroy((err) => {
-		if(err) {
+		if (err) {
 			return console.log(err);
 		}
 		res.redirect('/');
