@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const JobRoles = require('./JobRoles');
+const { check, validationResult } = require('express-validator');
 
 router.get('/', function (req, res) { 
 	res.render('index');
@@ -123,3 +124,5 @@ router.post('/add-job-role', [
 		console.log('add-job-role: POST Sent');
 	}
 });
+
+module.exports = router;

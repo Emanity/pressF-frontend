@@ -4,13 +4,15 @@ const mockApp = {
 	listen: jest.fn(),
 	set: jest.fn(),
 	use: jest.fn(),
-	post: jest.fn()
+	post: jest.fn(),
 };
 
 /* mocking express and express.static method */
 const mockExpress = jest.fn(() => mockApp);
 mockExpress.static = jest.fn();
-jest.mock('express', () => mockExpress);
+jest.mock('express', () => mockExpress,
+{Router: () => jest.fn()}
+);
 
 /* mocking node-fetch */
 const mockNodeFetch = jest.fn();
