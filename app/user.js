@@ -1,7 +1,6 @@
 // Node fetch
 const fetch = require('node-fetch');
 const crypto = require('crypto');
-const Buffer = require('buffer');
 
 this.exampleUser = {
 	email: null,
@@ -11,6 +10,7 @@ this.exampleUser = {
 exports.updateUser = (req, role) => {
 	this.exampleUser.email = req.body.email;
 	this.exampleUser.role = role;
+	req.session.email = req.body.email;
 };
 
 exports.resetUser = () => {
