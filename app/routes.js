@@ -108,4 +108,12 @@ router.get('/add-job-role', loginMiddleware, roleMiddleware, function (req, res)
 	res.render('add-job-role');
 });
 
+router.get('/admin-dashboard', function (req, res) {
+	res.render('admin-dashboard');
+});
+
+router.get('/employee-dashboard', function (req, res) {
+	res.render('employee-dashboard');
+});
+
 module.exports = router;

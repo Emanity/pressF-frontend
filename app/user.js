@@ -2,6 +2,7 @@
 const fetch = require('node-fetch');
 const crypto = require('crypto');
 
+
 exports.updateUser = (req, role) => {
 	req.session.email = req.body.email;
 	req.session.role = role;
