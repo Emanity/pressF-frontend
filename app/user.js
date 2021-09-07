@@ -3,8 +3,6 @@ const fetch = require('node-fetch');
 const crypto = require('crypto');
 
 exports.updateUser = (req, role) => {
-	this.exampleUser.email = req.body.email;
-	this.exampleUser.role = role;
 	req.session.email = req.body.email;
 	req.session.role = role;
 };
