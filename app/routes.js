@@ -1,39 +1,43 @@
-app.get('/', function (req, res) { 
+const express = require('express');
+const router = express.Router();
+const JobRoles = require('./JobRoles');
+
+router.get('/', function (req, res) { 
 	res.render('index');
 	console.log('Request processed'); 
 }); 
 
 /* Index (Home Page) Route */
-app.get('/index', function (req, res) {
+router.get('/index', function (req, res) {
 	res.render('index');
 	console.log('Request processed'); 
 }); 
 
 /* Job Roles Route */
-app.get('/job-roles', async (req, res) => {
+router.get('/job-roles', async (req, res) => {
 	let result = await JobRoles.getJobRoles();
 	res.render('job-roles', {JobRoles : result});
 });
 
 /* Job Role Details Route */
-app.get('/job-role-details/:jobRoleID', async (req, res) => {
+router.get('/job-role-details/:jobRoleID', async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {JobRole : result});
 });
 
-app.get('/login', function (req, res) {
+router.get('/login', function (req, res) {
 	res.render('login');
 });
 
 /* Add Job Band Routes */
 // GET route for add-job-band form
-app.get('/add-job-band', function (req, res) {
+router.get('/add-job-band', function (req, res) {
 	res.render('add-job-band');
 });
 
 /* POST route to validate and send add-job-band form */
-app.post('/add-job-band', [
+router.post('/add-job-band', [
 	check('jobBand', 'Job Band: Must be longer than 0 characters and shorter than 100 characters').isLength({min: 1, max: 100}),
 	check('jobBand', 'Job Band must only contain letters and space').matches('/^[A-Za-z\s]+$/'),
 	check('jobBandTraining', 'Job Band Training: Must be a URL').matches('((http|https)://)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)')
@@ -56,12 +60,12 @@ app.post('/add-job-band', [
 
 /* Add Job Capability Routes */
 // GET route for add-job-capability form
-app.get('/add-job-capability', function (req, res) {
+router.get('/add-job-capability', function (req, res) {
 	res.render('add-job-capability');
 });
 
 /* POST route to validate and send add-job-capability form */
-app.post('/add-job-capability', [
+router.post('/add-job-capability', [
 	check('jobCapability', 'Job Capability: Must be longer than 0 characters and shorter than 100 characters').isLength({min: 1, max: 100}),
 	check('jobCapability', 'Job Capability must only contain letters and space').matches('/^[A-Za-z\s]+$/')
 ], async (req, res) => {
@@ -83,7 +87,7 @@ app.post('/add-job-capability', [
 
 /* Add Job Role Routes */
 // GET route for add-job-role form
-app.get('/add-job-role', async (req, res) => {
+router.get('/add-job-role', async (req, res) => {
 	let bandResult = await JobRoles.getJobBand();
 	let capabilityResult = await JobRoles.getJobCapability();
 	let disciplineResult = await JobRoles.getJobDiscipline();
@@ -91,7 +95,7 @@ app.get('/add-job-role', async (req, res) => {
 });
 
 /* POST route to validate and send add-job-role form */
-app.post('/add-job-role', [
+router.post('/add-job-role', [
 	check('jobTitle', 'Job Title: Must be longer than 0 characters and shorter than 200 characters').isLength({min: 1, max: 200}),
 	check('jobTitle', 'Job Capability must only contain letters and space').matches('/^[A-Za-z\s]+$/'),
 	check('jobSpecification', 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters').isLength({min: 1, max: 5000}),
