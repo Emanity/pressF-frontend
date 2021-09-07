@@ -3,36 +3,36 @@ const router = express.Router();
 const JobRoles = require('./JobRoles');
 const user = require('./user');
 
-router.all('*', (req, res, next) => {
-    console.log("Email on request: "+ user.getUser().email );
-	if (user.getUser().email != null || req.url.startsWith('/login') || req.url.startsWith('/submit-login')){
+function middleware1(req, res, next) {
+	console.log('Email on request: '+ req.session.email );
+	
+	if (req.session.email != null ){
 		next();
 	} else {
-        res.redirect('/login');
+		res.redirect('/login');
 	}
-});
-
+}
 
 /* Index (Home Page) Route */
-router.get('/', function (req, res) { 
-	res.render('index');
+router.get('/', middleware1, function (req, res) {
+	res.redirect('index');
 	console.log('Request processed'); 
 }); 
 
 /* Index (Home Page) Route */
-router.get('/index', function (req, res) {
+router.get('/index', middleware1, function (req, res) {
 	res.render('index');
 	console.log('Request processed'); 
 }); 
 
 /* Job Roles Route */
-router.get('/job-roles', async (req, res) => {
+router.get('/job-roles', middleware1, async (req, res) => {
 	let result = await JobRoles.getJobRoles();
 	res.render('job-roles', {JobRoles : result});
 });
 
 /* Job Role Details Route */
-router.get('/job-role-details/:jobRoleID', async (req, res) => {
+router.get('/job-role-details/:jobRoleID', middleware1, async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {JobRole : result});
@@ -44,53 +44,51 @@ router.get('/login', function (req, res) {
 
 router.post('/submit-login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
-    if (result == '401'){
-        // TODO error
-        res.redirect('login');
-    } else {
-        x = 1;
-		user.updateUser(req, JSON.parse(result).role)
-        req.session.email = JSON.parse(result).email;
-        req.session.role = JSON.parse(result).role;
-        req.session.save((err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
-        console.log(JSON.parse(result).email);
-	    res.render('login-result', {userDetails : result});
 
-    }
-	
+	if (result == '401'){
+		// TODO error
+		res.redirect('login');
+	} else {
+		user.updateUser(req, JSON.parse(result).role);
+		req.session.email = JSON.parse(result).email;
+		req.session.role = JSON.parse(result).role;
+		req.session.save((err) => {
+			if (err) {
+				console.log(err);
+			}
+		});
+		console.log(req.session);
+		res.redirect('index');
+	}
 });
 
-router.get('/user-profile', (req,res) => {
+router.get('/user-profile', middleware1, (req,res) => {
 	if(user.getUser().role == 1){
-		res.render('admin-profile', {exuser : user.getUser()})
+		res.render('admin-profile', {exuser : user.getUser()});
 	} else {
-		res.render('user-profile', {exuser : user.getUser()})
+		res.render('user-profile', {exuser : user.getUser()});
 	}
-	
-})
+});
 
-router.get('/logout',(req,res) => {
-    req.session.destroy((err) => {
-        if(err) {
-            return console.log(err);
-        }
-        res.redirect('/');
-    });
-})
+router.get('/logout', middleware1, (req,res) => {
+	req.session.destroy((err) => {
+		if(err) {
+			return console.log(err);
+		}
+		res.redirect('/');
+	});
+	user.resetUser();
+});
 
-router.get('/add-job-band', function (req, res) {
+router.get('/add-job-band', middleware1, function (req, res) {
 	res.render('add-job-band');
 });
 
-router.get('/add-job-capability', function (req, res) {
+router.get('/add-job-capability', middleware1,function (req, res) {
 	res.render('add-job-capability');
 });
 
-router.get('/add-job-role', function (req, res) {
+router.get('/add-job-role', middleware1,function (req, res) {
 	res.render('add-job-role');
 });
 

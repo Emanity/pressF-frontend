@@ -3,20 +3,20 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const restsession = require('restsession');
-const HTTPStore = restsession(session);
+// const restsession = require('restsession');
+// const HTTPStore = restsession(session);
 
 /* Storing to the session */
 app.use(session({
-    secret: 'ThisSecret',
-    resave: false,
-    saveUninitialized: true,
-    store: new HTTPStore('http://localhost:8080/api/sessions'),
-    cookie: {
-		httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24
-    },
-	name: "secretname"
+	secret: 'ThisSecret',
+	resave: false,
+	saveUninitialized: true,
+	// store: new HTTPStore('http://localhost:8080/api/sessions'),
+	cookie: {
+		secure: false,
+		maxAge: 1000 * 60 * 60 * 24
+	},
+	name: 'secretname'
 }));
 
 /* Body parser middleware */
@@ -35,7 +35,7 @@ app.use(express.static('public'));
 app.set('view engine', 'html');
 
 /* Routes */
-const routes = require('./routes.js');
-app.use(routes);
+const router = require('./routes.js');
 
+app.use(router);
 module.exports = app;
