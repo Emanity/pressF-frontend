@@ -147,16 +147,16 @@ describe('app.js route testing', () => {
 		});
 	});
 
-	/* POST /add-job-role TODO: fix this test */ 
-	// describe('POST /add-job-role testing', () => {
-	// 	test('POST /add-job-role correct job role renders add-job-role complete', () => {
-	// 		// grabs the seventh call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
-	// 		behaviour = mockApp.post.mock.calls[3][1];
-	// 		const res = { render: jest.fn() };
-	// 		const req = { body: jest.fn({jobTitle: 'test', jobBand: 'test', jobCapability: 'test', jobDiscipline: 'test', jobCompetencies: 'test'})};
-	// 		// call function used by get handler
-	// 		behaviour(req, res);
-	// 		expect(res.render).toHaveBeenCalledWith('add-job-role');
-	// 	});
-	// });
+	/* POST /add-job-role */
+	 describe('POST /add-job-role testing', () => {
+	 	test('POST /add-job-role correct job role renders add-job-role complete', async () => {
+	 		// grabs the seventh call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
+	 		const behaviour = mockApp.post.mock.calls[2][2];
+	 		const res = { render: jest.fn() };
+	 		const req = { body: jest.fn({jobTitle: 'test', jobBand: 'test', jobCapability: 'test', jobDiscipline: 'test', jobCompetencies: 'test'})};
+	 		// call function used by get handler
+	 		await behaviour(req, res);
+	 		await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
+	 	});
+	 });
 });
