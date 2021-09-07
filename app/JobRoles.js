@@ -121,10 +121,11 @@ exports.addJobRole = async (jobRole) => {
 		// creating POST request to POST to API
 		const options = {
 			method: 'POST',
+			body: JSON.stringify(data),
 			headers: {
+				'Accept': 'application/json',
 				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
+			}
 		};
 		// POSTing to API
 		const fetch_response = await fetch(api_url, options);
@@ -146,7 +147,7 @@ exports.addJobRole = async (jobRole) => {
 exports.addJobBand = async (jobBand) => {
 	try {
 		// API url for adding a job role
-		var api_url = 'http://localhost:8080/api/addjobrole';
+		var api_url = 'http://localhost:8080/api/addjobband';
 		// data from post request
 		var data = jobBand;
 		// creating POST request to POST to API
@@ -178,7 +179,7 @@ exports.addJobBand = async (jobBand) => {
 exports.addJobCapbility = async (jobCapability) => {
 	try {
 		// API url for adding a job role
-		var api_url = 'http://localhost:8080/api/addjobrole';
+		var api_url = 'http://localhost:8080/api/addjobcapability';
 		// data from post request
 		var data = jobCapability;
 		// creating POST request to POST to API

@@ -56,7 +56,6 @@ app.get('/add-job-band', function (req, res) {
 
 /* POST route to validate and send add-job-band form */
 app.post('/add-job-band', [
-	check('jobBand', 'Job Band: Must contain letters').exists().isAlpha(),
 	check('jobBand', 'Job Band: Must be longer than 0').isLength({min: 1})
 ], async (req, res) => {
 	// variable to store error details
@@ -69,7 +68,7 @@ app.post('/add-job-band', [
 		res.render('add-job-band', {jobBand : req.body, alert});
 	} else {
 		// send the body to addJobBand function in JobRoles.js
-		await JobRoles.addJobCapbility(req.body);
+		await JobRoles.addJobBand(req.body);
 		res.render('add-job-band-complete');
 		console.log('add-job-band: POST Sent');
 	}
@@ -83,7 +82,6 @@ app.get('/add-job-capability', function (req, res) {
 
 /* POST route to validate and send add-job-capability form */
 app.post('/add-job-capability', [
-	check('jobCapability', 'Job Capability: Must contain letters').exists().isAlpha(),
 	check('jobCapability', 'Job Capability: Must be longer than 0').isLength({min: 1})
 ], async (req, res) => {
 	// variable to store error details
