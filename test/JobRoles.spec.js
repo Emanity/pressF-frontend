@@ -239,7 +239,8 @@ describe('JobRoles.js method testing', () => {
 			// send 200 status code when successful
 			beforeEach(() => {
 				mockData = {
-					jobBand: 'test'
+					jobBand: 'test',
+					jobBandTraining: 'testing'
 				}
 				nock('http://localhost:8080/')
 					.post('/api/addjobband', mockData)
@@ -255,7 +256,7 @@ describe('JobRoles.js method testing', () => {
 			// send 404 status code when unsuccessful
 			beforeEach(() => {
 				mockData = {
-					jobBand: '',
+					jobBand: '', jobBandTraining: ''
 				}
 				nock('http://localhost:8080/')
 					.post('/api/addjobband', mockData)
