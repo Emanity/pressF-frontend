@@ -3,7 +3,7 @@ const router = express.Router();
 const JobRoles = require('./JobRoles');
 const user = require('./user');
 
-function middleware1(req, res, next) {
+function loginMiddleware(req, res, next) {
 	console.log('Email on request: '+ req.session.email );
 	
 	if (req.session.email != null ){
@@ -13,26 +13,36 @@ function middleware1(req, res, next) {
 	}
 }
 
+function roleMiddleware(req,res,next) {
+	if(req.session.role == 1){
+		// is admin - now do admin things
+		next();
+	} else {
+		// is regular employee, cannot do the admin
+		res.redirect('/user-profile');
+	}
+}
+
 /* Index (Home Page) Route */
-router.get('/', middleware1, function (req, res) {
+router.get('/', loginMiddleware, function (req, res) {
 	res.redirect('index');
 	console.log('Request processed'); 
 }); 
 
 /* Index (Home Page) Route */
-router.get('/index', middleware1, function (req, res) {
+router.get('/index', loginMiddleware, function (req, res) {
 	res.render('index');
 	console.log('Request processed'); 
 }); 
 
 /* Job Roles Route */
-router.get('/job-roles', middleware1, async (req, res) => {
+router.get('/job-roles', loginMiddleware, async (req, res) => {
 	let result = await JobRoles.getJobRoles();
 	res.render('job-roles', {JobRoles : result});
 });
 
 /* Job Role Details Route */
-router.get('/job-role-details/:jobRoleID', middleware1, async (req, res) => {
+router.get('/job-role-details/:jobRoleID', loginMiddleware, async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {JobRole : result});
@@ -60,7 +70,7 @@ router.post('/submit-login', async (req, res) => {
 	}
 });
 
-router.get('/user-profile', middleware1, (req,res) => {
+router.get('/user-profile', loginMiddleware, (req,res) => {
 	if(req.session.role == 1){
 		res.render('admin-profile', {exuser : req.session});
 	} else {
@@ -68,7 +78,7 @@ router.get('/user-profile', middleware1, (req,res) => {
 	}
 });
 
-router.get('/logout', middleware1, (req,res) => {
+router.get('/logout', loginMiddleware, (req,res) => {
 	req.session.destroy((err) => {
 		if(err) {
 			return console.log(err);
@@ -77,15 +87,15 @@ router.get('/logout', middleware1, (req,res) => {
 	});
 });
 
-router.get('/add-job-band', middleware1, function (req, res) {
+router.get('/add-job-band', loginMiddleware, roleMiddleware, function (req, res) {
 	res.render('add-job-band');
 });
 
-router.get('/add-job-capability', middleware1,function (req, res) {
+router.get('/add-job-capability', loginMiddleware, roleMiddleware, function (req, res) {
 	res.render('add-job-capability');
 });
 
-router.get('/add-job-role', middleware1,function (req, res) {
+router.get('/add-job-role', loginMiddleware, roleMiddleware, function (req, res) {
 	res.render('add-job-role');
 });
 
