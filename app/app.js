@@ -3,21 +3,20 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-// const restsession = require('restsession');
-// const HTTPStore = restsession(session);
 
-/* Storing to the session */
-app.use(session({
-	secret: 'ThisSecret',
+let sessionConfig = {
+	secret: 'key',
 	resave: false,
 	saveUninitialized: true,
-	// store: new HTTPStore('http://localhost:8080/api/sessions'),
+	secure: false,
 	cookie: {
-		secure: false,
-		maxAge: 1000 * 60 * 60
-	},
-	name: 'secretname'
-}));
+		maxAge: 1000 * 60 * 60,
+		httpOnly: false
+	}
+};
+
+/* Storing to the session */
+app.use(session(sessionConfig));
 
 /* Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: true }));

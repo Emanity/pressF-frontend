@@ -3,9 +3,9 @@ const router = express.Router();
 const JobRoles = require('./JobRoles');
 const user = require('./user');
 
+/* Requires user to login before accessing system */
 function loginMiddleware(req, res, next) {
 	console.log('Email on request: '+ req.session.email );
-	
 	if (req.session.email != null ){
 		next();
 	} else {
@@ -32,20 +32,24 @@ router.get('/', loginMiddleware, function (req, res) {
 /* Index (Home Page) Route */
 router.get('/index', loginMiddleware, function (req, res) {
 	res.render('index');
-	console.log('Request processed'); 
-}); 
+	console.log('Request processed');
+});
 
 /* Job Roles Route */
 router.get('/job-roles', loginMiddleware, async (req, res) => {
 	let result = await JobRoles.getJobRoles();
-	res.render('job-roles', {JobRoles : result});
+	res.render('job-roles', {
+		JobRoles: result
+	});
 });
 
 /* Job Role Details Route */
 router.get('/job-role-details/:jobRoleID', loginMiddleware, async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
 	let result = await JobRoles.getJobRoleDetails(jobRoleID);
-	res.render('job-role-details', {JobRole : result});
+	res.render('job-role-details', {
+		JobRole: result
+	});
 });
 
 router.get('/login', function (req, res) {
@@ -55,7 +59,7 @@ router.get('/login', function (req, res) {
 router.post('/submit-login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
 
-	if (result == '401'){
+	if (result == '401') {
 		// TODO error
 		res.redirect('login');
 	} else {
