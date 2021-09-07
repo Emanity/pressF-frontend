@@ -201,6 +201,25 @@ footer p {
     border-color: #283583;
 }
 
+#accent-color-box {
+    background-color: #283583;
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#accent-color-box a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#accent-color-box a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+
 @media (max-width: 991px){
     .formsPage{
         width: 100%;

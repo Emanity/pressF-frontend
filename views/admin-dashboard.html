@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% set title = 'Admin Dashboard' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h2>Admin Dashboard<h2>
+    </div>
+    <div class="row">
+        <h4>Select from an option below:<h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div id="accent-color-box">
+                <a href="job-roles">View Job Roles</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div id="accent-color-box">
+                <a href="add-job-role">Add Job Role</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div id="accent-color-box">
+                <a href="add-job-band">Add Job Band</a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div id="accent-color-box">
+                <a href="add-job-capability">Add Job Capability</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
