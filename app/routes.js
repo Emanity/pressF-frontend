@@ -40,9 +40,9 @@ router.get('/login', function (req, res) {
 router.post('/login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
 
+	
 	if (result == '401') {
-		// TODO error
-		res.redirect('login');
+		res.render('login', {error: 'Invalid email/password'});
 	} else {
 		user.updateUser(req, JSON.parse(result).role);
 		req.session.save((err) => {
