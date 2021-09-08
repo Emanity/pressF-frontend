@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "start": "nodemon app/server.js",
-    "test": "jest --passWithNoTests --detectOpenHandles",
+    "test": "jest --passWithNoTests --detectOpenHandles --coverage",
     "lint": "./node_modules/.bin/eslint app/*.js test/*.js"
   },
   "repository": {
