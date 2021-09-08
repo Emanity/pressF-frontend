@@ -23,16 +23,15 @@ exports.getLoginResponse = async (req) => {
 		// If statement to catch errors
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 		// Return response
-			console.log('Test Auth Fetched');
 			return await fetch_response.text();
 		}
 		else {
 		// Return NULL and log error
-			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to fetch Test Auth ');
+			console.log(fetch_response.status, ' | ', fetch_response.statusText, ' | Unable to authenticate user.');
 			return fetch_response.status;
 		}
 	} catch(err) {
 		console.log(err);
-		return 'Error: There was a problem retrieving Test Auth.'; 
+		return 'Error: There was a problem connecting to the authentication service.'; 
 	}
 };
