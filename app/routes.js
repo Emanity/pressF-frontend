@@ -68,7 +68,7 @@ router.get('/add-job-capability', function (req, res) {
 /* POST route to validate and send add-job-capability form */
 router.post('/add-job-capability', [
 	check('jobCapability', 'Job Capability: Must be longer than 0 characters and shorter than 100 characters').isLength({min: 1, max: 100}),
-	check('jobCapability', 'Job Capability must only contain letters and space').matches('/^[A-Za-z\s]+$/')
+	check('jobCapability', 'Job Capability must only contain letters and space').matches('/^[A-Za-z ]+$/')
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);
