@@ -6,8 +6,10 @@ const middleware = {
 
 		if (req.session.email != null) {
 			next();
+			return true;
 		} else {
 			res.redirect('/login');
+			return false;
 		}
 	},
 
@@ -15,9 +17,11 @@ const middleware = {
 		if (req.session.role == 1) {
 			// is admin - now do admin things
 			next();
+			return true;
 		} else {
 			// is regular employee, cannot do the admin
 			res.redirect('/user-profile');
+			return false;
 		}
 	}
 };

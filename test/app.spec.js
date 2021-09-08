@@ -17,8 +17,7 @@ jest.mock('express', () => mockExpress);
 const mockNodeFetch = jest.fn();
 jest.mock('node-fetch', () => mockNodeFetch);
 
-/* importing app.js & routes.js file to test */
-require('../app/app.js');
+/* importing routes.js file to test */
 require('../app/routes.js');
 
 const mockRequest = {
@@ -30,17 +29,15 @@ const mockRequest = {
 };
 
 const mockResponse = {
-	
 	status: jest.fn(),
 	render: jest.fn(),
 	redirect: jest.fn()
 };
 
-/* Test Suite: route testing app.js 
+/* Test Suite: route testing routes.js 
 - does each route get called
 - does it then render the appropriate view (with data if required */
-describe('app.js route testing', () => {
-	// GET / testing 
+describe('routes.js route testing', () => {
 	describe('GET /index testing', () => {
 		test('GET / renders index html page', () => {
 			// call get function
