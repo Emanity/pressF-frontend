@@ -50,7 +50,6 @@ router.post('/login', async (req, res) => {
 				console.log(err);
 			}
 		});
-		console.log(req.session);
 		res.redirect('index');
 	}
 });
