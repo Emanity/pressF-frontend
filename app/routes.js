@@ -40,7 +40,7 @@ router.get('/add-job-band', function (req, res) {
 /* POST route to validate and send add-job-band form */
 router.post('/add-job-band', [
 	check('jobBand', 'Job Band: Must be longer than 0 characters and shorter than 100 characters').isLength({min: 1, max: 100}),
-	check('jobBand', 'Job Band must only contain letters and space').matches('/^[A-Za-z\s]+$/'),
+	check('jobBand', 'Job Band must only contain letters and space').matches('^[\.a-zA-Z0-9,!? ]*$'),
 	check('jobBandTraining', 'Job Band Training: Must be a URL').matches('((http|https)://)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)')
 ], async (req, res) => {
 	// variable to store error details
@@ -68,7 +68,7 @@ router.get('/add-job-capability', function (req, res) {
 /* POST route to validate and send add-job-capability form */
 router.post('/add-job-capability', [
 	check('jobCapability', 'Job Capability: Must be longer than 0 characters and shorter than 100 characters').isLength({min: 1, max: 100}),
-	check('jobCapability', 'Job Capability must only contain letters and space').matches('/^[A-Za-z ]+$/')
+	check('jobCapability', 'Job Capability must only contain letters and space').matches('^[\.a-zA-Z0-9,!? ]*$')
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);
@@ -98,7 +98,7 @@ router.get('/add-job-role', async (req, res) => {
 /* POST route to validate and send add-job-role form */
 router.post('/add-job-role', [
 	check('jobTitle', 'Job Title: Must be longer than 0 characters and shorter than 200 characters').isLength({min: 1, max: 200}),
-	check('jobTitle', 'Job Capability must only contain letters and space').matches('/^[A-Za-z\s]+$/'),
+	check('jobTitle', 'Job Title: Must only contain letters and space').matches('^[\.a-zA-Z0-9,!? ]*$'),
 	check('jobSpecification', 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters').isLength({min: 1, max: 5000}),
 	check('jobSpecification', 'Job Specification: Must not contain special characters (e.g. @~|/(){}[]"`)').matches('^[\.a-zA-Z0-9,!? ]*$'),
 	check('jobCompetencies', 'Job Competencies: Must be longer than 0 characters and shorter than 500 characters').isLength({min: 1, max: 5000}),
