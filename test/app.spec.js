@@ -1,5 +1,3 @@
-const sinon = require('sinon');
-
 // mocking app
 const mockApp = {
 	get: jest.fn(),
@@ -19,12 +17,6 @@ jest.mock('express', () => mockExpress);
 const mockNodeFetch = jest.fn();
 jest.mock('node-fetch', () => mockNodeFetch);
 
-// jest.mock('../app/routes.js', () => {
-// 	loginMiddleware = jest.fn();
-// });
-const middleware = require('../app/middleware.js');
-const loginStub = sinon.stub(middleware, 'loginMiddleware');
-
 /* importing app.js & routes.js file to test */
 require('../app/app.js');
 require('../app/routes.js');
@@ -34,18 +26,14 @@ const mockRequest = {
 		email: 'email@test.com',
 		role: 0
 	},
+	params: jest.fn(1)
 };
 
-const mockResponse = () => {
-	const res = {};
-	res.status = jest.fn().mockReturnValue(res);
-	res.render = jest.fn().mockReturnValue(res);
-	return res;
-};
-
-const mockNext = () => {
-	const next = jest.fn();
-	return next;
+const mockResponse = {
+	
+	status: jest.fn(),
+	render: jest.fn(),
+	redirect: jest.fn()
 };
 
 /* Test Suite: route testing app.js 
@@ -55,29 +43,22 @@ describe('app.js route testing', () => {
 	// GET / testing 
 	describe('GET /index testing', () => {
 		test('GET / renders index html page', () => {
-			expect(mockRequest.session.email).toBe('email@test.com');
-			const spy = jest.spyOn(middleware, 'loginMiddleware');
-			
 			// call get function
 			expect(mockApp.get).toHaveBeenCalledWith('/', expect.any(Function), expect.any(Function));
 			// grabs the first call in the app file, i.e. app.get('/')
-			const behaviour = mockApp.get.mock.calls[0][1];
-			// const res = { render: jest.fn() };
+			const behaviour = mockApp.get.mock.calls[0][2];
 			// call function used by get handler
 			behaviour(mockRequest, mockResponse);
-			expect(mockResponse.render).toHaveBeenCalledWith('index');
+			expect(mockResponse.redirect).toHaveBeenCalledWith('index');
 		});
 		test('GET /index renders index html page', () => {
 			// call get function
 			expect(mockApp.get).toHaveBeenCalledWith('/index', expect.any(Function), expect.any(Function));
 			// grabs the second call in the app file, i.e. app.get('/index')
-			const behaviour = mockApp.get.mock.calls[1][1];
-			const res = {
-				render: jest.fn()
-			};
+			const behaviour = mockApp.get.mock.calls[1][2];
 			// call function used by get handler
-			behaviour(null, res);
-			expect(res.render).toHaveBeenCalledWith('index');
+			behaviour(null, mockResponse);
+			expect(mockResponse.render).toHaveBeenCalledWith('index');
 		});
 	});
 	// GET /job-roles 
@@ -94,13 +75,10 @@ describe('app.js route testing', () => {
 				})
 			}));
 			// grabs the third call in the app file, i.e. app.get('/job-roles')
-			const behaviour = mockApp.get.mock.calls[2][1];
-			const res = {
-				render: jest.fn()
-			};
+			const behaviour = mockApp.get.mock.calls[2][2];
 			// call function used by get handler
-			await behaviour(null, res);
-			await expect(res.render).toHaveBeenCalledWith('job-roles', {
+			await behaviour(null, mockResponse);
+			await expect(mockResponse.render).toHaveBeenCalledWith('job-roles', {
 				JobRoles: {
 					result: 'Test Data'
 				}
@@ -121,16 +99,10 @@ describe('app.js route testing', () => {
 				})
 			}));
 			// grabs the fourth call in the app file, i.e. app.get('/job-role-details/:JobRoleID')
-			const behaviour = mockApp.get.mock.calls[3][1];
-			const res = {
-				render: jest.fn()
-			};
-			const req = {
-				params: jest.fn(1)
-			};
+			const behaviour = mockApp.get.mock.calls[3][2];
 			// call function used by get handler
-			await behaviour(req, res);
-			await expect(res.render).toHaveBeenCalledWith('job-role-details', {
+			await behaviour(mockRequest, mockResponse);
+			await expect(mockResponse.render).toHaveBeenCalledWith('job-role-details', {
 				JobRole: {
 					result: 'Test Data'
 				}
