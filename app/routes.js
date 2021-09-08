@@ -37,7 +37,7 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
-router.post('/submit-login', async (req, res) => {
+router.post('/login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
 
 	if (result == '401') {
