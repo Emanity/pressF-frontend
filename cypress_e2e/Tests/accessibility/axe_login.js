@@ -8,7 +8,6 @@ describe("Login user", function(){
         cy.get('[data-cy="emailInput"]').type('admin@test.com');
         cy.get('[data-cy="passwdInput"]').type('password').should('have.value', 'password');
         cy.get('[data-cy="submitBtn"]').click();
-        cy.get('[data-cy="alert"]').should('be.visible');
     });
 
     it("should not login admin - invalid password", function(){
@@ -29,5 +28,15 @@ describe("Login user", function(){
         cy.get('[data-cy="passwdInput"]').type('password').should('have.value', 'password');
         cy.get('[data-cy="submitBtn"]').click();
         cy.url().should('include', '/index');
+    });
+
+    describe('A11y',() => {
+        beforeEach(() => {
+            cy.injectAxe();
+        });
+    
+        it('should have no detectable a11y errors on page load', () => {
+            cy.checkA11y();
+        });
     });
 });

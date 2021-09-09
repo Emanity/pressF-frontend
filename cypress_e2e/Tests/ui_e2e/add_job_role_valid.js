@@ -25,13 +25,4 @@ describe("Adding job role valid values", () => {
         cy.get('[data-cy="homePageLink"]').click();
         cy.url().should('include', '/index');
     });
-    describe('A11y',() => {
-        beforeEach(() => {
-            cy.injectAxe();
-        });
-    
-        it('should have no detectable a11y errors on page load', () => {
-            cy.checkA11y();
-        });
-    });
 });

@@ -13,14 +13,4 @@ describe("Adding job capability", () => {
         cy.get('[data-cy="jobCapabInput"]').type('Systems Test').should('have.value','Systems Test');
         cy.get('[data-cy="submitBtn"]').click();
     });
-
-    describe('A11y',() => {
-        beforeEach(() => {
-            cy.injectAxe();
-        });
-    
-        it('should have no detectable a11y errors on page load', () => {
-            cy.checkA11y();
-        });
-    });
 });
