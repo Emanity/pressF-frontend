@@ -1,5 +1,4 @@
 // mocking app
-
 const mockApp = {
 	get: jest.fn(),	
 	listen: jest.fn(),
@@ -7,6 +6,10 @@ const mockApp = {
 	use: jest.fn(),
 	post: jest.fn()
 };
+
+const mockValidator = {
+	validationResult: jest.fn()
+}
 	
 /* mocking express and express.static method */	
 const mockExpress = jest.fn(() => mockApp);
@@ -168,6 +171,27 @@ describe('app.js route testing', () => {
 			const behaviour = mockApp.post.mock.calls[2][2];
 			const res = { render: jest.fn() };
 			const req = { body: jest.fn({jobTitle: '', jobBand: '', jobCapability: '', jobDiscipline: '', jobCompetencies: ''})};
+			mockValidator.validationResult
+			const errors = [
+				{
+				  value: '',
+				  msg: 'Job Title: Must be longer than 0 characters and shorter than 200 characters',
+				  param: 'jobTitle',
+				  location: 'body'
+				},
+				{
+				  value: '',
+				  msg: 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters',
+				  param: 'jobSpecification',
+				  location: 'body'
+				},
+				{
+				  value: '',
+				  msg: 'Job Competencies: Must be longer than 0 characters and shorter than 500 characters',
+				  param: 'jobCompetencies',
+				  location: 'body'
+				}
+			  ];
 			// call function used by get handler
 			await behaviour(req, res);
 			await expect(res.render).toHaveBeenCalledWith('add-job-role');
@@ -181,29 +205,7 @@ describe('app.js route testing', () => {
 				 const behaviour = mockApp.post.mock.calls[0][2];
 				 const res = { render: jest.fn() };
 				 const req = { body: jest.fn({jobBand: 'test', jobBandTraining: 'test'})};
-				 // call function used by get handler
-				
-				 const errors = [
-					{
-					  value: '',
-					  msg: 'Job Title: Must be longer than 0 characters and shorter than 200 characters',
-					  param: 'jobTitle',
-					  location: 'body'
-					},
-					{
-					  value: '',
-					  msg: 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters',
-					  param: 'jobSpecification',
-					  location: 'body'
-					},
-					{
-					  value: '',
-					  msg: 'Job Competencies: Must be longer than 0 characters and shorter than 500 characters',
-					  param: 'jobCompetencies',
-					  location: 'body'
-					}
-				  ];
-
+				 // call function used by get handles
 				 await behaviour(req, res);
 				 await expect(res.render).toHaveBeenCalledWith('add-job-band-complete');
 			 });
