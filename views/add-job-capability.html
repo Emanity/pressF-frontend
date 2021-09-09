@@ -12,7 +12,7 @@
 
                 {% if alert and alert.length > 0 %}
                     {% for error in alert %}    
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" data-cy="alert">
                             {{error.msg}}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -22,12 +22,12 @@
 
                 <div class="form-group">
                     <label for="jobCapability">Job Capability:</label>
-                    <input type="text" name="jobCapability" class="form-control" id="jobCapability">
+                    <input type="text" name="jobCapability" class="form-control" id="jobCapability" data-cy="jobCapabInput">
                 </div>
 
                 <br>
 
-                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button">
+                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button" data-cy="submitBtn">
             </form>
         </div>
         
