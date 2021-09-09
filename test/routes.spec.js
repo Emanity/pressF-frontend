@@ -165,7 +165,7 @@ describe('app.js route testing', () => {
 	 		await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
 	 	});
 
-		// Unhappy path - good Job Role
+		// Unhappy path - bad Job Role
 		test('POST /add-job-role correct job role renders add-job-role complete', async () => {
 			// grabs the second call in the app file, i.e. app.post('/add-job-role')
 			const behaviour = mockApp.post.mock.calls[2][2];
