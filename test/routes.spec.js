@@ -150,7 +150,7 @@ describe('app.js route testing', () => {
 	});
 
 	/* POST /add-job-role */
-	 describe('POST /add-job-role testing', () => {
+	describe('POST /add-job-role testing', () => {
 		// Happy path - good Job Role
 	 	test('POST /add-job-role correct job role renders add-job-role complete', async () => {
 	 		// grabs the second call in the app file, i.e. app.post('/add-job-role')
@@ -161,16 +161,7 @@ describe('app.js route testing', () => {
 	 		await behaviour(req, res);
 	 		await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
 	 	});
-		// // Unhappy path - bad Job Role
-		// test('POST /add-job-role correct job role renders add-job-role form as values not passed', async () => {
-		// 		// grabs the second call in the app file, i.e. app.post('/add-job-role')
-		// 		const behaviour = mockApp.post.mock.calls[2][2];
-		// 		const res = { render: jest.fn() };
-		// 		// call function used by get handler
-		// 		await behaviour(null, res);
-		// 		await expect(res.render).toHaveBeenCalledWith('add-job-role');
-		// 	});
-		});
+	});
 
 		describe('POST /add-job-band testing', () => {
 			// Happy path - good Job Role

@@ -72,7 +72,6 @@ router.post('/add-job-capability', [
 ], async (req, res) => {
 	// variable to store error details
 	errors = validationResult(req);
-
 	// check to ensure there are no errors
 	if (!errors.isEmpty()){
 		const alert = errors.array();
@@ -102,16 +101,13 @@ router.post('/add-job-role', [
 	check('jobSpecification', 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters').isLength({min: 1, max: 5000}),
 	check('jobSpecification', 'Job Specification: Must not contain special characters (e.g. @~|/(){}[]"`)').matches('^[\.a-zA-Z0-9,!? ]*$'),
 	check('jobCompetencies', 'Job Competencies: Must be longer than 0 characters and shorter than 500 characters').isLength({min: 1, max: 5000}),
-	check('jobCompetencies', 'Job Competencies: Must not contain special characters (e.g. @~|/(){}[]"`)').matches('^[\.a-zA-Z0-9,!? ]*$'),
+	check('jobCompetencies', 'Job Competencies: Must not contain special characters (e.g. @~|/(){}[]"`)').matches('^[\.a-zA-Z0-9,!? ]*$')
 ], async (req, res) => {
-
 	let bandResult = await JobRoles.getJobBand();
 	let capabilityResult = await JobRoles.getJobCapability();
 	let disciplineResult = await JobRoles.getJobDiscipline();
-	
 	// variable to store error details
 	errors = validationResult(req);
-
 	// check to ensure there are no errors
 	if (!errors.isEmpty()){
 		const alert = errors.array();
