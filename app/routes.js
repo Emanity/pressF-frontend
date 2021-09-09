@@ -108,6 +108,7 @@ router.post('/add-job-role', [
 	let disciplineResult = await JobRoles.getJobDiscipline();
 	// variable to store error details
 	errors = validationResult(req);
+	console.log(errors)
 	// check to ensure there are no errors
 	if (!errors.isEmpty()){
 		const alert = errors.array();

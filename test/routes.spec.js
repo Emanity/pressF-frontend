@@ -161,6 +161,17 @@ describe('app.js route testing', () => {
 	 		await behaviour(req, res);
 	 		await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
 	 	});
+
+		// Unhappy path - good Job Role
+		test('POST /add-job-role correct job role renders add-job-role complete', async () => {
+			// grabs the second call in the app file, i.e. app.post('/add-job-role')
+			const behaviour = mockApp.post.mock.calls[2][2];
+			const res = { render: jest.fn() };
+			const req = { body: jest.fn({jobTitle: '', jobBand: '', jobCapability: '', jobDiscipline: '', jobCompetencies: ''})};
+			// call function used by get handler
+			await behaviour(req, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-role');
+		});
 	});
 
 		describe('POST /add-job-band testing', () => {
@@ -171,6 +182,28 @@ describe('app.js route testing', () => {
 				 const res = { render: jest.fn() };
 				 const req = { body: jest.fn({jobBand: 'test', jobBandTraining: 'test'})};
 				 // call function used by get handler
+				
+				 const errors = [
+					{
+					  value: '',
+					  msg: 'Job Title: Must be longer than 0 characters and shorter than 200 characters',
+					  param: 'jobTitle',
+					  location: 'body'
+					},
+					{
+					  value: '',
+					  msg: 'Job Specification: Must be longer than 0 characters and shorter than 5000 characters',
+					  param: 'jobSpecification',
+					  location: 'body'
+					},
+					{
+					  value: '',
+					  msg: 'Job Competencies: Must be longer than 0 characters and shorter than 500 characters',
+					  param: 'jobCompetencies',
+					  location: 'body'
+					}
+				  ];
+
 				 await behaviour(req, res);
 				 await expect(res.render).toHaveBeenCalledWith('add-job-band-complete');
 			 });
