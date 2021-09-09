@@ -13,23 +13,29 @@
                     <img src="/Images/KainosLogo.png" alt="Logo" id="LoginLogo">
                 </a>
                 
-                <h4 id="loginHeading">Login</h4>
-                <form method="POST" action="">
+                <h4 id="loginHeading" data-cy="loginHeading">Login</h4>
+                <form method="POST" action="/login">
                     <div class="form-group">
+                        {% if error %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" data-cy="alert">
+                                    {{error}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
                         <label for="email">Email: </label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control" id="email" required="true" pattern="[a-z0-9._%+-]+@kainos.com$" data-cy="emailInput">
                     </div>
                         
                     <br><br>
                         
                     <div class="form-group">
                         <label>Password: </label>
-                        <input type="password" name="password" class="form-control" id="password">
+                        <input type="password" name="password" class="form-control" id="password" required="true" data-cy="passwdInput">
                     </div>
                         
                     <br><br>
 
-                    <input type="submit" value="Login" class="btn btn-primary" id="Form-Button">
+                    <input type="submit" value="Login" class="btn btn-primary" id="Form-Button" data-cy="submitBtn">
 
                 </form>
             </div>

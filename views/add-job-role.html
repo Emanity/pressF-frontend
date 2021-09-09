@@ -8,20 +8,31 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="formsPage">
             <h4>Add a Job Role</h4>
-            <form method="POST" action="" id="job-role-form">
+            <form method="POST" action="/add-job-role" id="job-role-form">
                 <div class="form-group">
-                    <label for="jobTitle">Job Title:</label>
-                    <input type="text" name="jobTitle" class="form-control" id="jobTitle">
-                </div>
+                    
+                    {% if alert and alert.length > 0 %}
+                        {% for error in alert %}    
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" data-cy="alert">
+                                    {{error.msg}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
 
+                        {% endfor %}
+                    {% endif %}
+
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" name="jobTitle" class="form-control" id="jobTitle" data-cy="jobTitleInput">
+                </div>
+                
                 <br><br>
                 
                 <div class="form-group">
                     <label for="jobRoleName">Job Band:</label>
-                    <select name="jobBand" class="form-control" id="jobBand"> 
-                    {% for band in JobRoles.jobBands %} 
-                     <option value="{{band.jobBandID}}">{{band.jobBand}}</option>
-                    {% endfor %}
+                    <select name="jobBandId" id="jobBand_datalist" class="form-control form-select" aria-label="Job Band" data-cy="jobBandDropdown"> 
+                        {% for band in bands %}
+                            <option value="{{band.jobBandId}}">{{band.jobBand}}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
@@ -29,36 +40,41 @@
                 
                 <div class="form-group">
                     <label for="jobCapability">Job Capability:</label>
-                    
-                    <select name="jobCapability" class="form-control" id="jobCapability">
-                        {% for capability in JobRoles.jobCapabilities%}
-                            <option value="{{capability.jobCapabilityID}}">{{capability.jobCapability}}</option>
+                    <select name="jobCapabilityId" id="jobCapability_datalist" class="form-control form-select" aria-label="Job Capability" data-cy="jobCapabDropdown">
+                        {% for capability in capabilities %}
+                            <option value="{{capability.jobCapabilityId}}">{{capability.jobCapability}}</option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <br><br>
 
-                {# <div class="form-group">
+                <div class="form-group">
                     <label for="jobDiscipline">Job Discipline:</label>
-                    
-                    <select name="jobDiscipline" class="form-control" id="jobDiscipline">
-                        {% for discipline in JobRoles.jobDisciplines%}
-                            <option value="{{discipline.jobDisciplineID}}">{{discipline.jobDiscipline}}</option>
+                    <select name="jobDisciplineId" id="jobDiscipline_datalist" class="form-control form-select" aria-label="Job Discipline" data-cy="jobDiscipDropdown">
+                        {% for discipline in disciplines %}
+                            <option value="{{discipline.jobDisciplineId}}">{{discipline.jobDiscipline}}</option>
                         {% endfor %}
                     </select>
                 </div> 
 
-                <br><br> #}
+                <br><br>
 
                 <div class="form-group">
                     <label for="jobSpecification">Job Specification:</label>
-                    <textarea name="jobSpecification" class="form-control" id="jobSpecification" form="job-role-form" rows="3"></textarea>
+                    <textarea name="jobSpecification" class="form-control" id="jobSpecification" form="job-role-form" rows="3" data-cy="jobSpecInput"></textarea>
                 </div>
 
                 <br><br>
 
-                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button">
+                <div class="form-group">
+                    <label for="jobCompetencies">Job Competencies:</label>
+                    <textarea name="jobCompetencies" class="form-control" id="jobCompetencies" form="job-role-form" rows="3" data-cy="jobCompInput"></textarea>
+                </div>
+
+                <br><br>
+
+                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button" data-cy="submitBtn">
             </form>
         </div>
     </div>
