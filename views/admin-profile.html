@@ -4,6 +4,27 @@
 
 
 {% block admin %}
-<h2>this is an admin</h2>
-<h3>Here are some buttons for admin user actions:</h3>
+<div class="row">
+    <div class="row">
+        <h4>Select admin features from the options below:<h4>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <div id="accent-color-box">
+            <a href="add-job-role"><button id="user-btn" type="button" class="btn btn-outline-primary me-2" data-cy="addrole">Add Job Role</button></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <div id="accent-color-box">
+            <a href="add-job-band"><button id="user-btn" type="button" class="btn btn-outline-primary me-2" data-cy="addband">Add Job Band</button></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <div id="accent-color-box">
+            <a href="add-job-capability"><button id="user-btn" type="button" class="btn btn-outline-primary me-2" data-cy="addcapability">Add Job Capability</button></a>
+        </div>
+    </div>
+</div>
 {% endblock %}
