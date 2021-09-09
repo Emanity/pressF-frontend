@@ -3,12 +3,12 @@
 const nock = require('nock');
 const getJobRoles = require('../app/jobRoles').getJobRoles;
 const getJobRoleDetails = require('../app/jobRoles').getJobRoleDetails;
-const getJobBand = require('../app/JobRoles').getJobBand;
-const getJobCapability = require('../app/JobRoles').getJobCapability;
-const getJobDiscipline = require('../app/JobRoles').getJobDiscipline;
-const addJobRole = require('../app/JobRoles').addJobRole;
-const addJobBand = require('../app/JobRoles').addJobBand;
-const addJobCapbility = require('../app/JobRoles').addJobCapbility;
+const getJobBand = require('../app/jobRoles').getJobBand;
+const getJobCapability = require('../app/jobRoles').getJobCapability;
+const getJobDiscipline = require('../app/jobRoles').getJobDiscipline;
+const addJobRole = require('../app/jobRoles').addJobRole;
+const addJobBand = require('../app/jobRoles').addJobBand;
+const addJobCapbility = require('../app/jobRoles').addJobCapbility;
 const expect = require('chai').expect;
 
 /* Test Suite: testing jobRoles.js 

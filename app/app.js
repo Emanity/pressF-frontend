@@ -3,7 +3,23 @@ const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const router = require('./routes');
+const session = require('express-session');
 
+let sessionConfig = {
+	secret: 'key',
+	resave: false,
+	saveUninitialized: true,
+	secure: false,
+	cookie: {
+		maxAge: 1000 * 60 * 60,
+		httpOnly: false
+	}
+};
+
+/* Storing to the session */
+app.use(session(sessionConfig));
+
+/* Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Configuring Express to use Nunjucks */

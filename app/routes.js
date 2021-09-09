@@ -103,7 +103,7 @@ router.post('/add-job-band', [
 			alert
 		});
 	} else {
-		// send the body to addJobBand function in JobRoles.js
+		// send the body to addJobBand function in jobRoles.js
 		await jobRoles.addJobBand(req.body);
 		res.render('add-job-band-complete');
 		console.log('add-job-band: POST Sent');
@@ -136,7 +136,7 @@ router.post('/add-job-capability', [
 			alert
 		});
 	} else {
-		// send the body to addJobBand function in JobRoles.js
+		// send the body to addJobBand function in jobRoles.js
 		await jobRoles.addJobCapbility(req.body);
 		res.render('add-job-capability-complete');
 		console.log('add-job-capability: POST Sent');
@@ -192,7 +192,7 @@ router.post('/add-job-role', [
 			alert
 		});
 	} else {
-		// send the body to addJobRole function in JobRoles.js
+		// send the body to addJobRole function in jobRoles.js
 		await jobRoles.addJobRole(req.body);
 		res.render('add-job-role-complete');
 		console.log('add-job-role: POST Sent');
