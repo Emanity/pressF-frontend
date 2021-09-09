@@ -89,7 +89,7 @@ router.post('/add-job-band', [
 		max: 100
 	}),
 	check('jobBand', 'Job Band must only contain letters and space').matches('^[a-zA-Z0-9 ]*$'),
-	check('jobBandTraining', 'Job Band Training: Must be a URL').matches('((http|https)://)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)')
+	check('jobBandTraining', 'Job Band Training: Must be a URL (contain http:// or https:// and .)').matches('((http|https)://)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)')
 ], async (req, res) => {
 	// variable to store error details
 	let errors = validationResult(req);
