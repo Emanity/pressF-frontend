@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-validator": "^6.12.1",
     "express-session": "^1.17.2",
     "node-fetch": "^2.6.1",
     "nunjucks": "^3.2.3",
@@ -33,6 +34,7 @@
     "eslint-plugin-jest": "^24.4.0",
     "jest": "^27.0.6",
     "nock": "^13.1.3",
+    "node-mocks-http": "^1.10.1",
     "nodemon": "^2.0.12",
     "proxyquire": "^2.1.3",
     "sinon": "^11.1.2",

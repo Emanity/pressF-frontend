@@ -37,13 +37,6 @@
                 <h4> {{jobRoles}} </h4>
                 <p> The service is not available right now. Please try again later. </p>
             {% elif jobRoles and jobRoles.length > 0 %}
-
-
-                 <!--   <div class="input-group w-25 mb-3">
-                            <input type="text" class="form-control" placeholder="Search for available job roles"aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
-                    </div> -->
-
                 {% for jobRole in jobRoles %}
                     
                     <div class="card" id="list{{jobRole.jobRoleID}}" data-cy="jobSummary{{jobRole.jobRoleID}}">
@@ -59,8 +52,6 @@
                     </div>
 
                 {% endfor %} 
-
-
             {% else %}
 
                 <h4> No results can be returned! </h4>

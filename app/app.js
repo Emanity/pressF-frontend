@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
+const router = require('./routes');
 const session = require('express-session');
 
 let sessionConfig = {
@@ -32,9 +33,6 @@ app.use(express.static('public'));
 
 /* Nunjucks view engine */
 app.set('view engine', 'html');
-
-/* Routes */
-const router = require('./routes.js');
 
 app.use(router);
 module.exports = app;

@@ -18,7 +18,7 @@ const authorisation = {
 			return true;
 		} else {
 			// is regular employee
-			res.render('error-page', {error: 'You do not have access to view this page. If you think you should have access, please contact a site administrator'})
+			res.render('error-page', {error: 'You do not have access to view this page. If you think you should have access, please contact a site administrator'});
 			return false;
 		}
 	}
