@@ -12,7 +12,6 @@ describe("Loading home page", function(){
         });
     
         it('should have no detectable a11y errors on page load', () => {
-            cy.screenshot('home-page-axe');
             cy.checkA11y();
         });
     });
