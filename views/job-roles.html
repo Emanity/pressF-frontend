@@ -32,29 +32,26 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12" data-cy="jobRoleList"> 
-            {% if JobRoles == "Error: There was a problem retrieving job roles." %}
-                <h4> {{JobRoles}} </h4>
+        <div class="col-lg-12 col-md-12 col-sm-12"> 
+            {% if jobRoles == "Error: There was a problem retrieving job roles." %}
+                <h4> {{jobRoles}} </h4>
                 <p> The service is not available right now. Please try again later. </p>
-            {% elif JobRoles and JobRoles.length > 0 %}
-
-                {% for JobRole in JobRoles %}
+            {% elif jobRoles and jobRoles.length > 0 %}
+                {% for jobRole in jobRoles %}
                     
-                    <div class="card" id="list{{JobRole.jobRoleID}}" data-cy="jobSummary{{JobRole.jobRoleID}}">
+                    <div class="card" id="list{{jobRole.jobRoleID}}" data-cy="jobSummary{{jobRole.jobRoleID}}">
                         <details>
-                                <summary id="list">{{JobRole.jobTitle}} ({{JobRole.jobBand}})</summary>
+                                <summary id="list">{{jobRole.jobTitle}} ({{jobRole.jobBand}})</summary>
                             <ul>
-                                    <li>Job Band: {{JobRole.jobBand}}</li>
-                                    <li>Job Capability: {{JobRole.jobCapability}}</li>
-                                    <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
-                                    <li><a href="/job-role-details/{{JobRole.jobRoleID}}" data-cy="jobRoleDetailsLink{{JobRole.jobRoleID}}">View Job Role Details</a></li>
+                                    <li>Job Band: {{jobRole.jobBand}}</li>
+                                    <li>Job Capability: {{jobRole.jobCapability}}</li>
+                                    <li>Job Discipline: {{jobRole.jobDiscipline}}</li>
+                                    <li><a href="/job-role-details/{{jobRole.jobRoleID}}" data-cy="jobRoleDetailsLink{{jobRole.jobRoleID}}">View Job Role Details</a></li>
                             </ul>
                         </details>
                     </div>
 
                 {% endfor %} 
-
-
             {% else %}
 
                 <h4> No results can be returned! </h4>

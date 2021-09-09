@@ -11,7 +11,7 @@ exports.getJobRoles = async () => {
 		if (fetch_response.status >= 200 && fetch_response.status <= 299) {
 		// Return response
 			console.log('Job Roles Fetched');
-			return await fetch_response.json();
+			return fetch_response.json();
 		} else {
 		// Return NULL and log error
 			console.log(fetch_response.status, ' | ' ,  fetch_response.statusText, ' | Unable to Fetch Job Roles');

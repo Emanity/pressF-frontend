@@ -18,7 +18,5 @@ app.use(express.static('public'));
 /* Nunjucks view engine */
 app.set('view engine', 'html');
 
-/* Index (Home Page) Route */
-app.use(router)
-
+app.use(router);
 module.exports = app;

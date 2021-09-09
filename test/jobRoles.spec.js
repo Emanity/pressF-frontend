@@ -1,8 +1,8 @@
 /* eslint-disable jest/valid-expect */
 /* imports */
 const nock = require('nock');
-const getJobRoles = require('../app/JobRoles').getJobRoles;
-const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
+const getJobRoles = require('../app/jobRoles').getJobRoles;
+const getJobRoleDetails = require('../app/jobRoles').getJobRoleDetails;
 const getJobBand = require('../app/JobRoles').getJobBand;
 const getJobCapability = require('../app/JobRoles').getJobCapability;
 const getJobDiscipline = require('../app/JobRoles').getJobDiscipline;
@@ -11,12 +11,11 @@ const addJobBand = require('../app/JobRoles').addJobBand;
 const addJobCapbility = require('../app/JobRoles').addJobCapbility;
 const expect = require('chai').expect;
 
-/* Test Suite: testing JobRoles.js 
+/* Test Suite: testing jobRoles.js 
 - does each method fetch when api can be found
 - does it return null if it can't reach api */
-describe('JobRoles.js method testing', () => {
-
-	/* getJobRoles() testing */
+describe('jobRoles.js method testing', () => {
+	// getJobRoles() testing 
 	describe('getJobRoles()', () => {
 		// unhappy path
 		describe('getJobRoles() returns null when api endpoint is not available', () => {
@@ -39,7 +38,13 @@ describe('JobRoles.js method testing', () => {
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroles')
-					.reply(200, { results: [{id:1},{id:2}] });
+					.reply(200, {
+						results: [{
+							id: 1
+						}, {
+							id: 2
+						}]
+					});
 			});
 			it('should return a json object', () => {
 				return getJobRoles()
@@ -73,7 +78,9 @@ describe('JobRoles.js method testing', () => {
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobroledetails/1')
-					.reply(200, {id:1});
+					.reply(200, {
+						id: 1
+					});
 			});
 			it('should return a json object', () => {
 				return getJobRoleDetails(1)
@@ -84,8 +91,6 @@ describe('JobRoles.js method testing', () => {
 		});
 	});
 
-	
-
 	/* getJobBand() testing */
 	describe('getJobBand()', () => {
 		// happy path
@@ -94,7 +99,9 @@ describe('JobRoles.js method testing', () => {
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobband')
-					.reply(200, {id:1});
+					.reply(200, {
+						id: 1
+					});
 			});
 			it('should return a json object', () => {
 				return getJobBand()
@@ -128,7 +135,9 @@ describe('JobRoles.js method testing', () => {
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobcapability')
-					.reply(200, {id:1});
+					.reply(200, {
+						id: 1
+					});
 			});
 			it('should return a json object', () => {
 				return getJobCapability()
@@ -162,7 +171,9 @@ describe('JobRoles.js method testing', () => {
 			beforeEach(() => {
 				nock('http://localhost:8080/')
 					.get('/api/getjobdiscipline')
-					.reply(200, {id:1});
+					.reply(200, {
+						id: 1
+					});
 			});
 			it('should return a json object', () => {
 				return getJobDiscipline()
@@ -189,119 +200,120 @@ describe('JobRoles.js method testing', () => {
 	});
 
 	/* addJobRoles() testing */
-	describe('addJobRole()', () => { 
+	describe('addJobRole()', () => {
 		// happy path
 		describe('addJobRole() returns 200 when adding a job role is successful', () => {
 			// send 200 status code when successful
 			beforeEach(() => {
-				mockData = {
+				let mockData = {
 					jobTitle: 'test',
 					jobBand: 'test',
 					jobCapability: 'test',
 					jobDiscipline: 'test',
 					jobCompetencies: 'test'
-				}
+				};
 				nock('http://localhost:8080/')
 					.post('/api/addjobrole', mockData)
 					.reply(200);
 			});
 			it('should return a 200 status', () => {
 				return addJobRole()
-				.then(expect(200));
+					.then(expect(200));
 			});
 		});
 		// unhappy path
 		describe('addJobRole() returns 404 when adding a job role is unsuccessful', () => {
 			// send 404 status code when unsuccessful
 			beforeEach(() => {
-				mockData = {
+				let mockData = {
 					jobTitle: '',
 					jobBand: '',
 					jobCapability: '',
 					jobDiscipline: '',
 					jobCompetencies: ''
-				}
+				};
 				nock('http://localhost:8080/')
 					.post('/api/addjobrole', mockData)
 					.reply(404);
 			});
 			it('should return a 200 status', () => {
 				return addJobRole()
-				.then(expect(404));
+					.then(expect(404));
 			});
 		});
 	});
 
 	/* addJobBand() testing */
-	describe('addJobBand()', () => { 
+	describe('addJobBand()', () => {
 		// happy path
 		describe('addJobBand() returns 200 when adding a job role is successful', () => {
 			// send 200 status code when successful
 			beforeEach(() => {
-				mockData = {
+				let mockData = {
 					jobBand: 'test',
 					jobBandTraining: 'testing'
-				}
+				};
 				nock('http://localhost:8080/')
 					.post('/api/addjobband', mockData)
 					.reply(200);
 			});
 			it('should return a 200 status', () => {
 				return addJobBand()
-				.then(expect(200));
+					.then(expect(200));
 			});
 		});
 		// unhappy path
 		describe('addJobBand() returns 404 when adding a job role is unsuccessful', () => {
 			// send 404 status code when unsuccessful
 			beforeEach(() => {
-				mockData = {
-					jobBand: '', jobBandTraining: ''
-				}
+				let mockData = {
+					jobBand: '',
+					jobBandTraining: ''
+				};
 				nock('http://localhost:8080/')
 					.post('/api/addjobband', mockData)
 					.reply(404);
 			});
 			it('should return a 200 status', () => {
 				return addJobBand()
-				.then(expect(404));
+					.then(expect(404));
 			});
 		});
 	});
 
-		/* addJobBand() testing */
-		describe('addJobCapbility()', () => { 
-			// happy path
-			describe('addJobCapbility() returns 200 when adding a job role is successful', () => {
-				// send 200 status code when successful
-				beforeEach(() => {
-					mockData = {
-						jobCapability: 'test'
-					}
-					nock('http://localhost:8080/')
-						.post('/api/addjobcapbility', mockData)
-						.reply(200);
-				});
-				it('should return a 200 status', () => {
-					return addJobCapbility()
-					.then(expect(200));
-				});
+	/* addJobBand() testing */
+	describe('addJobCapbility()', () => {
+		// happy path
+		describe('addJobCapbility() returns 200 when adding a job role is successful', () => {
+			// send 200 status code when successful
+			beforeEach(() => {
+				let mockData = {
+					jobCapability: 'test'
+				};
+				nock('http://localhost:8080/')
+					.post('/api/addjobcapbility', mockData)
+					.reply(200);
 			});
-			// unhappy path
-			describe('addJobCapbility() returns 404 when adding a job role is unsuccessful', () => {
-				// send 404 status code when unsuccessful
-				beforeEach(() => {
-					mockData = {
-						jobCapability: '',
-					}
-					nock('http://localhost:8080/')
-						.post('/api/addjobcapbility', mockData)
-						.reply(404);
-				});
-				it('should return a 200 status', () => {
-					return addJobCapbility()
-					.then(expect(404));
-				});
+			it('should return a 200 status', () => {
+				return addJobCapbility()
+					.then(expect(200));
 			});
 		});
+		// unhappy path
+		describe('addJobCapbility() returns 404 when adding a job role is unsuccessful', () => {
+			// send 404 status code when unsuccessful
+			beforeEach(() => {
+				let mockData = {
+					jobCapability: '',
+				};
+				nock('http://localhost:8080/')
+					.post('/api/addjobcapbility', mockData)
+					.reply(404);
+			});
+			it('should return a 200 status', () => {
+				return addJobCapbility()
+					.then(expect(404));
+			});
+		});
+	});
 });

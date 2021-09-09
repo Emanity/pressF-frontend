@@ -1,36 +1,37 @@
+/* eslint-disable no-useless-escape */
 const express = require('express');
 const router = express.Router();
-const JobRoles = require('./JobRoles');
-const {
-	check,
-	validationResult
-} = require('express-validator');
+const { check, validationResult } = require('express-validator');
+const jobRoles = require('./jobRoles');
+const user = require('./user');
+const {isLoggedIn, isAdmin} = require('./authorisation');
 
-router.get('/', function (req, res) {
-	res.render('index');
+/* Index (Home Page) Route */
+router.get('/', isLoggedIn, function (req, res) {
+	res.redirect('index');
 	console.log('Request processed');
 });
 
 /* Index (Home Page) Route */
-router.get('/index', function (req, res) {
+router.get('/index', isLoggedIn, function (req, res) {
 	res.render('index');
 	console.log('Request processed');
 });
 
 /* Job Roles Route */
-router.get('/job-roles', async (req, res) => {
-	let result = await JobRoles.getJobRoles();
+router.get('/job-roles', isLoggedIn, async (req, res) => {
+	let result = await jobRoles.getJobRoles();
 	res.render('job-roles', {
-		JobRoles: result
+		jobRoles: result
 	});
 });
 
 /* Job Role Details Route */
-router.get('/job-role-details/:jobRoleID', async (req, res) => {
+router.get('/job-role-details/:jobRoleID', isLoggedIn, async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
-	let result = await JobRoles.getJobRoleDetails(jobRoleID);
+	let result = await jobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {
-		JobRole: result
+		jobRole: result
 	});
 });
 
@@ -38,9 +39,46 @@ router.get('/login', function (req, res) {
 	res.render('login');
 });
 
+router.post('/login', async (req, res) => {
+	let result = await user.getLoginResponse(req);
+	
+	if (result == '401') {
+		res.render('login', {error: 'Invalid email/password'});
+	} else {
+		user.updateUser(req, JSON.parse(result).role);
+		req.session.save((err) => {
+			if (err) {
+				console.log(err);
+			}
+		});
+		res.redirect('index');
+	}
+});
+
+router.get('/user-profile', isLoggedIn, (req, res) => {
+	if (req.session.role == 1) {
+		res.render('admin-profile', {
+			exuser: req.session
+		});
+	} else {
+		res.render('user-profile', {
+			exuser: req.session
+		});
+	}
+});
+
+router.get('/logout', isLoggedIn, (req, res) => {
+	req.session.destroy((err) => {
+		if (err) {
+			return console.log(err);
+		}
+		res.redirect('/');
+	});
+});
+
 /* Add Job Band Routes */
 // GET route for add-job-band form
-router.get('/add-job-band', function (req, res) {
+router.get('/add-job-band', isLoggedIn, isAdmin, function (req, res) {
 	res.render('add-job-band');
 });
 
@@ -54,7 +92,7 @@ router.post('/add-job-band', [
 	check('jobBandTraining', 'Job Band Training: Must be a URL').matches('((http|https)://)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)')
 ], async (req, res) => {
 	// variable to store error details
-	errors = validationResult(req);
+	let errors = validationResult(req);
 
 	// check to ensure there are no errors
 	if (!errors.isEmpty()) {
@@ -66,7 +104,7 @@ router.post('/add-job-band', [
 		});
 	} else {
 		// send the body to addJobBand function in JobRoles.js
-		await JobRoles.addJobBand(req.body);
+		await jobRoles.addJobBand(req.body);
 		res.render('add-job-band-complete');
 		console.log('add-job-band: POST Sent');
 	}
@@ -74,7 +112,7 @@ router.post('/add-job-band', [
 
 /* Add Job Capability Routes */
 // GET route for add-job-capability form
-router.get('/add-job-capability', function (req, res) {
+router.get('/add-job-capability', isLoggedIn, isAdmin, function (req, res) {
 	res.render('add-job-capability');
 });
 
@@ -87,7 +125,8 @@ router.post('/add-job-capability', [
 	check('jobCapability', 'Job Capability must only contain letters and space').matches('^[a-zA-Z ]*$')
 ], async (req, res) => {
 	// variable to store error details
-	errors = validationResult(req);
+	let errors = validationResult(req);
+
 	// check to ensure there are no errors
 	if (!errors.isEmpty()) {
 		const alert = errors.array();
@@ -98,7 +137,7 @@ router.post('/add-job-capability', [
 		});
 	} else {
 		// send the body to addJobBand function in JobRoles.js
-		await JobRoles.addJobCapbility(req.body);
+		await jobRoles.addJobCapbility(req.body);
 		res.render('add-job-capability-complete');
 		console.log('add-job-capability: POST Sent');
 	}
@@ -106,10 +145,10 @@ router.post('/add-job-capability', [
 
 /* Add Job Role Routes */
 // GET route for add-job-role form
-router.get('/add-job-role', async (req, res) => {
-	let bandResult = await JobRoles.getJobBand();
-	let capabilityResult = await JobRoles.getJobCapability();
-	let disciplineResult = await JobRoles.getJobDiscipline();
+router.get('/add-job-role', isLoggedIn, isAdmin, async (req, res) => {
+	let bandResult = await jobRoles.getJobBand();
+	let capabilityResult = await jobRoles.getJobCapability();
+	let disciplineResult = await jobRoles.getJobDiscipline();
 	res.render('add-job-role', {
 		bands: bandResult,
 		capabilities: capabilityResult,
@@ -135,11 +174,12 @@ router.post('/add-job-role', [
 	}),
 	check('jobCompetencies', 'Job Competencies: Must not contain special characters (e.g. @~|/(){}[]"`)').matches('^[\.a-zA-Z0-9,!? ]*$')
 ], async (req, res) => {
-	let bandResult = await JobRoles.getJobBand();
-	let capabilityResult = await JobRoles.getJobCapability();
-	let disciplineResult = await JobRoles.getJobDiscipline();
+	let bandResult = await jobRoles.getJobBand();
+	let capabilityResult = await jobRoles.getJobCapability();
+	let disciplineResult = await jobRoles.getJobDiscipline();
 	// variable to store error details
 	let errors = validationResult(req);
+
 	// check to ensure there are no errors
 	if (!errors.isEmpty()) {
 		const alert = errors.array();
@@ -153,7 +193,7 @@ router.post('/add-job-role', [
 		});
 	} else {
 		// send the body to addJobRole function in JobRoles.js
-		await JobRoles.addJobRole(req.body);
+		await jobRoles.addJobRole(req.body);
 		res.render('add-job-role-complete');
 		console.log('add-job-role: POST Sent');
 	}
