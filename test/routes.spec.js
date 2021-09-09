@@ -1,3 +1,7 @@
+// imports left for WIP Trello ticket "Test for US012, US013, US014"
+// const httpMocks = require('node-mocks-http');
+// const { validationResult } = require('express-validator');
+
 // mocking app
 const mockApp = {
 	get: jest.fn(),
@@ -214,6 +218,29 @@ describe('app.js route testing', () => {
 			await behaviour(req, res);
 			await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
 		});
+<<<<<<< HEAD
+=======
+
+		// Unhappy path - bad Job Role
+		test('POST /add-job-role correct job role renders add-job-role complete', async () => {
+			// WIP - See Trello ticket "Test for US012, US013, US014"
+			// // grabs the second call in the app file, i.e. app.post('/add-job-role')
+			// const behaviour = mockApp.post.mock.calls[2][2];
+			// const checks = mockApp.post.mock.calls[2][1];
+			// // console.log(checks);
+			// const res = {
+			// 	render: jest.fn()
+			// };
+			// let req = httpMocks.createRequest({body: {jobTitle: '',jobCompetencies: ''}});
+
+			// // console.log(validationResult(req));
+
+			// // validationResult(req).mockReturnValueOnce(errors);
+			// // call function used by get handler
+			// await behaviour(req, res);
+			// await expect(res.render).toHaveBeenCalledWith('add-job-role');
+		});
+>>>>>>> c9ffc13164decf0c82ce743b176baab78a35df22
 	});
 
 	describe('POST /add-job-band testing', () => {
