@@ -17,10 +17,13 @@ body {
     font-family: "century-gothic" !important;
 }
 
-#card-text{
+#card-text1{
     text-align: center;
 }
 
+#card-text2{
+    text-align: center;
+}
 #login-btn{
     color: #283583;
     border-color: #283583;
@@ -81,7 +84,7 @@ footer p {
       text-align: left;
   }
 
-  #list {
+  summary {
     padding: 10px;
   }
 
@@ -119,6 +122,9 @@ footer p {
     white-space: nowrap;
 }
 
+.text-muted{
+    color: #6A707B !important;
+}
 #accent-color {
     border: solid #283583;
     color: #000000;

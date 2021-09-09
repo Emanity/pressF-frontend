@@ -10,6 +10,8 @@
   "author": "Aleksandra Łobocka <aleksandra.lobocka@kainos.com>",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^8.3.0"
+    "axe-core": "^4.3.3",
+    "cypress": "^8.3.0",
+    "cypress-axe": "^0.13.0"
   }
 }
