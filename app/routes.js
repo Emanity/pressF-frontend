@@ -39,7 +39,6 @@ router.get('/login', function (req, res) {
 
 router.post('/login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
-
 	
 	if (result == '401') {
 		res.render('login', {error: 'Invalid email/password'});
