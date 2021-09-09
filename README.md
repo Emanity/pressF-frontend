@@ -28,6 +28,7 @@ Open on: http://localhost:7999
 
 ## To Lint:
 `npm run lint`
+
 If it fails run: `./node_modules/.bin/eslint app/*.js test/*.js --fix`
 
 This will autofix any errors that can be automatically fixed.
