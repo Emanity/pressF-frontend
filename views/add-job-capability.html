@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% set title = 'Add Job Capability' %}
+
+{% block content %} 
+
+<div class="container"> 
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="formsPage">
+            <h4>Add a Job Capability</h4>
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="jobCapability">Job Capability:</label>
+                    <input type="text" name="jobCapability" class="form-control" id="jobCapability">
+                </div>
+
+                <br>
+
+                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button">
+            </form>
+        </div>
+        
+        <div class="col-lg-4 col-md-4 col-sm-12">
+        </div>
+    </div>
+</div>
+{% endblock %}

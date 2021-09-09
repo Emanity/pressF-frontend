@@ -125,3 +125,90 @@ footer p {
 .text-muted{
     color: #6A707B !important;
 }
+#accent-color {
+    border: solid #283583;
+    color: #000000;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow:  4px 4px 8px #000000;
+    background-color: #ffffff;
+}
+
+.formsPage {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Form-Button  {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #283583;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#Form-Button:hover  {
+    background-color: #ffff;
+    color: #283583;
+    border-color: #283583;
+}
+
+.formsPage h4 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.formPadding {
+    padding-top: 100px;
+}
+
+#LoginLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+
+#loginHeading {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.Loginbackground{
+    background-image: url('/Images/loginBackground.jpg');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+}
+
+#cardSpacing {
+    padding: 10px;
+}
+
+#AddForm-Button {
+    background-color: #283583;
+    color: #ffffff;
+    border-color: #283583;
+    display: block;
+}
+
+#AddForm-Button:hover {
+    background-color: #ffff;
+    color: #283583;
+    border-color: #283583;
+}
+
+@media (max-width: 991px){
+    .formsPage{
+        width: 100%;
+    }
+}
