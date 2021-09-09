@@ -20,7 +20,7 @@ const middleware = {
 			return true;
 		} else {
 			// is regular employee, cannot do the admin
-			res.redirect('/user-profile');
+			res.render('error-page', {error: 'You do not have access to view that page. If you think you should have access, please contact a site administrator'})
 			return false;
 		}
 	}
