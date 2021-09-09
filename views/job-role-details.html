@@ -11,11 +11,11 @@
                 <ol class="breadcrumb__items u-fs-s">
                     <li class="breadcrumb__item" id="breadcrumb-1">
                         <a class="breadcrumb__link" href="/">Home</a>
-                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg">
+                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg" alt="Breadcrumb icon">
                     </li>
                     <li class="breadcrumb__item" id="breadcrumb-1">
                         <a href="/job-roles">Job Roles</a>
-                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg">
+                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg" alt="Breadcrumb icon">
                     </li>
                     <li class="breadcrumb__item active" id="breadcrumb-2">
                         Job Role Details
@@ -35,7 +35,7 @@
             <p> The service is not available right now. Please try again later. </p>
         {% else %}
             <div class="card">
-                <div class="card-header" data-cy="jobTitleCard" id="card-text">
+                <div class="card-header" data-cy="jobTitleCard" id="card-text1">
                     <strong>{{jobRole.jobTitle}}</strong>
                 </div>
                 
@@ -52,7 +52,7 @@
                             </details>
                         </div>
 
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobSpecification">Job Specification</summary>
                                 <p>{{jobRole.jobSpecification}}</p>
@@ -64,7 +64,7 @@
                             </details>
                         </div>
                         
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobCompetencies"> Job Competencies </summary>       
                                         <p>{{jobRole.jobCompetencies}}</p>
@@ -74,7 +74,7 @@
                             </details>
                         </div>
                         
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobRoleResponsibilities"> Job Role Responsibilities </summary>
                                 {% if jobRole.jobRoleResponsibilities and jobRole.jobRoleResponsibilities.length > 0 %}
@@ -90,8 +90,8 @@
                         </div>
                     </div>
                 </div>
-            
-                <div class="card-footer text-muted" id="card-text">
+
+                <div class="card-footer text-muted" id="card-text2">
                     Job listing created: {{jobRole.recordCreated}}
                 </div>
             </div>
