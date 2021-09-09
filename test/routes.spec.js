@@ -22,8 +22,8 @@ require('../app/routes.js');
 
 const mockRequest = {
 	session: {
-		email: 'email@test.com',
-		role: 0
+		email: 'admin@test.com',
+		role: 1
 	},
 	params: jest.fn(1)
 };
@@ -82,7 +82,7 @@ describe('routes.js route testing', () => {
 			});
 		});
 	});
-	// GET /job-role-details/:JobRoleID 
+
 	describe('GET /job-role-details/:jobRoleID testing', () => {
 		test('GET /job-role-details/:jobRoleID', () => {
 			expect(mockApp.get).toHaveBeenCalledWith('/job-role-details/:jobRoleID', expect.any(Function), expect.any(Function));
@@ -104,6 +104,159 @@ describe('routes.js route testing', () => {
 					result: 'Test Data'
 				}
 			});
+		});
+	});
+
+	describe('GET /add-job-role testing', () => {
+		test('GET /add-job-role', () => {
+			expect(mockApp.get).toHaveBeenCalledWith('/add-job-role', expect.any(Function), expect.any(Function), expect.any(Function));
+		});
+		test('GET /add-job-role renders add-job-roles.html page', async () => {
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve({
+				status: 200,
+				json: () => Promise.resolve({
+					bands: 'Test Data'
+				})
+			}));
+
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve({
+				status: 200,
+				json: () => Promise.resolve({
+					capabilities: 'Test Data'
+				})
+			}));
+
+			mockNodeFetch.mockImplementationOnce(() => Promise.resolve({
+				status: 200,
+				json: () => Promise.resolve({
+					disciplines: 'Test Data'
+				})
+			}));
+			// grabs the seventh call in the app file, i.e. app.get('/add-job-role')
+			const behaviour = mockApp.get.mock.calls[9][3];
+			const res = {
+				render: jest.fn()
+			};
+			// call function used by get handler
+			await behaviour(mockRequest, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-role', {
+				bands: {
+					bands: 'Test Data'
+				},
+				capabilities: {
+					capabilities: 'Test Data'
+				},
+				disciplines: {
+					disciplines: 'Test Data'
+				}
+			});
+		});
+	});
+
+	describe('GET /add-job-band testing', () => {
+		test('GET /add-job-band', () => {
+			expect(mockApp.get).toHaveBeenCalledWith('/add-job-band', expect.any(Function), expect.any(Function), expect.any(Function));
+		});
+		test('GET /add-job-band renders add-job-band.html page', async () => {
+			// grabs the fith call in the app file, i.e. app.get('/add-job-band')
+			const behaviour = mockApp.get.mock.calls[7][3];
+			const res = {
+				render: jest.fn()
+			};
+			// call function used by get handler
+			await behaviour(mockRequest, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-band');
+		});
+	});
+
+	describe('GET /add-job-capability testing', () => {
+		test('GET /add-job-capability', () => {
+			expect(mockApp.get).toHaveBeenCalledWith('/add-job-capability', expect.any(Function), expect.any(Function), expect.any(Function));
+		});
+		test('GET /add-job-capability renders add-job-capability.html page', async () => {
+			// grabs the sixth call in the app file, i.e. app.get('/add-job-capability')
+			const behaviour = mockApp.get.mock.calls[8][3];
+			const res = {
+				render: jest.fn()
+			};
+			// call function used by get handler
+			await behaviour(mockRequest, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-capability');
+		});
+	});
+
+	describe('POST /add-job-role testing', () => {
+		// Happy path - good Job Role
+		test('POST /add-job-role correct job role renders add-job-role complete', async () => {
+			// grabs the second call in the app file, i.e. app.post('/add-job-role')
+			const behaviour = mockApp.post.mock.calls[3][2];
+			const res = {
+				render: jest.fn()
+			};
+			const req = {
+				body: jest.fn({
+					jobTitle: 'test',
+					jobBand: 'test',
+					jobCapability: 'test',
+					jobDiscipline: 'test',
+					jobCompetencies: 'test'
+				}),
+				session: {
+					email: 'admin@test.com',
+					role: 1
+				},
+			};
+			// call function used by get handler
+			await behaviour(req, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-role-complete');
+		});
+	});
+
+	describe('POST /add-job-band testing', () => {
+		// Happy path - good Job Band
+		test('POST /add-job-band correct job band renders add-job-band-complete', async () => {
+			// grabs the zero call in the app file, i.e. app.post('/add-job-band')
+			const behaviour = mockApp.post.mock.calls[1][2];
+			const res = {
+				render: jest.fn()
+			};
+			const req = {
+				body: jest.fn({
+					jobBand: 'test',
+					jobBandTraining: 'test'
+				}),
+				session: {
+					email: 'admin@test.com',
+					role: 1
+				},
+			};
+			// call function used by get handles
+			await behaviour(req, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-band-complete');
+		});
+	});
+
+	describe('POST /add-job-capability testing', () => {
+		// Happy path - good Job Capability
+		test('POST /add-job-capability correct job capability renders add-job-capability-complete', async () => {
+			// grabs the zero call in the app file, i.e. app.post('/add-job-capability')
+			const behaviour = mockApp.post.mock.calls[2][2];
+			const res = {
+				render: jest.fn()
+			};
+			const req = {
+				body: jest.fn({
+					jobCapability: 'test'
+				}),
+				session: {
+					email: 'admin@test.com',
+					role: 1
+				},
+				params: jest.fn(1)
+			};
+			// call function used by get handler
+			await behaviour(req, res);
+			await expect(res.render).toHaveBeenCalledWith('add-job-capability-complete');
 		});
 	});
 });
