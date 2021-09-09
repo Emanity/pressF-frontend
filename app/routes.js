@@ -1,35 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const JobRoles = require('./JobRoles');
+const jobRoles = require('./jobRoles');
 const user = require('./user');
-const {loginMiddleware, roleMiddleware} = require('./middleware');
+const {isLoggedIn, isAdmin} = require('./authorisation');
 
 /* Index (Home Page) Route */
-router.get('/', loginMiddleware, function (req, res) {
+router.get('/', isLoggedIn, function (req, res) {
 	res.redirect('index');
 	console.log('Request processed');
 });
 
 /* Index (Home Page) Route */
-router.get('/index', loginMiddleware, function (req, res) {
+router.get('/index', isLoggedIn, function (req, res) {
 	res.render('index');
 	console.log('Request processed');
 });
 
 /* Job Roles Route */
-router.get('/job-roles', loginMiddleware, async (req, res) => {
-	let result = await JobRoles.getJobRoles();
+router.get('/job-roles', isLoggedIn, async (req, res) => {
+	let result = await jobRoles.getJobRoles();
 	res.render('job-roles', {
-		JobRoles: result
+		jobRoles: result
 	});
 });
 
 /* Job Role Details Route */
-router.get('/job-role-details/:jobRoleID', loginMiddleware, async (req, res) => {
+router.get('/job-role-details/:jobRoleID', isLoggedIn, async (req, res) => {
 	var jobRoleID = req.params.jobRoleID;
-	let result = await JobRoles.getJobRoleDetails(jobRoleID);
+	let result = await jobRoles.getJobRoleDetails(jobRoleID);
 	res.render('job-role-details', {
-		JobRole: result
+		jobRole: result
 	});
 });
 
@@ -39,7 +39,6 @@ router.get('/login', function (req, res) {
 
 router.post('/login', async (req, res) => {
 	let result = await user.getLoginResponse(req);
-
 	
 	if (result == '401') {
 		res.render('login', {error: 'Invalid email/password'});
@@ -54,7 +53,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.get('/user-profile', loginMiddleware, (req, res) => {
+router.get('/user-profile', isLoggedIn, (req, res) => {
 	if (req.session.role == 1) {
 		res.render('admin-profile', {
 			exuser: req.session
@@ -66,7 +65,7 @@ router.get('/user-profile', loginMiddleware, (req, res) => {
 	}
 });
 
-router.get('/logout', loginMiddleware, (req, res) => {
+router.get('/logout', isLoggedIn, (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
 			return console.log(err);
@@ -75,15 +74,15 @@ router.get('/logout', loginMiddleware, (req, res) => {
 	});
 });
 
-router.get('/add-job-band', loginMiddleware, roleMiddleware, function (req, res) {
+router.get('/add-job-band', isLoggedIn, isAdmin, function (req, res) {
 	res.render('add-job-band');
 });
 
-router.get('/add-job-capability', loginMiddleware, roleMiddleware, function (req, res) {
+router.get('/add-job-capability', isLoggedIn, isAdmin, function (req, res) {
 	res.render('add-job-capability');
 });
 
-router.get('/add-job-role', loginMiddleware, roleMiddleware, function (req, res) {
+router.get('/add-job-role', isLoggedIn, isAdmin, function (req, res) {
 	res.render('add-job-role');
 });
 

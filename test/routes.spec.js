@@ -76,7 +76,7 @@ describe('routes.js route testing', () => {
 			// call function used by get handler
 			await behaviour(null, mockResponse);
 			await expect(mockResponse.render).toHaveBeenCalledWith('job-roles', {
-				JobRoles: {
+				jobRoles: {
 					result: 'Test Data'
 				}
 			});
@@ -100,7 +100,7 @@ describe('routes.js route testing', () => {
 			// call function used by get handler
 			await behaviour(mockRequest, mockResponse);
 			await expect(mockResponse.render).toHaveBeenCalledWith('job-role-details', {
-				JobRole: {
+				jobRole: {
 					result: 'Test Data'
 				}
 			});
