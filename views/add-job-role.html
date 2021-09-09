@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="jobRoleName">Job Band:</label>
                     <select name="jobBand" class="form-control" id="jobBand"> 
-                    {% for band in JobRoles.jobBands %} 
+                    {% for band in jobRoles.jobBands %} 
                      <option value="{{band.jobBandID}}">{{band.jobBand}}</option>
                     {% endfor %}
                     </select>
@@ -31,7 +31,7 @@
                     <label for="jobCapability">Job Capability:</label>
                     
                     <select name="jobCapability" class="form-control" id="jobCapability">
-                        {% for capability in JobRoles.jobCapabilities%}
+                        {% for capability in jobRoles.jobCapabilities%}
                             <option value="{{capability.jobCapabilityID}}">{{capability.jobCapability}}</option>
                         {% endfor %}
                     </select>
@@ -43,7 +43,7 @@
                     <label for="jobDiscipline">Job Discipline:</label>
                     
                     <select name="jobDiscipline" class="form-control" id="jobDiscipline">
-                        {% for discipline in JobRoles.jobDisciplines%}
+                        {% for discipline in jobRoles.jobDisciplines%}
                             <option value="{{discipline.jobDisciplineID}}">{{discipline.jobDiscipline}}</option>
                         {% endfor %}
                     </select>

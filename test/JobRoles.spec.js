@@ -1,14 +1,14 @@
 /* eslint-disable jest/valid-expect */
 /* imports */
 const nock = require('nock');
-const getJobRoles = require('../app/JobRoles').getJobRoles;
-const getJobRoleDetails = require('../app/JobRoles').getJobRoleDetails;
+const getJobRoles = require('../app/jobRoles').getJobRoles;
+const getJobRoleDetails = require('../app/jobRoles').getJobRoleDetails;
 const expect = require('chai').expect;
 
-/* Test Suite: testing JobRoles.js 
+/* Test Suite: testing jobRoles.js 
 - does each method fetch when api can be found
 - does it return null if it can't reach api */
-describe('JobRoles.js method testing', () => {
+describe('jobRoles.js method testing', () => {
 	// getJobRoles() testing 
 	describe('getJobRoles()', () => {
 		// unhappy path

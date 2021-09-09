@@ -1,9 +1,7 @@
-const middleware = {
+const authorisation = {
 	
 	/* Requires user to login before accessing system */
-	loginMiddleware(req, res, next) {
-		console.log('Email on request: ' + req.session.email);
-
+	isLoggedIn(req, res, next) {
 		if (req.session.email != null) {
 			next();
 			return true;
@@ -13,7 +11,7 @@ const middleware = {
 		}
 	},
 
-	roleMiddleware(req, res, next) {
+	isAdmin(req, res, next) {
 		if (req.session.role == 1) {
 			// is admin - now do admin things
 			next();
@@ -26,4 +24,4 @@ const middleware = {
 	}
 };
 
-module.exports = middleware;
+module.exports = authorisation;
