@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% set title = 'Add Job Capability' %}
+
+{% block content %} 
+
+<div class="container"> 
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="formsPage">
+            <h4>Add a Job Capability</h4>
+            <form method="POST" action="/add-job-capability">
+
+                {% if alert and alert.length > 0 %}
+                    {% for error in alert %}    
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" data-cy="alert">
+                            {{error.msg}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        {% endfor %}
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="jobCapability">Job Capability:</label>
+                    <input type="text" name="jobCapability" class="form-control" id="jobCapability" data-cy="jobCapabInput">
+                </div>
+
+                <br>
+
+                <input type="submit" value="Submit" class="btn btn-primary" id="AddForm-Button" data-cy="submitBtn">
+            </form>
+        </div>
+        
+        <div class="col-lg-4 col-md-4 col-sm-12">
+        </div>
+    </div>
+</div>
+{% endblock %}

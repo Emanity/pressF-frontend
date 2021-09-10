@@ -11,11 +11,11 @@
                 <ol class="breadcrumb__items u-fs-s">
                     <li class="breadcrumb__item" id="breadcrumb-1">
                         <a class="breadcrumb__link" href="/">Home</a>
-                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg">
+                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg" alt="Breadcrumb icon">
                     </li>
                     <li class="breadcrumb__item" id="breadcrumb-1">
                         <a href="/job-roles">Job Roles</a>
-                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg">
+                        <img class="breadcrumb-svg-icon" src="/breadcrumb-svg-icon.svg" alt="Breadcrumb icon">
                     </li>
                     <li class="breadcrumb__item active" id="breadcrumb-2">
                         Job Role Details
@@ -28,58 +28,58 @@
 
 <div class="container">
 
-    {% if JobRole %}
+    {% if jobRole %}
 
-        {% if JobRole == "Error: There was a problem retrieving job role details." %}
-            <h4> {{JobRole}} </h4>
+        {% if jobRole == "Error: There was a problem retrieving job role details." %}
+            <h4> {{jobRole}} </h4>
             <p> The service is not available right now. Please try again later. </p>
         {% else %}
             <div class="card">
-                <div class="card-header" data-cy="jobTitleCard" id="card-text">
-                    <strong>{{JobRole.jobTitle}}</strong>
+                <div class="card-header" data-cy="jobTitleCard" id="card-text1">
+                    <strong>{{jobRole.jobTitle}}</strong>
                 </div>
                 
                 <div class="card-body">
-                    <div id="list{{JobRole.jobRoleID}}">
+                    <div id="list{{jobRole.jobRoleID}}">
                         <div id="list" class="card">
                             <details>
                                 <summary data-cy="jobRoleDetails">Job Role Details</summary>
                                 <ul data-cy="jobDetailsList">
-                                    <li>Job Band: {{JobRole.jobBand}}</li>
-                                    <li>Job Capability: {{JobRole.jobCapability}}</li>
-                                    <li>Job Discipline: {{JobRole.jobDiscipline}}</li>
+                                    <li>Job Band: {{jobRole.jobBand}}<a href="{{jobRole.jobBandTraining}}">View Training</a></li>
+                                    <li>Job Capability: {{jobRole.jobCapability}}</li>
+                                    <li>Job Discipline: {{jobRole.jobDiscipline}}</li>
                                 </ul>
                             </details>
                         </div>
 
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobSpecification">Job Specification</summary>
-                                <p>{{JobRole.jobSpecification}}</p>
-                                {% if JobRole.jobProfileLink and JobRole.jobProfileLink.length > 0 %}
-                                    <a data-cy="jobSpecLink" href="{{JobRole.jobProfileLink}}">SharePoint Link</a><br>
+                                <p>{{jobRole.jobSpecification}}</p>
+                                {% if jobRole.jobProfileLink and jobRole.jobProfileLink.length > 0 %}
+                                    <a data-cy="jobSpecLink" href="{{jobRole.jobProfileLink}}">SharePoint Link</a><br>
                                 {% else %}
                                     <p>SharePoint Link Does Not Exist</p>
                                 {% endif %}
                             </details>
                         </div>
                         
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobCompetencies"> Job Competencies </summary>       
-                                        <p>{{JobRole.jobCompetencies}}</p>
+                                        <p>{{jobRole.jobCompetencies}}</p>
                                         <p><a data-cy='jobCompLink' 
                                             href="https://kainossoftwareltd.sharepoint.com/people/Shared%20Documents/Forms/AllItems.aspx?id=%2Fpeople%2FShared%20Documents%2FLeadership%20Competency%20Framework%20Documents%2FKainos%20Leadership%20Competency%20Framework%20%28Apprentice%20to%20Consultant%29%20v5%2E3%2Epdf&parent=%2Fpeople%2FShared%20Documents%2FLeadership%20Competency%20Framework%20Documents">
                                             SharePoint Link (For Details)</a></p>
                             </details>
                         </div>
                         
-                        <div id="list" class="card">
+                        <div class="card">
                             <details>
                                 <summary data-cy="jobRoleResponsibilities"> Job Role Responsibilities </summary>
-                                {% if JobRole.jobRoleResponsibilities and JobRole.jobRoleResponsibilities.length > 0 %}
+                                {% if jobRole.jobRoleResponsibilities and jobRole.jobRoleResponsibilities.length > 0 %}
                                     <ul data-cy="jobRoleResponsibilitiesList">
-                                        {% for responsibility in JobRole.jobRoleResponsibilities %}
+                                        {% for responsibility in jobRole.jobRoleResponsibilities %}
                                             <li>{{responsibility.jobRoleResponsibility}}</li>
                                         {% endfor %}
                                     </ul>
@@ -90,9 +90,9 @@
                         </div>
                     </div>
                 </div>
-            
-                <div class="card-footer text-muted" id="card-text">
-                    Job listing created: {{JobRole.recordCreated}}
+
+                <div class="card-footer text-muted" id="card-text2">
+                    Job listing created: {{jobRole.recordCreated}}
                 </div>
             </div>
         {% endif %}

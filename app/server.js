@@ -1,9 +1,9 @@
 const app = require('./app');
 
-// // Port
+// Port
 let port = 7999;
 
 // Start Server
 app.listen(port, function() {
-	console.log('Express started');
+	console.log('Now listening on port ' + port);
 });
